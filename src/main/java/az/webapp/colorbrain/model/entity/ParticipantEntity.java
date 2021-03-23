@@ -3,10 +3,6 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-<<<<<<< HEAD
-
-=======
->>>>>>> 111a7b587a07d70dcc7c5d90353f32db25c2ff7d
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,37 +13,40 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "file")
+@Table(name = "participant")
 @Getter
 @Setter
 @ToString
-public class FileEntity {
+public class ParticipantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    //  bunu enum olaraq deyishdire bilerik ????
-    @Column(name = "file_type")
-    private int fileType;
 
-    @Column(name = "file_path")
-    private String filePath;
-    //  bunu enum olaraq deyishdire bilerik ????
-    @Column(name = "file_category")
-    private int fileCategory;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    @Column(name = "university")
+    private String university;
+
+    @Column(name = "faculty")
+    private String faculty;
+
+    @Column(name = "active")
+    private boolean active;
 
     @ManyToOne
     @JoinColumn(name = "training_id")
     private TrainingEntity trainingEntity;
 
-    @ManyToOne
-<<<<<<< HEAD
-    @JoinColumn(name = "news_id")
-    private NewsEntity newsEntity;
-=======
-    @JoinColumn(name = "project_id")
-    private ProjectEntity projectEntity;
-
->>>>>>> 111a7b587a07d70dcc7c5d90353f32db25c2ff7d
 }
