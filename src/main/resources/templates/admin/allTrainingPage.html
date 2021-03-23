@@ -7,6 +7,7 @@
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a href="/training/active" type="button" class="btn btn-success text-uppercase">Aktİv Təlİmlər</a>
+                    <a href="/training/create" class="btn btn-primary text-uppercase">Yeni Təlİm</a>
                     <a href="/training/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Təlİmlər</a>
                 </div>
             </div>
@@ -14,23 +15,26 @@
     </div>
     <div class="main-container">
         <div class="main-card-row-container">
-            <div th:each="training : ${trainings}" class="col-3">
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="Cover Image">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${training.header}"></h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" th:text="${training.startDate}"><b>Tarix: </b></li>
-                        <li class="list-group-item" th:text="${training.startTime}"><b>Saat: </b></li>
-                        <li class="list-group-item" th:text="${training.lastRegistrationDay}"><b>Son qeydiyyat
-                            tarixi: </b></li>
-                        <li class="list-group-item" th:text="${training.trainerName}"><b>Təlimçi:</b></li>
-                        <li class="list-group-item" th:text="${training.trainingPrice}"><b>Qiymət:</b></li>
-                        <li class="list-group-item" th:text="${training.status}"><b>Status:</b></li>
-                    </ul>
-                    <div class="card-body text-center">
-                        <a href="#" class="card-link text-uppercase">Ətraflı Məlumat</a>
+            <div class="row">
+                <div th:each="training : ${trainings}" class="col-3">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="Cover Image">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${training.header}"></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${training.startDate}"><b>Tarix: </b></li>
+                            <li class="list-group-item" th:text="${training.startTime}"><b>Saat: </b></li>
+                            <li class="list-group-item" th:text="${training.lastRegistrationDay}"><b>Son qeydiyyat
+                                tarixi: </b></li>
+                            <li class="list-group-item" th:text="${training.trainerName}"><b>Təlimçi:</b></li>
+                            <li class="list-group-item" th:text="${training.trainingPrice}"><b>Qiymət:</b></li>
+                            <li class="list-group-item" th:text="${training.status}"><b>Status:</b></li>
+                        </ul>
+                        <div class="card-body text-center">
+                            <a th:href="@{{id}(id=${training.id})}" class="card-link text-uppercase">Ətraflı
+                                Məlumat</a>
+                        </div>
                     </div>
                 </div>
             </div>

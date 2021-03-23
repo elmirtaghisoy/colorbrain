@@ -3,6 +3,8 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,12 +50,15 @@ public class TrainingEntity {
     private String imageCover;
 
     @Column(name = "last_registration_day")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastRegistrationDay;
 
     @Column(name = "start_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column(name = "start_time")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startTime;
 
     @Column(name = "trainer_name")

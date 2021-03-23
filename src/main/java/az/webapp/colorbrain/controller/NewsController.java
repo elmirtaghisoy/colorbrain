@@ -1,6 +1,5 @@
 package az.webapp.colorbrain.controller;
 
-
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.NewsEntity;
 import az.webapp.colorbrain.service.NewsService;
@@ -18,24 +17,12 @@ import java.util.List;
 @RequestMapping(value = "/news")
 public class NewsController {
 
-
     @Autowired
     private NewsService newsService;
 
-
-    @GetMapping("/basic")
-    public String getBasicNews(Model model) {
-        model.addAttribute("News", newsService.getAllBasicNews());
-        for (NewsEntity ne: newsService.getAllBasicNews()) {
-            System.out.println(ne.getHeader());
-        }
-
-        return "admin/allNewsPage";
-    }
-
-    @GetMapping("/latest")
-    public String getLatestNews(Model model) {
-       model.addAttribute("news", newsService.getAllLatestNews());
+    @GetMapping("/all")
+    public String getAllNews(Model model) {
+        model.addAttribute("newsList", newsService.getAllNews());
         return "admin/allNewsPage";
     }
 
@@ -63,6 +50,6 @@ public class NewsController {
         fileLists.add(fileEntity2);
 
         newsEntity.setFileEntities(fileLists);
-        newsService.createNews(newsEntity);
+        newsService.saveNews(newsEntity);
     }
 }

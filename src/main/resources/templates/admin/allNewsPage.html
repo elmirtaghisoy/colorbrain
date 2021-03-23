@@ -7,14 +7,13 @@
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a href="/news/basic" type="button" class="btn btn-success text-uppercase">Əsas Xəbərlər</a>
-                    <a href="/news/latest" type="button" class="btn btn-success text-uppercase">Son Xəbərlər</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="main-container">
         <div class="main-card-row-container">
-            <div th:each="news : ${News}" class="col-3">
+            <div th:each="news : ${newsList}" class="col-3">
                 <div class="card">
                     <img src="..." class="card-img-top" alt="Cover Image">
                     <div class="card-body">

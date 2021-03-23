@@ -21,7 +21,15 @@ public class TrainingService {
         return trainingRepository.findAllByStatusFalse();
     }
 
-    public void createTraining(TrainingEntity trainingEntity) {
+    public void saveTraining(TrainingEntity trainingEntity) {
         trainingRepository.save(trainingEntity);
+    }
+
+    public void updateTraining(TrainingEntity trainingEntity) {
+        trainingRepository.save(trainingEntity);
+    }
+
+    public void deleteTraining(TrainingEntity trainingEntity) {
+        trainingRepository.delete(trainingEntity);
     }
 }
