@@ -24,4 +24,12 @@ public class TrainingService {
     public void createTraining(TrainingEntity trainingEntity) {
         trainingRepository.save(trainingEntity);
     }
+
+    public void updateTraining(TrainingEntity trainingEntity) {
+        trainingRepository.save(trainingEntity);
+    }
+
+    public void deleteTraining(TrainingEntity trainingEntity) {
+        trainingRepository.delete(trainingEntity);
+    }
 }

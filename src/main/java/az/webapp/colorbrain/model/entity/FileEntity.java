@@ -3,10 +3,7 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-<<<<<<< HEAD
 
-=======
->>>>>>> 111a7b587a07d70dcc7c5d90353f32db25c2ff7d
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,12 +39,11 @@ public class FileEntity {
     private TrainingEntity trainingEntity;
 
     @ManyToOne
-<<<<<<< HEAD
     @JoinColumn(name = "news_id")
     private NewsEntity newsEntity;
-=======
+
+    @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity projectEntity;
 
->>>>>>> 111a7b587a07d70dcc7c5d90353f32db25c2ff7d
 }
