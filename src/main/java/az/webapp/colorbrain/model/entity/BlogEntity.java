@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "blog")
@@ -12,8 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Blog {
-
+public class BlogEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,13 +41,11 @@ public class Blog {
     @Column(name = "active")
     private boolean active;
 
-
-//    @OneToMany(mappedBy = "blog")
-//    private List<File> files;
+    @OneToMany(mappedBy = "blogEntity", cascade = CascadeType.ALL)
+    private List<FileEntity> files;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private CategoryEntity category;
-
+    private CategoryEntity categoryEntity;
 
 }

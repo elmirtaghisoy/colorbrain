@@ -13,15 +13,11 @@ public class NewsService {
     @Autowired
     private NewsRepository newsRepository;
 
-    public List<NewsEntity> getAllBasicNews() {
+    public List<NewsEntity> getAllNews() {
         return newsRepository.findAllByStatusTrue();
     }
 
-    public List<NewsEntity> getAllLatestNews() {
-        return newsRepository.findAllByStatusFalse();
-    }
-
-    public void createNews(NewsEntity newsEntity) {
+    public void saveNews(NewsEntity newsEntity) {
         newsRepository.save(newsEntity);
     }
 }

@@ -26,8 +26,6 @@ public class CategoryEntity {
     private boolean active;
 
     @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL)
-    private List<NewsEntity> newsEntity;
+    private List<BlogEntity> blogEntities;
 
-    @OneToMany
-    private List<Blog> blogs;
 }

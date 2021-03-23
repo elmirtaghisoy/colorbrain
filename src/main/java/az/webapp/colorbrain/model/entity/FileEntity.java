@@ -46,4 +46,8 @@ public class FileEntity {
     @JoinColumn(name = "project_id")
     private ProjectEntity projectEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "blog_id")
+    private BlogEntity blogEntity;
+
 }

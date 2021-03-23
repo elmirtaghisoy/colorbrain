@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class NewsEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -46,12 +45,7 @@ public class NewsEntity {
     @Column(name = "active")
     private boolean active;
 
-
     @OneToMany(mappedBy = "newsEntity", cascade = CascadeType.ALL)
     private List<FileEntity> fileEntities;
 
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private CategoryEntity categoryEntity;
 }

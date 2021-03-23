@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface NewsRepository extends JpaRepository<NewsEntity, Long> {
     List<NewsEntity> findAllByStatusTrue();
+
     List<NewsEntity> findAllByStatusFalse();
 }

@@ -14,7 +14,6 @@ import java.util.List;
 @ToString
 public class ProjectEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
