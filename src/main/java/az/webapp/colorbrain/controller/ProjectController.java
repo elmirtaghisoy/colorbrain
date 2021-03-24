@@ -34,6 +34,7 @@ public class ProjectController {
         projectEntity.setContext("first project contex");
         projectEntity.setCreatedAt(LocalDateTime.now());
         projectEntity.setImageCover("first project image cover");
+        projectEntity.setActive(true);
 
 
         FileEntity fileEntity = new FileEntity();

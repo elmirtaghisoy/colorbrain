@@ -38,6 +38,9 @@ public class ProjectEntity {
     @Column(name = "image_cover")
     private String imageCover;
 
+    @Column(name = "status")
+    private boolean status;
+
     @Column(name = "active")
     private boolean active;
 
