@@ -18,4 +18,5 @@ public class CategoryController {
     public void getAllCategoty(){
 
     }
+
 }
