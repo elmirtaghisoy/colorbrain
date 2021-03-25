@@ -48,7 +48,7 @@ public class ProjectController {
         projectEntity.setFileEntities(fileLists);
 
 
-        projectService.createProject(projectEntity);
+        projectService.saveProject(projectEntity);
 
     }
 

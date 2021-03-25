@@ -1,18 +1,20 @@
 package az.webapp.colorbrain.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Entity
-@Table(name = "project")
+@Table(name = "news")
 @Getter
 @Setter
 @ToString
-public class ProjectEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+public class NewsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +30,8 @@ public class ProjectEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(name = "update_at")
+    private LocalDateTime updateAt;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
@@ -43,7 +45,7 @@ public class ProjectEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "projectEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "newsEntity", cascade = CascadeType.ALL)
     private List<FileEntity> fileEntities;
 
 }

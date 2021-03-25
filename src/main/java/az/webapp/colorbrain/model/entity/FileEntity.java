@@ -3,6 +3,7 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,15 @@ public class FileEntity {
     private TrainingEntity trainingEntity;
 
     @ManyToOne
+    @JoinColumn(name = "news_id")
+    private NewsEntity newsEntity;
+
+    @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity projectEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "blog_id")
+    private BlogEntity blogEntity;
 
 }

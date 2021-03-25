@@ -1,0 +1,166 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="updateFrom">
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
+            <input th:value="${training.header}" name="header" type="text" class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-6">
+            <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>
+            <input th:value="${training.trainerName}" name="trainerName" type="text" class="form-control"
+                   id="trainerLabel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-4">
+            <label for="lastRegDayLabel" class="form-label text-uppercase">Son Qeydİyyat Tarİxİ</label>
+            <input th:value="${training.lastRegistrationDay}" name="lastRegistrationDay" type="date"
+                   class="form-control"
+                   id="lastRegDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
+            <input th:value="${training.startDate}" name="startDate" type="date" class="form-control"
+                   id="startDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startTimeLabel" class="form-label text-uppercase">Başlama Saatı</label>
+            <input th:value="${training.startTime}" name="startTime" type="time" class="form-control"
+                   id="startTimeLabel">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-4">
+            <label for="priceLabel" class="form-label text-uppercase">Ödənİş</label>
+            <input th:value="${training.trainingPrice}" name="trainingPrice" type="text" class="form-control "
+                   id="priceLabel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label for="contextLabel" class="form-label text-uppercase">Məlumat</label>
+            <textarea th:text="${training.context}" name="context" class="form-control" id="contextLabel"
+                      rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
+                At</label>
+            <input th:value="${training.createdAt}" name="createdAt" type="text" disabled class="form-control"
+                   id="createdAtLabel">
+        </div>
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
+                At</label>
+            <input th:value="${training.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
+                   id="updatedAtLabel">
+        </div>
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="deletedAtLabel" class="form-label text-uppercase">Deleted
+                At</label>
+            <input th:value="${training.deletedAt}" name="deletedAt" type="text" disabled class="form-control"
+                   id="deletedAtLabel">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-2">
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="registrationIsActive"
+                       th:checked="${training.registrationIsActive}"
+                       type="checkbox" id="flexSwitchCheckDefault1">
+                <label class="form-check-label text-uppercase"
+                       for="flexSwitchCheckDefault1">Qeydİyyat</label>
+            </div>
+        </div>
+        <div class="mb-3 col-2">
+            <div class="form-check form-switch">
+                <input class="form-check-input text-uppercase" name="status" th:checked="${training.status}"
+                       type="checkbox" id="flexSwitchCheckDefault2">
+                <label class="form-check-label text-uppercase" for="flexSwitchCheckDefault2">Status</label>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success text-uppercase" value="Dəyİşİklİyİ Yadda Saxla">
+    </div>
+</div>
+
+<div th:fragment="createFrom">
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
+            <input name="header" type="text" class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-6">
+            <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>
+            <input name="trainerName" type="text" class="form-control" id="trainerLabel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-4">
+            <label for="lastRegDayLabel" class="form-label text-uppercase">Son Qeydİyyat Tarİxİ</label>
+            <input name="lastRegistrationDay" type="date" class="form-control"
+                   id="lastRegDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
+            <input name="startDate" type="date" class="form-control" id="startDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startTimeLabel" class="form-label text-uppercase">Başlama Saatı</label>
+            <input name="startTime" type="time" class="form-control" id="startTimeLabel">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-4">
+            <label for="priceLabel" class="form-label text-uppercase">Ödənİş</label>
+            <input name="trainingPrice" type="text" class="form-control "
+                   id="priceLabel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label for="contextLabel" class="form-label text-uppercase">Məlumat</label>
+            <textarea name="context" class="form-control" id="contextLabel"
+                      rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
+                At</label>
+            <input name="createdAt" type="text" disabled class="form-control"
+                   id="createdAtLabel">
+        </div>
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
+                At</label>
+            <input name="updatedAt" type="text" disabled class="form-control"
+                   id="updatedAtLabel">
+        </div>
+        <div class="mb-3 col-4 text-center">
+            <label style="margin: 0" for="deletedAtLabel" class="form-label text-uppercase">Deleted
+                At</label>
+            <input name="deletedAt" type="text" disabled class="form-control"
+                   id="deletedAtLabel">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-2">
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="registrationIsActive"
+                       type="checkbox" id="flexSwitchCheckDefault1">
+                <label class="form-check-label text-uppercase"
+                       for="flexSwitchCheckDefault1">Qeydİyyat</label>
+            </div>
+        </div>
+        <div class="mb-3 col-2">
+            <div class="form-check form-switch">
+                <input class="form-check-input text-uppercase" name="status"
+                       type="checkbox" id="flexSwitchCheckDefault2">
+                <label class="form-check-label text-uppercase" for="flexSwitchCheckDefault2">Status</label>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success text-uppercase" value="Yadda Saxla">
+    </div>
+</div>
+</html>

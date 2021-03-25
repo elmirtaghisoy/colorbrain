@@ -1,6 +1,7 @@
 package az.webapp.colorbrain.model.entity;
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class CategoryEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany
-    private List<Blog> blogs;
+    @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL)
+    private List<BlogEntity> blogEntities;
+
 }

@@ -17,7 +17,7 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public void createProject(ProjectEntity projectEntity){
+    public void saveProject(ProjectEntity projectEntity){
         projectRepository.save(projectEntity);
     }
 
