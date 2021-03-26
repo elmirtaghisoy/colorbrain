@@ -3,71 +3,86 @@
     <div class="row">
         <div class="mb-3 col-6">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
-            <input th:value="${training.header}" name="header" type="text" class="form-control" id="headerLabel">
+            <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
+               th:errors="*{header}"></p>
+            <input th:value="${trainingEntity.header}" th:disabled="${!trainingEntity.status}"
+                   name="header" type="text" class="form-control" id="headerLabel">
         </div>
         <div class="mb-3 col-6">
             <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>
-            <input th:value="${training.trainerName}" name="trainerName" type="text" class="form-control"
+            <p style="display: inline" th:if="${#fields.hasErrors('trainerName')}" class="text-danger fw-bolder"
+               th:errors="*{trainerName}"></p>
+            <input th:value="${trainingEntity.trainerName}" th:disabled="${!trainingEntity.status}" name="trainerName"
+                   type="text" class="form-control"
                    id="trainerLabel">
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-4">
             <label for="lastRegDayLabel" class="form-label text-uppercase">Son Qeydİyyat Tarİxİ</label>
-            <input th:value="${training.lastRegistrationDay}" name="lastRegistrationDay" type="date"
+            <p style="display: inline" th:if="${#fields.hasErrors('lastRegistrationDay')}" class="text-danger fw-bolder"
+               th:errors="*{lastRegistrationDay}"></p>
+            <input th:value="${trainingEntity.lastRegistrationDay}" th:disabled="${!trainingEntity.status}"
+                   name="lastRegistrationDay" type="date"
                    class="form-control"
                    id="lastRegDayLabel">
         </div>
         <div class="mb-3 col-4">
             <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
-            <input th:value="${training.startDate}" name="startDate" type="date" class="form-control"
+            <p style="display: inline" th:if="${#fields.hasErrors('startDate')}" class="text-danger fw-bolder"
+               th:errors="*{startDate}"></p>
+            <input th:value="${trainingEntity.startDate}" th:disabled="${!trainingEntity.status}" name="startDate"
+                   type="date" class="form-control"
                    id="startDayLabel">
         </div>
         <div class="mb-3 col-4">
             <label for="startTimeLabel" class="form-label text-uppercase">Başlama Saatı</label>
-            <input th:value="${training.startTime}" name="startTime" type="time" class="form-control"
+            <p style="display: inline" th:if="${#fields.hasErrors('startTime')}" class="text-danger fw-bolder"
+               th:errors="*{startTime}"></p>
+            <input th:value="${trainingEntity.startTime}" th:disabled="${!trainingEntity.status}" name="startTime"
+                   type="time" class="form-control"
                    id="startTimeLabel">
         </div>
     </div>
     <div class="row d-flex justify-content-center">
         <div class="mb-3 col-4">
             <label for="priceLabel" class="form-label text-uppercase">Ödənİş</label>
-            <input th:value="${training.trainingPrice}" name="trainingPrice" type="text" class="form-control "
+            <p style="display: inline" th:if="${#fields.hasErrors('trainingPrice')}" class="text-danger fw-bolder"
+               th:errors="*{trainingPrice}"></p>
+            <input th:value="${trainingEntity.trainingPrice}" th:disabled="${!trainingEntity.status}"
+                   name="trainingPrice" type="text" class="form-control "
                    id="priceLabel">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <label for="contextLabel" class="form-label text-uppercase">Məlumat</label>
-            <textarea th:text="${training.context}" name="context" class="form-control" id="contextLabel"
+            <label for="editor" class="form-label text-uppercase">Məlumat</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
+               th:errors="*{context}"></p>
+            <textarea th:text="${trainingEntity.context}" th:disabled="${!trainingEntity.status}" name="context"
+                      class="form-control" id="editor"
                       rows="3"></textarea>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="mb-3 col-4 text-center">
             <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
                 At</label>
-            <input th:value="${training.createdAt}" name="createdAt" type="text" disabled class="form-control"
+            <input th:value="${trainingEntity.createdAt}" name="createdAt" type="text" disabled class="form-control"
                    id="createdAtLabel">
         </div>
         <div class="mb-3 col-4 text-center">
             <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
                 At</label>
-            <input th:value="${training.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
+            <input th:value="${trainingEntity.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
                    id="updatedAtLabel">
         </div>
-        <div class="mb-3 col-4 text-center">
-            <label style="margin: 0" for="deletedAtLabel" class="form-label text-uppercase">Deleted
-                At</label>
-            <input th:value="${training.deletedAt}" name="deletedAt" type="text" disabled class="form-control"
-                   id="deletedAtLabel">
-        </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div th:if="${trainingEntity.status}" class="row d-flex justify-content-center">
         <div class="mb-3 col-2">
             <div class="form-check form-switch">
                 <input class="form-check-input" name="registrationIsActive"
-                       th:checked="${training.registrationIsActive}"
+                       th:checked="${trainingEntity.registrationIsActive}"
                        type="checkbox" id="flexSwitchCheckDefault1">
                 <label class="form-check-label text-uppercase"
                        for="flexSwitchCheckDefault1">Qeydİyyat</label>
@@ -75,7 +90,7 @@
         </div>
         <div class="mb-3 col-2">
             <div class="form-check form-switch">
-                <input class="form-check-input text-uppercase" name="status" th:checked="${training.status}"
+                <input class="form-check-input text-uppercase" name="status" th:checked="${trainingEntity.status}"
                        type="checkbox" id="flexSwitchCheckDefault2">
                 <label class="form-check-label text-uppercase" for="flexSwitchCheckDefault2">Status</label>
             </div>
@@ -88,60 +103,104 @@
     <div class="row">
         <div class="mb-3 col-6">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
-            <input name="header" type="text" class="form-control" id="headerLabel">
+            <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
+               th:errors="*{header}"></p>
+            <input th:field="*{header}" name="header" type="text" class="form-control" id="headerLabel">
         </div>
         <div class="mb-3 col-6">
             <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>
-            <input name="trainerName" type="text" class="form-control" id="trainerLabel">
+            <p style="display: inline" th:if="${#fields.hasErrors('trainerName')}" class="text-danger fw-bolder"
+               th:errors="*{trainerName}"></p>
+            <input name="trainerName" th:field="*{trainerName}" type="text" class="form-control" id="trainerLabel">
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-4">
             <label for="lastRegDayLabel" class="form-label text-uppercase">Son Qeydİyyat Tarİxİ</label>
+            <p style="display: inline;font-size: 12px;" th:if="${#fields.hasErrors('lastRegistrationDay')}"
+               class="text-danger fw-bolder"
+               th:errors="*{lastRegistrationDay}"></p>
             <input name="lastRegistrationDay" type="date" class="form-control"
                    id="lastRegDayLabel">
         </div>
         <div class="mb-3 col-4">
             <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('startDate')}" class="text-danger fw-bolder"
+               th:errors="*{startDate}"></p>
             <input name="startDate" type="date" class="form-control" id="startDayLabel">
         </div>
         <div class="mb-3 col-4">
             <label for="startTimeLabel" class="form-label text-uppercase">Başlama Saatı</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('startTime')}" class="text-danger fw-bolder"
+               th:errors="*{startTime}"></p>
             <input name="startTime" type="time" class="form-control" id="startTimeLabel">
         </div>
     </div>
     <div class="row d-flex justify-content-center">
         <div class="mb-3 col-4">
             <label for="priceLabel" class="form-label text-uppercase">Ödənİş</label>
-            <input name="trainingPrice" type="text" class="form-control "
+            <p style="display: inline" th:if="${#fields.hasErrors('trainingPrice')}" class="text-danger fw-bolder"
+               th:errors="*{trainingPrice}"></p>
+            <input th:field="*{trainingPrice}" name="trainingPrice" min="0"
+                   placeholder="Məbləği ancaq rəqəmlə ifadə edin." type="number" class="form-control "
                    id="priceLabel">
         </div>
     </div>
-    <div class="row">
+    <div class="row main-card-row-container">
         <div class="col-12">
-            <label for="contextLabel" class="form-label text-uppercase">Məlumat</label>
-            <textarea name="context" class="form-control" id="contextLabel"
+            <label for="editor" class="form-label text-uppercase">Məlumat</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
+               th:errors="*{context}"></p>
+            <textarea th:field="*{context}" name="context" class="form-control" id="editor"
                       rows="3"></textarea>
         </div>
     </div>
     <div class="row">
-        <div class="mb-3 col-4 text-center">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Başlıq Şəkİlİ
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label for="formFileLg" class="form-label text-uppercase">Təlİmİn başlıq şəkİlİnİ seçİn</label>
+                        <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Əlavə Fayllar
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label for="formFileLg" class="form-label text-uppercase">Təlİmİn dİgər fayllarını seçİn</label>
+                        <input name="files" multiple class="form-control form-control-lg" id="formFileLg" type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="mb-3 col-3 text-center">
             <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
                 At</label>
             <input name="createdAt" type="text" disabled class="form-control"
                    id="createdAtLabel">
         </div>
-        <div class="mb-3 col-4 text-center">
+        <div class="mb-3 col-3 text-center">
             <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
                 At</label>
             <input name="updatedAt" type="text" disabled class="form-control"
                    id="updatedAtLabel">
-        </div>
-        <div class="mb-3 col-4 text-center">
-            <label style="margin: 0" for="deletedAtLabel" class="form-label text-uppercase">Deleted
-                At</label>
-            <input name="deletedAt" type="text" disabled class="form-control"
-                   id="deletedAtLabel">
         </div>
     </div>
     <div class="row d-flex justify-content-center">
@@ -155,7 +214,7 @@
         </div>
         <div class="mb-3 col-2">
             <div class="form-check form-switch">
-                <input class="form-check-input text-uppercase" name="status"
+                <input class="form-check-input text-uppercase" checked disabled name="status"
                        type="checkbox" id="flexSwitchCheckDefault2">
                 <label class="form-check-label text-uppercase" for="flexSwitchCheckDefault2">Status</label>
             </div>
