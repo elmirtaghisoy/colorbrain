@@ -13,11 +13,11 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public List<ProjectEntity> getAllProject(){
+    public List<ProjectEntity> getAllProject() {
         return projectRepository.findAll();
     }
 
-    public void saveProject(ProjectEntity projectEntity){
+    public void saveProject(ProjectEntity projectEntity) {
         projectRepository.save(projectEntity);
     }
 

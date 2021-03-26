@@ -15,7 +15,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/")
-    public void getAllCategoty(){
+    public void getAllCategoty() {
 
     }
 
