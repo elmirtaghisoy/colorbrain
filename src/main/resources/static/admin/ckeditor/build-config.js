@@ -101,7 +101,7 @@ var CKBUILDER_CONFIG = {
 		'print' : 1,
 		'removeformat' : 1,
 		'resize' : 1,
-		'save' : 1,
+		'save' : 0,
 		'scayt' : 1,
 		'selectall' : 1,
 		'showblocks' : 1,

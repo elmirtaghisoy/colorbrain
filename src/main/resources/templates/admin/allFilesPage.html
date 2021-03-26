@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <table class="table table-hover text-center">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Fayl</th>
+                    <th scope="col">Fayl Tipi</th>
+                    <th scope="col">Sil</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="file : ${files}" class="col-3">
+                    <th class="align-middle" scope="row" th:text="${file.id}"></th>
+                    <td th:switch="${file.fileType}">
+                        <img th:case="1" style="height:200; width:auto;" th:src="@{'/file/'+${file.filePath}}"
+                             class="img-thumbnail">
+                        <video th:case="2" width="auto" height="200" controls>
+                            <source th:src="@{'/file/'+${file.filePath}}" type="video/mp4">
+                        </video>
+                        <audio th:case="3" controls>
+                            <source th:src="@{'/file/'+${file.filePath}}" type="audio/mpeg">
+                        </audio>
+                        <iframe th:case="4" th:src="@{'/file/'+${file.filePath}}" height="200" width="auto"></iframe>
+                    </td>
+                    <td class="align-middle" th:text="${file.fileType}"></td>
+                    <td class="align-middle">
+                        <div class="row d-flex justify-content-center">
+                            <form th:action="@{'files/delete'}" method="post">
+                                <input type="hidden" th:value="${file.id}" name="fileId">
+                                <input type="submit" class="btn btn-danger text-uppercase" value="Faylı sİl">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Yenİ fayl əlavə et
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form th:action="@{'files/save'}" method="post" enctype="multipart/form-data">
+                                <div class="container-fluid mb-3 mt-2">
+                                    <label for="formFileLg" class="form-label text-uppercase">Təlİmİn dİgər fayllarını
+                                        seçİn</label>
+                                    <input name="files" multiple class="form-control form-control-lg" id="formFileLg"
+                                           type="file">
+                                    <div class="row d-flex justify-content-center mt-4">
+                                        <input type="submit" class="btn btn-success text-uppercase"
+                                               value="Faylları yadda saxla">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
