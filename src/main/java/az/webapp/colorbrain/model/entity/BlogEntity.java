@@ -41,11 +41,18 @@ public class BlogEntity {
     @Column(name = "active")
     private boolean active;
 
+
     @OneToMany(mappedBy = "blogEntity", cascade = CascadeType.ALL)
     private List<FileEntity> files;
+
+
+//    @OneToMany(mappedBy = "blog")
+//    private List<File> files;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity categoryEntity;
+
 
 }

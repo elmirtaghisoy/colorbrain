@@ -1,35 +1,39 @@
-<!--<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">-->
-<!--<head></head>-->
-<!--<body>-->
-<!--<div class="container-fluid">-->
-<!--    <div class="row">-->
-<!--        <div class="col-12 text-center">-->
-<!--            <div class="main-container">-->
-<!--                <div class="btn-group" role="group" aria-label="Basic mixed styles example">-->
-<!--                    <a href="/news/basic" type="button" class="btn btn-success text-uppercase">Əsas Layihələr</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="main-container">-->
-<!--        <div class="main-card-row-container">-->
-<!--            <div th:each="news : ${newsList}" class="col-3">-->
-<!--                <div class="card">-->
-<!--                    <img src="..." class="card-img-top" alt="Cover Image">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title" th:text="${news.header}"></h5>-->
-<!--                    </div>-->
-<!--                    <ul class="list-group list-group-flush">-->
-<!--                        <li class="list-group-item" th:text="${news.createdAt}"><b>Tarix: </b></li>-->
-<!--                        <li class="list-group-item" th:text="${news.status}"><b>Status:</b></li>-->
-<!--                    </ul>-->
-<!--                    <div class="card-body text-center">-->
-<!--                        <a href="#" class="card-link text-uppercase">Ətraflı Məlumat</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="main-container">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="/project/active" type="button" class="btn btn-success text-uppercase">Aktiv Layihələr</a>
+                    <a href="/project/create" class="btn btn-primary text-uppercase">Yeni Layihələr</a>
+                    <a href="/project/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Layihələr
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="main-card-row-container">
+            <div class="row">
+                <div th:each="project : ${projects}" class="col-3">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="Cover Image">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${project.header}"></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${project.createdAt}"><b>Tarix: </b></li>
+                            <li class="list-group-item" th:text="${project.status}"><b>Status:</b></li>
+                        </ul>
+                        <div class="card-body text-center">
+                            <a th:href="@{{id}(id=${project.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

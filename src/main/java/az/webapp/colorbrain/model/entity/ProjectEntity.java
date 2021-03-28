@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,9 +20,11 @@ public class ProjectEntity {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "Layihənin adını daxil edin.")
     @Column(name = "header")
     private String header;
 
+    @NotBlank(message = "Layihə haqqında məlumat daxil edin.")
     @Column(name = "context")
     private String context;
 
@@ -30,9 +33,6 @@ public class ProjectEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
 
     @Column(name = "image_cover")
     private String imageCover;

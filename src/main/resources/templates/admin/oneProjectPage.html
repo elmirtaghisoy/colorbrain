@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head>
+</head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="projectEntity" type="az.webapp.colorbrain.model.entity.ProjectEntity"*/-->
+            <form th:object="${projectEntity}" th:action="@{'/project/update'}" method="post">
+                <input type="hidden" name="id" th:value="${projectEntity.id}">
+                <div th:include="/admin/layout/project/projectForm::updateFrom"></div>
+            </form>
+            <form th:object="${projectEntity}" th:action="@{'/project/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${projectEntity.id}">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" class="btn btn-danger text-uppercase" value="Projecti sil">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>
