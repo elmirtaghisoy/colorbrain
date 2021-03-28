@@ -14,11 +14,15 @@
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/static/admin/css/main.css}"/>
-
+    <script th:src="@{/static/admin/ckeditor/ckeditor.js}"></script>
+    <script th:src="@{/static/admin/ckeditor/config.js}"></script>
 </head>
 <body>
 <div th:replace="admin/layout/header.html::header"></div>
 <th:block th:include="${template}"/>
 <div th:replace="admin/layout/footer.html::footer"></div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
 </body>
 </html>

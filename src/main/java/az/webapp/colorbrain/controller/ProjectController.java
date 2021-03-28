@@ -20,15 +20,15 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping("/")
-    public void getAllProject(){
+    public void getAllProject() {
         List<ProjectEntity> projectList = projectService.getAllProject();
-        for (ProjectEntity pr:projectList) {
+        for (ProjectEntity pr : projectList) {
             System.out.println(pr);
         }
     }
 
     @GetMapping("/create")
-    public void createProject(){
+    public void createProject() {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setHeader("first project header");
         projectEntity.setContext("first project contex");

@@ -29,13 +29,7 @@ public class CategoryController {
         return "admin/oneCategoryPage";
     }
 
-//    @GetMapping("/create")
-//    public void createCategory(){
-//        CategoryEntity categoryEntity = new CategoryEntity();
-//        categoryEntity.setCategoryName("first category");
-//        categoryEntity.setActive(true);
-//        categoryService.createCategory(categoryEntity);
-//    }
+
 
     @PostMapping("/delete")
     public String deleteCategory(CategoryEntity categoryEntity) {

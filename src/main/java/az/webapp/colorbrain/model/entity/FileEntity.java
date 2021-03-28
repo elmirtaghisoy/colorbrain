@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,29 +25,34 @@ public class FileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    //  bunu enum olaraq deyishdire bilerik ????
+
     @Column(name = "file_type")
     private int fileType;
 
     @Column(name = "file_path")
     private String filePath;
-    //  bunu enum olaraq deyishdire bilerik ????
+
     @Column(name = "file_category")
     private int fileCategory;
 
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+    })
     @JoinColumn(name = "training_id")
     private TrainingEntity trainingEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "news_id")
     private NewsEntity newsEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private ProjectEntity projectEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "blog_id")
     private BlogEntity blogEntity;
 
