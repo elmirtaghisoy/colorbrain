@@ -25,6 +25,7 @@ public class CategoryEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany
-    private List<Blog> blogs;
+    @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL)
+    private List<BlogEntity> blogEntities;
+
 }

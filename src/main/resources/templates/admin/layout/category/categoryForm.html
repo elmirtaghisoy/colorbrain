@@ -1,0 +1,14 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="updateForm">
+    <label for="categoryNameLabel" class="form-label">Kateqoriya</label>
+    <input type="text" class="form-control" id="categoryNameLabel"
+           th:value="${category.getCategoryName()}" name="categoryName">
+    <button type="submit" class="btn btn-primary mt-3">Dəyişikliyi yadda saxla</button>
+</div>
+
+<div th:fragment="createForm">
+    <label for="categoryNameLabel" class="form-label">Kateqoriya</label>
+    <input name="categoryName" type="text" class="form-control" id="categoryNameLabel">
+    <button type="submit" class="btn btn-primary mt-3">Yadda saxla</button>
+</div>
+</html>
