@@ -30,8 +30,8 @@ public class TrainingService {
     }
 
     public void saveTraining(TrainingEntity trainingEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
-        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
         trainingEntity.setImageCover(FileService.saveSingle(file));
+        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
         trainingEntity.setCreatedAt(LocalDateTime.now());
         trainingEntity.setStatus(true);
         trainingRepository.save(trainingEntity);

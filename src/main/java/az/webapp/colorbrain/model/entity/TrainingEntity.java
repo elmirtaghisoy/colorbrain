@@ -88,7 +88,4 @@ public class TrainingEntity {
     @JoinColumn(name = "training_id")
     private List<FileEntity> fileEntities;
 
-    @OneToMany(mappedBy = "trainingEntity", cascade = CascadeType.ALL)
-    private List<ParticipantEntity> participantEntities;
-
 }
