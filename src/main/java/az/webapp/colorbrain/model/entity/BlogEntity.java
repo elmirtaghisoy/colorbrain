@@ -61,4 +61,5 @@ public class BlogEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity categoryEntity;
 
+
 }

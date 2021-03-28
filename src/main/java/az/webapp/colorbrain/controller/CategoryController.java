@@ -1,6 +1,5 @@
 package az.webapp.colorbrain.controller;
 
-
 import az.webapp.colorbrain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
