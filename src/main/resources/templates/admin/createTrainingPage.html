@@ -5,7 +5,8 @@
     <div class="main-container">
         <div class="row">
             <!--/*@thymesVar id="trainingEntity" type="az.webapp.colorbrain.model.entity.TrainingEntity"*/-->
-            <form action="#" th:object="${trainingEntity}" th:action="@{'/training/create'}" method="post">
+            <form th:object="${trainingEntity}" th:action="@{'/training/create'}" method="post"
+                  enctype="multipart/form-data">
                 <div th:include="/admin/layout/training/trainingForm::createFrom"></div>
             </form>
         </div>

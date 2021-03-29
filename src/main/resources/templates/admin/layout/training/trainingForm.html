@@ -5,13 +5,15 @@
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
-            <input th:value="${trainingEntity.header}" name="header" type="text" class="form-control" id="headerLabel">
+            <input th:value="${trainingEntity.header}" th:disabled="${!trainingEntity.status}"
+                   name="header" type="text" class="form-control" id="headerLabel">
         </div>
         <div class="mb-3 col-6">
             <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>
             <p style="display: inline" th:if="${#fields.hasErrors('trainerName')}" class="text-danger fw-bolder"
                th:errors="*{trainerName}"></p>
-            <input th:value="${trainingEntity.trainerName}" name="trainerName" type="text" class="form-control"
+            <input th:value="${trainingEntity.trainerName}" th:disabled="${!trainingEntity.status}" name="trainerName"
+                   type="text" class="form-control"
                    id="trainerLabel">
         </div>
     </div>
@@ -20,7 +22,8 @@
             <label for="lastRegDayLabel" class="form-label text-uppercase">Son Qeydİyyat Tarİxİ</label>
             <p style="display: inline" th:if="${#fields.hasErrors('lastRegistrationDay')}" class="text-danger fw-bolder"
                th:errors="*{lastRegistrationDay}"></p>
-            <input th:value="${trainingEntity.lastRegistrationDay}" name="lastRegistrationDay" type="date"
+            <input th:value="${trainingEntity.lastRegistrationDay}" th:disabled="${!trainingEntity.status}"
+                   name="lastRegistrationDay" type="date"
                    class="form-control"
                    id="lastRegDayLabel">
         </div>
@@ -28,14 +31,16 @@
             <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
             <p style="display: inline" th:if="${#fields.hasErrors('startDate')}" class="text-danger fw-bolder"
                th:errors="*{startDate}"></p>
-            <input th:value="${trainingEntity.startDate}" name="startDate" type="date" class="form-control"
+            <input th:value="${trainingEntity.startDate}" th:disabled="${!trainingEntity.status}" name="startDate"
+                   type="date" class="form-control"
                    id="startDayLabel">
         </div>
         <div class="mb-3 col-4">
             <label for="startTimeLabel" class="form-label text-uppercase">Başlama Saatı</label>
             <p style="display: inline" th:if="${#fields.hasErrors('startTime')}" class="text-danger fw-bolder"
                th:errors="*{startTime}"></p>
-            <input th:value="${trainingEntity.startTime}" name="startTime" type="time" class="form-control"
+            <input th:value="${trainingEntity.startTime}" th:disabled="${!trainingEntity.status}" name="startTime"
+                   type="time" class="form-control"
                    id="startTimeLabel">
         </div>
     </div>
@@ -44,7 +49,8 @@
             <label for="priceLabel" class="form-label text-uppercase">Ödənİş</label>
             <p style="display: inline" th:if="${#fields.hasErrors('trainingPrice')}" class="text-danger fw-bolder"
                th:errors="*{trainingPrice}"></p>
-            <input th:value="${trainingEntity.trainingPrice}" name="trainingPrice" type="text" class="form-control "
+            <input th:value="${trainingEntity.trainingPrice}" th:disabled="${!trainingEntity.status}"
+                   name="trainingPrice" type="text" class="form-control "
                    id="priceLabel">
         </div>
     </div>
@@ -53,7 +59,8 @@
             <label for="editor" class="form-label text-uppercase">Məlumat</label>
             <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
                th:errors="*{context}"></p>
-            <textarea th:text="${trainingEntity.context}" name="context" class="form-control" id="editor"
+            <textarea th:text="${trainingEntity.context}" th:disabled="${!trainingEntity.status}" name="context"
+                      class="form-control" id="editor"
                       rows="3"></textarea>
         </div>
     </div>
@@ -71,7 +78,7 @@
                    id="updatedAtLabel">
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div th:if="${trainingEntity.status}" class="row d-flex justify-content-center">
         <div class="mb-3 col-2">
             <div class="form-check form-switch">
                 <input class="form-check-input" name="registrationIsActive"
@@ -139,13 +146,47 @@
                    id="priceLabel">
         </div>
     </div>
-    <div class="row">
+    <div class="row main-card-row-container">
         <div class="col-12">
             <label for="editor" class="form-label text-uppercase">Məlumat</label>
             <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
                th:errors="*{context}"></p>
             <textarea th:field="*{context}" name="context" class="form-control" id="editor"
                       rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Başlıq Şəkİlİ
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label for="formFileLg" class="form-label text-uppercase">Təlİmİn başlıq şəkİlİnİ seçİn</label>
+                        <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Əlavə Fayllar
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label for="formFileLg" class="form-label text-uppercase">Təlİmİn dİgər fayllarını seçİn</label>
+                        <input name="files" multiple class="form-control form-control-lg" id="formFileLg" type="file">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row d-flex justify-content-center">

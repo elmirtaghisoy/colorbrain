@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -83,7 +84,8 @@ public class TrainingEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "trainingEntity", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id")
     private List<FileEntity> fileEntities;
 
     @OneToMany(mappedBy = "trainingEntity", cascade = CascadeType.ALL)

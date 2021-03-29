@@ -19,14 +19,12 @@ public class ProjectController {
     @GetMapping("/active")
     public String getAllProject(Model model) {
         model.addAttribute("projects", projectService.getAllActiveProject());
-        System.out.println(projectService.getAllActiveProject());
         return "admin/allProjectPage";
     }
 
     @GetMapping("/finished")
     public String getAllFinishedTraining(Model model) {
         model.addAttribute("projects", projectService.getAllFinishedProject());
-        System.out.println(projectService.getAllFinishedProject());
         return "admin/allProjectPage";
     }
 
