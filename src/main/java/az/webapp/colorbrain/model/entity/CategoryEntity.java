@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -30,6 +32,7 @@ public class CategoryEntity {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "Kateqoriyanın adını daxil edin")
     @Column(name = "category_name")
     private String categoryName;
 

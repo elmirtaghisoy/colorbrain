@@ -9,24 +9,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "project")
+@Table(name = "media")
 @Getter
 @Setter
 @ToString
-public class ProjectEntity {
+public class MediaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Layihənin adını daxil edin.")
+    @NotBlank(message = "Paylaşımın adını daxil edin")
     @Column(name = "header")
     private String header;
-
-    @NotBlank(message = "Layihə haqqında məlumat daxil edin.")
-    @Column(name = "context")
-    private String context;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -34,16 +30,13 @@ public class ProjectEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "image_cover")
-    private String imageCover;
-
-    @Column(name = "status")
-    private boolean status;
-
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "projectEntity", cascade = CascadeType.ALL)
-    private List<FileEntity> fileEntities;
+    @Column(name = "image_cover")
+    private String imageCover;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "media_id")
+    private List<FileEntity> fileEntities;
 }

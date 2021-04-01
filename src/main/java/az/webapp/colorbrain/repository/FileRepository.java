@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
     List<FileEntity> findAllByTrainingEntity_IdOrderByFileTypeAsc(Long id);
+    List<FileEntity> findAllByMediaEntity_IdOrderByFileTypeAsc(Long id);
 }
