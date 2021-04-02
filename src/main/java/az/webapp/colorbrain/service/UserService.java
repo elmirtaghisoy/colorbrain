@@ -17,11 +17,11 @@ public class UserService implements UserDetailsService {
     UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CUser user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        CUser user = userRepository.findByEmail(email);
         UserBuilder userBuilder;
         if (user != null) {
-            userBuilder = User.withUsername(username);
+            userBuilder = User.withUsername(email);
             userBuilder.disabled(!user.isActive());
             userBuilder.password(user.getPassword());
             userBuilder.authorities("ADMIN");

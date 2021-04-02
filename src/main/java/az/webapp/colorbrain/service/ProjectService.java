@@ -2,8 +2,10 @@ package az.webapp.colorbrain.service;
 
 import az.webapp.colorbrain.model.entity.ProjectEntity;
 import az.webapp.colorbrain.repository.ProjectRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,18 +16,17 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public List<ProjectEntity> getAllActiveProject() {
-        return projectRepository.findAllByActiveTrue();
+        return projectRepository.findAllByStatusTrue();
     }
 
     public List<ProjectEntity> getAllFinishedProject() {
-        return projectRepository.findAllByActiveFalse();
+        return projectRepository.findAllByStatusFalse();
     }
 
     public void saveProject(ProjectEntity projectEntity) {
         projectEntity.setCreatedAt(LocalDateTime.now());
         projectEntity.setStatus(true);
         projectEntity.setActive(true);
-        System.out.println(projectEntity.toString());
         projectRepository.save(projectEntity);
     }
 

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -17,8 +18,10 @@ public class CUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    @NotNull(message = "Emaili daxil edin")
+    private String email;
 
+    @NotNull(message = "Shifreni daxil edin")
     private String password;
 
     private boolean active;

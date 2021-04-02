@@ -8,7 +8,7 @@
             <!--/*@thymesVar id="projectEntity" type="az.webapp.colorbrain.model.entity.ProjectEntity"*/-->
             <form th:object="${projectEntity}" th:action="@{'/project/update'}" method="post">
                 <input type="hidden" name="id" th:value="${projectEntity.id}">
-                <div th:include="/admin/layout/project/projectForm::updateFrom"></div>
+                <div th:include="/admin/layout/project/projectForm::updateForm"></div>
             </form>
             <form th:object="${projectEntity}" th:action="@{'/project/delete'}" method="post">
                 <input type="hidden" name="id" th:value="${projectEntity.id}">
@@ -22,8 +22,10 @@
 <script>
     window.onload = function dateConverter() {
         var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
 
         createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
     }
 </script>
 </body>

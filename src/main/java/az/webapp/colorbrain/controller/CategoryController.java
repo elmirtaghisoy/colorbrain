@@ -29,8 +29,6 @@ public class CategoryController {
         return "admin/oneCategoryPage";
     }
 
-
-
     @PostMapping("/delete")
     public String deleteCategory(CategoryEntity categoryEntity) {
         categoryService.deleteCategory(categoryEntity);
