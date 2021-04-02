@@ -6,8 +6,7 @@
         <div class="col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/news/allNews" type="button" class="btn btn-primary text-uppercase">Xəbərlər</a>
-                    <a href="/news/create" type="button" class="btn btn-success text-uppercase">Yeni Xəbər</a>
+                    <a href="/teamMembers/create" type="button" class="btn btn-success text-uppercase">Yeni member</a>
                 </div>
             </div>
         </div>
@@ -15,18 +14,18 @@
     <div class="main-container">
         <div class="main-card-row-container">
             <div class="row">
-                <div th:each="news : ${newsList}" class="col-3">
+                <div th:each="teamMembers : ${teamMembersList}" class="col-3">
                     <div class="card">
-                        <img th:src="@{'/file/'+${news.imageCover}}" class="card-img-top" alt="Cover Image">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${news.header}"></h5>
-                        </div>
+                        <img src="@{'/file/'+${teamMembers.memberImage}}" class="card-img-top" alt="Member Image">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" th:text="${news.createdAt}"><b>Tarix: </b></li>
+                            <li class="list-group-item" th:text="${teamMembers.memberName}"><b>memberName: </b></li>
+                            <li class="list-group-item" th:text="${teamMembers.surname}"><b>surname: </b></li>
+                            <li class="list-group-item" th:text="${teamMembers.position}"><b>position: </b></li>
                         </ul>
                         <div class="card-body text-center">
-                            <a th:href="@{{id}(id=${news.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
+                            <a th:href="@{{id}(id=${teamMembers.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
                         </div>
+
                     </div>
                 </div>
             </div>

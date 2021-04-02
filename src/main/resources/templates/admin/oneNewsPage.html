@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="newsEntity" type="az.webapp.colorbrain.model.entity.NewsEntity"*/-->
+            <form th:object="${newsEntity}" th:action="@{'/news/update'}" method="post">
+                <input type="hidden" name="id" th:value="${newsEntity.id}">
+                <div th:include="/admin/layout/news/newsForm::updateFrom"></div>
+            </form>
+            <a style="color: white" th:href="@{/news/{id}/files(id=${newsEntity.id})}"
+               class="btn btn-warning text-uppercase mb-3">Fayllarda
+                dəyİşİklİk et</a>
+            <form th:object="${newsEntity}" th:action="@{'/news/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${newsEntity.id}">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" class="btn btn-danger text-uppercase"
+                           th:value="${newsEntity}? 'Xəbəri sil':'Xəbəri sİl' ">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>
