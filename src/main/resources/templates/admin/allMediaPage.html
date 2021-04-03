@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container-fluid">
+    <div class="main-container">
+        <div class="main-card-row-container">
+            <div class="row">
+                <div class="d-grid gap-2 col-6 mx-auto" role="group" aria-label="Basic mixed styles example">
+                    <a href="/media/create" class="btn btn-primary text-uppercas">Paylaşım əlave edİn</a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div th:each="media : ${medias}" class="col-3">
+                    <div class="card">
+                        <img th:src="@{'/file/'+${media.imageCover}}" class="card-img-top" alt="Cover Image">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${media.header}"></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${media.createdAt}"><b>Tarix: </b></li>
+                        </ul>
+                        <div class="card-body text-center">
+                            <a th:href="@{{id}(id=${media.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
+        var deletedAtLabel = document.getElementById("deletedAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
+        deletedAtLabel.setAttribute("value", deletedAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>

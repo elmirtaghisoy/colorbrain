@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head>
+</head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="mediaEntity" type="az.webapp.colorbrain.model.entity.MediaEntity"*/-->
+            <form th:object="${mediaEntity}" th:action="@{'/media/update'}" method="post">
+                <input type="hidden" name="id" th:value="${mediaEntity.id}">
+                <div th:include="/admin/layout/media/mediaForm::updateForm"></div>
+            </form>
+            <a style="color: white" th:href="@{/media/{id}/files(id=${mediaEntity.id})}"
+               class="btn btn-warning text-uppercase mb-3">Fayllarda dəyİşİklİk et</a>
+            <form th:object="${mediaEntity}" th:action="@{'/media/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${mediaEntity.id}">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" class="btn btn-danger text-uppercase" value="Paylaşımı Sİl">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
+        var deletedAtLabel = document.getElementById("deletedAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
+        deletedAtLabel.setAttribute("value", deletedAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>
