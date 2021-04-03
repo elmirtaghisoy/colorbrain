@@ -2,7 +2,6 @@ package az.webapp.colorbrain.service;
 
 import az.webapp.colorbrain.model.entity.ProjectEntity;
 import az.webapp.colorbrain.repository.ProjectRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +22,10 @@ public class ProjectService {
         return projectRepository.findAllByStatusFalse();
     }
 
+    public ProjectEntity getOneProjectById(Long id) {
+        return projectRepository.getOne(id);
+    }
+
     public void saveProject(ProjectEntity projectEntity) {
         projectEntity.setCreatedAt(LocalDateTime.now());
         projectEntity.setStatus(true);
@@ -41,8 +44,5 @@ public class ProjectService {
         projectRepository.delete(projectEntity);
     }
 
-    public ProjectEntity getOneProjectById(Long id) {
-        return projectRepository.getOne(id);
-    }
 }
 

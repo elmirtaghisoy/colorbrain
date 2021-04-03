@@ -3,7 +3,6 @@ package az.webapp.colorbrain.service;
 
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.NewsEntity;
-import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.repository.FileRepository;
 import az.webapp.colorbrain.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import java.util.List;
 
 @Service
 public class NewsService {
+
     @Autowired
     private NewsRepository newsRepository;
 
@@ -32,6 +32,22 @@ public class NewsService {
         newsEntity.setCreatedAt(LocalDateTime.now());
         newsRepository.save(newsEntity);
     }
+
+    public void updateNews(NewsEntity newsEntity) {
+        NewsEntity newsEntityFromDb = getOneNewsById(newsEntity.getId());
+        newsEntity.setCreatedAt(newsEntityFromDb.getCreatedAt());
+        newsEntity.setUpdateAt(LocalDateTime.now());
+        newsRepository.save(newsEntity);
+    }
+
+    public NewsEntity getOneNewsById(Long id) {
+        return newsRepository.getOne(id);
+    }
+
+    public void deleteNews(NewsEntity newsEntity) {
+        newsRepository.delete(newsEntity);
+    }
+
     public void saveAdditionalNewsFiles(List<MultipartFile> files, NewsEntity newsEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
             List<FileEntity> savedFiles = FileService.saveMultiple(files, "news");
@@ -42,27 +58,13 @@ public class NewsService {
         }
     }
 
-    public void updateNews(NewsEntity newsEntity) {
-        NewsEntity newsEntityFromDb = getOneNewsById(newsEntity.getId());
-        newsEntity.setCreatedAt(newsEntityFromDb.getCreatedAt());
-        newsEntity.setUpdateAt(LocalDateTime.now());
-        newsRepository.save(newsEntity);
-    }
-
-
-    public NewsEntity getOneNewsById(Long id) {
-        return newsRepository.getOne(id);
-    }
-
-    public void deleteNews(NewsEntity newsEntity) {
-       newsRepository.delete(newsEntity);
-    }
-
-    public List<FileEntity> getAllFilesByNewsId(Long id) {
-        return fileRepository.findAllByNewsEntity_IdOrderByFileTypeAsc(id);}
-
     public void deleteFileByNewsId(FileEntity fileEntity) {
         fileRepository.delete(fileEntity);
     }
+
+    public List<FileEntity> getAllFilesByNewsId(Long id) {
+        return fileRepository.findAllByNewsEntity_IdOrderByFileTypeAsc(id);
+    }
+
 }
 

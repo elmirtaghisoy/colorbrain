@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="teamMemberEntity" type="az.webapp.colorbrain.model.entity.TeamMemberEntity"*/-->
+            <form th:object="${teamMemberEntity}" th:action="@{'/team-member/update'}" method="post">
+                <input type="hidden" name="id" th:value="${teamMemberEntity.id}">
+                <div th:include="/admin/layout/teamMember/teamMemberForm::updateFrom"></div>
+            </form>
+            <form th:object="${teamMemberEntity}" th:action="@{'/team-member/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${teamMemberEntity.id}">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" class="btn btn-danger text-uppercase" value="Üzvü Sİl">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

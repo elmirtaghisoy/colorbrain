@@ -29,22 +29,8 @@ public class TrainingService {
         return trainingRepository.findAllByStatusFalse();
     }
 
-    public void saveTraining(TrainingEntity trainingEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
-        trainingEntity.setImageCover(FileService.saveSingle(file));
-        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
-        trainingEntity.setCreatedAt(LocalDateTime.now());
-        trainingEntity.setStatus(true);
-        trainingRepository.save(trainingEntity);
-    }
-
-    public void saveAdditionalTrainingFiles(List<MultipartFile> files, TrainingEntity trainingEntity) throws IOException {
-        if (files.get(0).getSize() != 0) {
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "training");
-            for (FileEntity file : savedFiles) {
-                file.setTrainingEntity(trainingEntity);
-                fileRepository.save(file);
-            }
-        }
+    public TrainingEntity getOneTrainingById(Long id) {
+        return trainingRepository.getOne(id);
     }
 
     public void updateTraining(TrainingEntity trainingEntity) {
@@ -57,19 +43,34 @@ public class TrainingService {
         trainingRepository.save(trainingEntity);
     }
 
-    public void deleteTraining(TrainingEntity trainingEntity) {
-        trainingRepository.delete(trainingEntity);
+    public void saveTraining(TrainingEntity trainingEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
+        trainingEntity.setImageCover(FileService.saveSingle(file));
+        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
+        trainingEntity.setCreatedAt(LocalDateTime.now());
+        trainingEntity.setStatus(true);
+        trainingRepository.save(trainingEntity);
     }
 
-    public TrainingEntity getOneTrainingById(Long id) {
-        return trainingRepository.getOne(id);
+    public void deleteTraining(TrainingEntity trainingEntity) {
+        trainingRepository.delete(trainingEntity);
     }
 
     public List<FileEntity> getAllFilesByTrainingId(Long id) {
         return fileRepository.findAllByTrainingEntity_IdOrderByFileTypeAsc(id);
     }
 
+    public void saveAdditionalTrainingFiles(List<MultipartFile> files, TrainingEntity trainingEntity) throws IOException {
+        if (files.get(0).getSize() != 0) {
+            List<FileEntity> savedFiles = FileService.saveMultiple(files, "training");
+            for (FileEntity file : savedFiles) {
+                file.setTrainingEntity(trainingEntity);
+                fileRepository.save(file);
+            }
+        }
+    }
+
     public void deleteFileByTrainingId(FileEntity fileEntity) {
         fileRepository.delete(fileEntity);
     }
+
 }

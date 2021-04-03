@@ -14,25 +14,19 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<CategoryEntity> getAllCategory(){
+    public List<CategoryEntity> getAllCategory() {
         return categoryRepository.findAll();
     }
 
-    public void deleteCategory(CategoryEntity categoryEntity){
+    public void deleteCategory(CategoryEntity categoryEntity) {
         categoryRepository.delete(categoryEntity);
     }
 
-    public void saveCategory(CategoryEntity categoryEntity){
+    public void saveCategory(CategoryEntity categoryEntity) {
         categoryRepository.save(categoryEntity);
     }
 
-    public void updateCategory(CategoryEntity categoryEntity){
+    public void updateCategory(CategoryEntity categoryEntity) {
         categoryRepository.save(categoryEntity);
     }
-
-//    public void createCategory(CategoryEntity categoryEntity){
-//        categoryRepository.save(categoryEntity);
-//
-//    }
-
 }

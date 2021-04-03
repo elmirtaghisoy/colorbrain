@@ -3,7 +3,6 @@ package az.webapp.colorbrain.controller;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.service.TrainingService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

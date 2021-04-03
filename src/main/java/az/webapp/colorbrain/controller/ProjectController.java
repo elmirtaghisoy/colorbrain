@@ -2,7 +2,6 @@ package az.webapp.colorbrain.controller;
 
 import az.webapp.colorbrain.model.entity.ProjectEntity;
 import az.webapp.colorbrain.service.ProjectService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +28,7 @@ public class ProjectController {
     }
 
     @GetMapping("/finished")
-    public String getAllFinishedTraining(Model model) {
+    public String getAllFinishedProject(Model model) {
         model.addAttribute("projects", projectService.getAllFinishedProject());
         return "admin/allProjectPage";
     }
@@ -42,7 +41,6 @@ public class ProjectController {
         model.addAttribute("projectEntity", projectService.getOneProjectById(projectEntity.getId()));
         return "admin/oneProjectPage";
     }
-
 
     @GetMapping("/create")
     public String getCreatePage(Model model) {
@@ -63,13 +61,6 @@ public class ProjectController {
         return "redirect:/project/active";
     }
 
-    @PostMapping("/delete")
-    public String deleteProject(ProjectEntity projectEntity) {
-        projectService.deleteProject(projectEntity);
-        return "redirect:/project/active";
-    }
-
-
     @PostMapping("/update")
     public String updateProject(
             @Valid @ModelAttribute("projectEntity") ProjectEntity projectEntity,
@@ -79,6 +70,12 @@ public class ProjectController {
             return "admin/oneProjectPage";
         }
         projectService.updateProject(projectEntity);
+        return "redirect:/project/active";
+    }
+
+    @PostMapping("/delete")
+    public String deleteProject(ProjectEntity projectEntity) {
+        projectService.deleteProject(projectEntity);
         return "redirect:/project/active";
     }
 }

@@ -4,10 +4,10 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
-            <!--/*@thymesVar id="teamMembersEntity" type="az.webapp.colorbrain.model.entity.teamMembersEntity"*/-->
-            <form th:object="${teamMembersEntity}" th:action="@{'/teamMembers/create'}" method="post"
+            <!--/*@thymesVar id="teamMemberEntity" type="az.webapp.colorbrain.model.entity.teamMemberEntity"*/-->
+            <form th:object="${teamMemberEntity}" th:action="@{'/team-member/create'}" method="post"
                   enctype="multipart/form-data">
-                <div th:include="/admin/layout/teamMembers/teamMembersForm::createFrom"></div>
+                <div th:include="/admin/layout/teamMember/teamMemberForm::createFrom"></div>
             </form>
         </div>
     </div>

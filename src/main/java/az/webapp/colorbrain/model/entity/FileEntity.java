@@ -60,7 +60,7 @@ public class FileEntity {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "teamMembers_id")
-    private  TeamMembersEntity teamMembersEntity;
+    private TeamMemberEntity teamMemberEntity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")

@@ -10,31 +10,31 @@
                     <a href="/project/create" class="btn btn-primary text-uppercase">Yeni Layihələr</a>
                     <a href="/project/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Layihələr</a>
                 </div>
-                </div>
             </div>
         </div>
     </div>
-    <div class="main-container">
-        <div class="main-card-row-container">
-            <div class="row">
-                <div th:each="project : ${projects}" class="col-3">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="Cover Image">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${project.header}"></h5>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" th:text="${project.createdAt}"><b>Tarix: </b></li>
-                            <li class="list-group-item" th:text="${project.status}"><b>Status:</b></li>
-                        </ul>
-                        <div class="card-body text-center">
-                            <a th:href="@{{id}(id=${project.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
-                        </div>
+</div>
+<div class="main-container">
+    <div class="main-card-row-container">
+        <div class="row">
+            <div th:each="project : ${projects}" class="col-3">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="Cover Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${project.header}"></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="${project.createdAt}"><b>Tarix: </b></li>
+                        <li class="list-group-item" th:text="${project.status}"><b>Status:</b></li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a th:href="@{{id}(id=${project.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
