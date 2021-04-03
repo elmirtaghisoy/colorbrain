@@ -1,7 +1,6 @@
 package az.webapp.colorbrain.controller;
 
 import az.webapp.colorbrain.model.entity.CategoryEntity;
-import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/category")
@@ -20,18 +18,16 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/active")
-    public String getAllCategory(Model model){
-        model.addAttribute("categories",categoryService.getAllCategory());
+    public String getAllCategory(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "admin/allCategoryPage";
     }
 
     @GetMapping("/{id}")
-    public String getOneCategoryById(@PathVariable("id")CategoryEntity categoryEntity, Model model){
-        model.addAttribute("category",categoryEntity);
+    public String getOneCategoryById(@PathVariable("id") CategoryEntity categoryEntity, Model model) {
+        model.addAttribute("category", categoryEntity);
         return "admin/oneCategoryPage";
     }
-
-
 
     @PostMapping("/delete")
     public String deleteCategory(CategoryEntity categoryEntity) {
@@ -40,7 +36,7 @@ public class CategoryController {
     }
 
     @PostMapping("/update")
-    public String updateCategory( CategoryEntity categoryEntity){
+    public String updateCategory(CategoryEntity categoryEntity) {
         categoryService.updateCategory(categoryEntity);
         return "redirect:/category/active";
     }
@@ -48,9 +44,9 @@ public class CategoryController {
     @PostMapping("/create")
     public String saveCategory(
             @Valid @ModelAttribute("categoryEntity") CategoryEntity categoryEntity,
-                               BindingResult bindingResult
-    ){
-        if (bindingResult.hasErrors()){
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
             return "admin/createCategoryPage";
         }
         categoryService.saveCategory(categoryEntity);
@@ -58,8 +54,8 @@ public class CategoryController {
     }
 
     @GetMapping("/create")
-    public String getCreatePage(Model model){
-        model.addAttribute("categoryEntity",new CategoryEntity());
+    public String getCreatePage(Model model) {
+        model.addAttribute("categoryEntity", new CategoryEntity());
         return "admin/createCategoryPage";
     }
 }

@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <table style="margin-top: 1%" class="table table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Kontaktin Adi</th>
+                    <th scope="col">Kontaktin Adresi</th>
+                    <th scope="col">Icon</th>
+                    <th scope="col">Dəyişiklik et</th>
+                    <th scope="col">Sil</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contact : ${contacts}">
+                    <th scope="row" th:text="${contact.id}"></th>
+                    <td th:text="${contact.contactName}"></td>
+                    <td th:text="${contact.contactAddress}"></td>
+                    <td th:text="${contact.icon}"></td>
+                    <td>
+                        <a href="/category/id" th:href="@{{id} (id=${contact.id})}" class="card-link btn btn-success">
+                            Update
+                        </a>
+                    </td>
+                    <td>
+                        <form th:object="${contactEntity}" th:action="@{'/contact/delete'}" method="post">
+                            <input type="hidden" name="id" th:value="${contact.id}">
+                            <div class="text-left">
+                                <input type="submit" class="btn btn-danger" value= "Sil">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto" role="group" aria-label="Basic mixed styles example">
+            <a href="/contact/create" class="btn btn-primary">Elave edin</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
