@@ -3,6 +3,7 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -43,7 +44,8 @@ public class ProjectEntity {
     @Column(name = "active")
     private boolean active;
 
-    @OneToMany(mappedBy = "projectEntity", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
     private List<FileEntity> fileEntities;
 
 }

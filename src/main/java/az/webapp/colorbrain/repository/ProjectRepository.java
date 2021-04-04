@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<ProjectEntity, Long> {
 
-    List<ProjectEntity> findAllByActiveTrue();
+    List<ProjectEntity> findAllByStatusTrue();
 
-    List<ProjectEntity> findAllByActiveFalse();
+    List<ProjectEntity> findAllByStatusFalse();
 }

@@ -6,9 +6,9 @@
         <div class="col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/project/active" type="button" class="btn btn-success text-uppercase">Aktiv Layihələr</a>
-                    <a href="/project/create" class="btn btn-primary text-uppercase">Yeni Layihələr</a>
-                    <a href="/project/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Layihələr</a>
+                    <a href="/blog/active" type="button" class="btn btn-success text-uppercase">Aktiv Bloglar</a>
+                    <a href="/blog/create" class="btn btn-primary text-uppercase">Yeni Bloglar</a>
+                    <a href="/blog/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Bloglar</a>
                 </div>
             </div>
         </div>
@@ -17,17 +17,17 @@
 <div class="main-container">
     <div class="main-card-row-container">
         <div class="row">
-            <div th:each="project : ${projects}" class="col-3">
+            <div th:each="blog : ${blogs}" class="col-3">
                 <div class="card">
-                    <img th:src="@{'/file/' +${project.imageCover}}" class="card-img-top" alt="Cover Image">
+                    <img th:src="@{'/file/' +${blog.imageCover}}" class="card-img-top" alt="Cover Image">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${project.header}"></h5>
+                        <h5 class="card-title" th:text="${blog.header}"></h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item" th:text="${project.status}"><b>Status:</b></li>
+                        <li class="list-group-item" th:text="${blog.status}"><b>Status:</b></li>
                     </ul>
                     <div class="card-body text-center">
-                        <a th:href="@{{id}(id=${project.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
+                        <a th:href="@{{id}(id=${blog.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
                     </div>
                 </div>
             </div>
