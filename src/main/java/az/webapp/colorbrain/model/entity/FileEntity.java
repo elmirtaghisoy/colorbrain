@@ -70,7 +70,7 @@ public class FileEntity {
     @JoinColumn(name = "blog_id")
     private BlogEntity blogEntity;
 
-    @ManyToOne(cascade ={
+    @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,

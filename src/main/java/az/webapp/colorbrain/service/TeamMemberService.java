@@ -1,7 +1,6 @@
 package az.webapp.colorbrain.service;
 
 import az.webapp.colorbrain.model.entity.TeamMemberEntity;
-import az.webapp.colorbrain.repository.FileRepository;
 import az.webapp.colorbrain.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

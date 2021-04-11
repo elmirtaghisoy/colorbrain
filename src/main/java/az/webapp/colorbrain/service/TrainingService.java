@@ -43,8 +43,8 @@ public class TrainingService {
         trainingRepository.save(trainingEntity);
     }
 
-    public void saveTraining(TrainingEntity trainingEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
-        trainingEntity.setImageCover(FileService.saveSingle(file));
+    public void saveTraining(TrainingEntity trainingEntity, List<MultipartFile> files) throws IOException {
+        trainingEntity.setCoverPath(FileService.saveSingle(trainingEntity.getCoverImage()));
         trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
         trainingEntity.setCreatedAt(LocalDateTime.now());
         trainingEntity.setStatus(true);
