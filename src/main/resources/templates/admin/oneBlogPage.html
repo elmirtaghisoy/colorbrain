@@ -5,20 +5,20 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
-            <!--/*@thymesVar id="projectEntity" type="az.webapp.colorbrain.model.entity.ProjectEntity"*/-->
-            <form th:object="${projectEntity}" th:action="@{'/project/update'}" method="post">
-                <input type="hidden" name="id" th:value="${projectEntity.id}">
-                <div th:include="/admin/layout/project/projectForm::updateForm"></div>
+            <!--/*@thymesVar id="blogEntity" type="az.webapp.colorbrain.model.entity.BlogEntity"*/-->
+            <form th:object="${blogEntity}" th:action="@{'/blog/update'}" method="post">
+                <input type="hidden" name="id" th:value="${blogEntity.id}">
+                <div th:include="/admin/layout/blog/blogForm::updateForm"></div>
             </form>
 
-            <a style="color: white" th:href="@{/project/{id}/files(id=${projectEntity.id})}"
+            <a style="color: white" th:href="@{/blog/{id}/files(id=${blogEntity.id})}"
                class="btn btn-warning text-uppercase mb-3">Fayllarda dəyişiklik et</a>
 
-            <form th:object="${projectEntity}" th:action="@{'/project/delete'}" method="post">
-                <input type="hidden" name="id" th:value="${projectEntity.id}">
+            <form th:object="${blogEntity}" th:action="@{'/blog/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${blogEntity.id}">
                 <div class="row d-flex justify-content-center">
                     <input type="submit" class="btn btn-danger text-uppercase"
-                           th:value="${projectEntity.status}? 'Layihəni ləğv et' : 'Layihəni sil'">
+                           th:value="${blogEntity.status}? 'Layihəni ləğv et' : 'Layihəni sil'">
                 </div>
             </form>
         </div>

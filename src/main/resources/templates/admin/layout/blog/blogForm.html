@@ -5,7 +5,7 @@
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
-            <input th:value="${projectEntity.header}" th:disabled="${!projectEntity.status}" name="header" type="text"
+            <input th:value="${blogEntity.header}" th:disabled="${!blogEntity.status}" name="header" type="text"
                    class="form-control" id="headerLabel">
         </div>
         <div class="row">
@@ -13,7 +13,7 @@
                 <label for="editor" class="form-label text-uppercase">Məlumat</label>
                 <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
                    th:errors="*{context}"></p>
-                <textarea th:text="${projectEntity.context}" th:disabled="${!projectEntity.status}" name="context"
+                <textarea th:text="${blogEntity.context}" th:disabled="${!blogEntity.status}" name="context"
                           class="form-control" id="editor"
                           rows="3"></textarea>
             </div>
@@ -22,22 +22,22 @@
             <div class="mb-3 col-4 text-center">
                 <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
                     At</label>
-                <input th:value="${projectEntity.createdAt}" name="createdAt" type="text" disabled class="form-control"
+                <input th:value="${blogEntity.createdAt}" name="createdAt" type="text" disabled class="form-control"
                        id="createdAtLabel">
             </div>
             <div class="mb-3 col-4 text-center">
                 <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
                     At</label>
-                <input th:value="${projectEntity.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
+                <input th:value="${blogEntity.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
                        id="updatedAtLabel">
             </div>
         </div>
         <div>
-            <div th:if="${projectEntity.status}" class="row d-flex justify-content-center">
+            <div th:if="${blogEntity.status}" class="row d-flex justify-content-center">
                 <div class="mb-3 col-2">
                     <div class="form-check form-switch">
                         <input class="form-check-input text-uppercase" name="status"
-                               th:checked="${projectEntity.status}"
+                               th:checked="${blogEntity.status}"
                                type="checkbox" id="flexSwitchCheckDefault2">
                         <label class="form-check-label text-uppercase" for="flexSwitchCheckDefault2">Status</label>
                     </div>
@@ -78,7 +78,7 @@
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                          data-bs-parent="#accordionFlushExample">
                         <div class="main-container">
-                            <label for="formFileLg" class="form-label text-uppercase">Layihənin başlıq şəkilini
+                            <label for="formFileLg" class="form-label text-uppercase">Blogun başlıq şəkilini
                                 seçin</label>
                             <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
                         </div>
@@ -95,7 +95,7 @@
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
                          data-bs-parent="#accordionFlushExample">
                         <div class="main-container">
-                            <label for="formFileLg" class="form-label text-uppercase">Layihənin digər fayllarını
+                            <label for="formFileLg" class="form-label text-uppercase">Blogun digər fayllarını
                                 seçin</label>
                             <input name="files" multiple class="form-control form-control-lg" id="formFileLg"
                                    type="file">
