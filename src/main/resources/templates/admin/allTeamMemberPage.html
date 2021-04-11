@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="main-container">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="/team-member/create" type="button" class="btn btn-success text-uppercase">Yenİ Üzv
+                        yarat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="main-card-row-container">
+            <div class="row">
+                <div th:each="teamMember : ${teamMembers}" class="col-3">
+                    <div class="card">
+                        <img th:src="@{'/file/'+${teamMember.memberImage}}" class="card-img-top" alt="Member Image">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${teamMember.memberName}"><b>memberName: </b></li>
+                            <li class="list-group-item" th:text="${teamMember.surname}"><b>surname: </b></li>
+                            <li class="list-group-item" th:text="${teamMember.position}"><b>position: </b></li>
+                        </ul>
+                        <div class="card-body text-center">
+                            <a th:href="@{{id}(id=${teamMember.id})}" class="card-link text-uppercase">Ətraflı
+                                Məlumat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

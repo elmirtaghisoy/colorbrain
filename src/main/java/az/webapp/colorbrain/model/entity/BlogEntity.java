@@ -51,10 +51,4 @@ public class BlogEntity {
     @JoinColumn(name = "blog_id")
     private List<FileEntity> fileEntities;
 
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "blog_id")
-//    private CategoryEntity categoryEntity;
-
-
 }

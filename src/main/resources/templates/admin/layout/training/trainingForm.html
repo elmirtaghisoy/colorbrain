@@ -162,13 +162,17 @@
                     <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
                             data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                         Başlıq Şəkİlİ
+                        <p style="display: inline" th:if="${#fields.hasErrors('coverImage')}"
+                           class="text-danger fw-bolder"
+                           th:errors="*{coverImage}"></p>
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                      data-bs-parent="#accordionFlushExample">
                     <div class="container-fluid mb-3 mt-2">
                         <label for="formFileLg" class="form-label text-uppercase">Təlİmİn başlıq şəkİlİnİ seçİn</label>
-                        <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
+                        <input th:field="*{coverImage}" name="coverImage" class="form-control form-control-lg"
+                               id="formFileLg" type="file">
                     </div>
                 </div>
             </div>

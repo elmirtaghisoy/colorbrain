@@ -10,5 +10,7 @@ import java.util.List;
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
     List<FileEntity> findAllByTrainingEntity_IdOrderByFileTypeAsc(Long id);
 
-    List<FileEntity> findAllByBlogEntity_IdOrderByFileTypeAsc(Long id);
+    List<FileEntity> findAllByNewsEntity_IdOrderByFileTypeAsc(Long id);
+
+    List<FileEntity> findAllByMediaEntity_IdOrderByFileTypeAsc(Long id);
 }

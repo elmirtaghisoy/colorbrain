@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<TrainingEntity, Long> {
-
     List<TrainingEntity> findAllByStatusTrue();
 
     List<TrainingEntity> findAllByStatusFalse();

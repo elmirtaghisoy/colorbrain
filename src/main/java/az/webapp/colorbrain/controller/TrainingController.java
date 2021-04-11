@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.controller;
 
+import az.webapp.colorbrain.component.annotation.IsImage;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.service.TrainingService;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 
@@ -62,14 +62,13 @@ public class TrainingController {
     @PostMapping("/create")
     public String saveTraining(
             @Valid @ModelAttribute("trainingEntity") TrainingEntity trainingEntity,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createTrainingPage";
         }
-        trainingService.saveTraining(trainingEntity, file, files);
+        trainingService.saveTraining(trainingEntity, files);
         return "redirect:/training/active";
     }
 
@@ -110,3 +109,13 @@ public class TrainingController {
     }
 
 }
+
+
+//        if (!file.getOriginalFilename().contains("jpg")) {
+//            try {
+//                throw new IOException("Elave etdiyiniz faylin formati shekil olmalidir");
+//            } catch (IOException ex) {
+//                model.addAttribute("fileEx", file);
+//                System.out.println("ex");
+//                return "admin/createTrainingPage";
+//            }

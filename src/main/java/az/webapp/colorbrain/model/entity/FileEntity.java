@@ -3,7 +3,16 @@ package az.webapp.colorbrain.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "file")
@@ -35,7 +44,12 @@ public class FileEntity {
     @JoinColumn(name = "training_id")
     private TrainingEntity trainingEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+    })
     @JoinColumn(name = "news_id")
     private NewsEntity newsEntity;
 
@@ -45,16 +59,22 @@ public class FileEntity {
             CascadeType.PERSIST,
             CascadeType.REFRESH
     })
+    @JoinColumn(name = "teamMembers_id")
+    private TeamMemberEntity teamMemberEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private ProjectEntity projectEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "blog_id")
+    private BlogEntity blogEntity;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
-    @JoinColumn(name = "blog_id")
-    private BlogEntity blogEntity;
-
+            CascadeType.REFRESH})
+    @JoinColumn(name = "media_id")
+    private MediaEntity mediaEntity;
 }

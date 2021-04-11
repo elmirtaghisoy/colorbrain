@@ -15,8 +15,7 @@
             <form th:object="${trainingEntity}" th:action="@{'/training/delete'}" method="post">
                 <input type="hidden" name="id" th:value="${trainingEntity.id}">
                 <div class="row d-flex justify-content-center">
-                    <input type="submit" class="btn btn-danger text-uppercase"
-                           th:value="${trainingEntity.status}? 'Təlİmİ ləğv et':'Təlİmİ sİl' ">
+                    <input type="submit" class="btn btn-danger text-uppercase" value="Təlİmİ sİl">
                 </div>
             </form>
         </div>

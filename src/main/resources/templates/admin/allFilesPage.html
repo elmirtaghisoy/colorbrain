@@ -4,6 +4,11 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
+            <div class="col-4">
+                <a th:href="@{/previous-page}" class="btn btn-danger text-white text-uppercase mb-4">Gerİ</a>
+            </div>
+        </div>
+        <div class="row">
             <table class="table table-hover text-center">
                 <thead>
                 <tr>
@@ -54,10 +59,8 @@
                         <div class="accordion-body">
                             <form th:action="@{'files/save'}" method="post" enctype="multipart/form-data">
                                 <div class="container-fluid mb-3 mt-2">
-                                    <label for="formFileLg" class="form-label text-uppercase">Təlİmİn dİgər fayllarını
-                                        seçİn</label>
-                                    <label for="formFileLg" class="form-label text-uppercase">Layihənin dİgər fayllarını
-                                        seçİn</label>
+                                    <label for="formFileLg" class="form-label text-uppercase fw-bolder">Xəbərin
+                                        dİgər fayllarını seçİn</label>
                                     <input name="files" multiple class="form-control form-control-lg" id="formFileLg"
                                            type="file">
                                     <div class="row d-flex justify-content-center mt-4">

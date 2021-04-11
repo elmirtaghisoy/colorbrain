@@ -1,11 +1,22 @@
 package az.webapp.colorbrain.model.entity;
 
+import az.webapp.colorbrain.component.annotation.IsImage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -41,8 +52,8 @@ public class TrainingEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "image_cover")
-    private String imageCover;
+    @Column(name = "cover_path")
+    private String coverPath;
 
     @NotNull(message = "Təlimin son qeydiyyat tarixini daxil edin.")
     @Column(name = "last_registration_day")
@@ -80,7 +91,7 @@ public class TrainingEntity {
     @JoinColumn(name = "training_id")
     private List<FileEntity> fileEntities;
 
-    @OneToMany(mappedBy = "trainingEntity", cascade = CascadeType.ALL)
-    private List<ParticipantEntity> participantEntities;
-
+    @Transient
+    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
+    private MultipartFile coverImage;
 }

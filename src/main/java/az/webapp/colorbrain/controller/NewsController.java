@@ -1,17 +1,27 @@
 package az.webapp.colorbrain.controller;
 
+
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.NewsEntity;
 import az.webapp.colorbrain.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "/news")
@@ -26,30 +36,78 @@ public class NewsController {
         return "admin/allNewsPage";
     }
 
-    @GetMapping("/create")
-    public void createNews() {
-        NewsEntity newsEntity = new NewsEntity();
-        newsEntity.setHeader("news header");
-        newsEntity.setContext("news context");
-        newsEntity.setCreatedAt(LocalDateTime.now());
-        newsEntity.setImageCover("cover image");
-        newsEntity.setActive(true);
-
-        FileEntity fileEntity1 = new FileEntity();
-        fileEntity1.setFileCategory(1);
-        fileEntity1.setFilePath("file path");
-        fileEntity1.setFileType(2);
-
-        FileEntity fileEntity2 = new FileEntity();
-        fileEntity2.setFileCategory(2);
-        fileEntity2.setFilePath("file path");
-        fileEntity2.setFileType(3);
-
-        List<FileEntity> fileLists = new ArrayList<>();
-        fileLists.add(fileEntity1);
-        fileLists.add(fileEntity2);
-
-        newsEntity.setFileEntities(fileLists);
-        newsService.saveNews(newsEntity);
+    @GetMapping("/{id}")
+    public String getOneNewsById(
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+        model.addAttribute("newsEntity", newsService.getOneNewsById(id));
+        return "admin/oneNewsPage";
     }
+
+    @GetMapping("/create")
+    public String getCreatePage(Model model) {
+        model.addAttribute("newsEntity", new NewsEntity());
+        return "admin/createNewsPage";
+    }
+
+    @GetMapping("/{id}/files")
+    public String getAllFilesByNewsId(
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+        model.addAttribute("files", newsService.getAllFilesByNewsId(id));
+        return "admin/allFilesPage";
+    }
+
+    @PostMapping("/create")
+    public String saveNews(
+            @Valid @ModelAttribute("newsEntity") NewsEntity newsEntity,
+            @NotNull @RequestParam("coverImage") MultipartFile file,
+            @NotNull @RequestParam("files") List<MultipartFile> files,
+            BindingResult bindingResult
+    ) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "admin/createNewsPage";
+        }
+        newsService.saveNews(newsEntity, file, files);
+        return "redirect:/news/all";
+    }
+
+    @PostMapping("/update")
+    public String updateNews(
+            @Valid @ModelAttribute("newsEntity") NewsEntity newsEntity,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            return "admin/oneNewsPage";
+        }
+        newsService.updateNews(newsEntity);
+        return "redirect:/news/all";
+    }
+
+    @PostMapping("/delete")
+    public String deleteNews(NewsEntity newsEntity) {
+        newsService.deleteNews(newsEntity);
+        return "redirect:/news/all";
+    }
+
+    @PostMapping("{id}/files/save")
+    public String saveFilesByNewsId(
+            @PathVariable("id") NewsEntity newsEntity,
+            @NotBlank @RequestParam("files") List<MultipartFile> files
+    ) throws IOException {
+        newsService.saveAdditionalNewsFiles(files, newsEntity);
+        return "redirect:/news/" + newsEntity.getId() + "/files";
+    }
+
+    @PostMapping("{id}/files/delete")
+    public String deleteFileByNewsId(
+            @RequestParam("fileId") FileEntity fileEntity,
+            @PathVariable("id") NewsEntity newsEntity
+    ) {
+        newsService.deleteFileByNewsId(fileEntity);
+        return "redirect:/news/" + newsEntity.getId() + "/files";
+    }
+
 }
