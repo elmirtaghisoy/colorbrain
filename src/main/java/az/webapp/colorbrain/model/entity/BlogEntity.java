@@ -1,8 +1,10 @@
 package az.webapp.colorbrain.model.entity;
 
+import az.webapp.colorbrain.component.annotation.IsImage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -38,8 +40,8 @@ public class BlogEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @Column(name = "image_cover")
-    private String imageCover;
+    @Column(name = "cover_path")
+    private String coverPath;
 
     @Column(name = "active")
     private boolean active;
@@ -50,5 +52,9 @@ public class BlogEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "blog_id")
     private List<FileEntity> fileEntities;
+
+    @Transient
+    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG, JPEG, IMG, PNG) ola bilər.")
+    private MultipartFile coverImage;
 
 }

@@ -12,7 +12,7 @@ public class GlobalExceptionHandler extends DispatcherServlet {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public String handleMaxSizeException(WebRequest req, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("uploadingError", "YÜKLƏDİYİNİZ FAYLLARIN ÜMUMİ ÖLÇÜSÜ 30MB-DAN BÖYÜK OLMALIDIR");
+        redirectAttributes.addFlashAttribute("uploadingError", "YÜKLƏDİYİNİZ FAYLLARIN ÜMUMİ ÖLÇÜSÜ 30MB-DAN BÖYÜK OLMAMALIDIR");
         return "redirect:" + req.getHeader("referer").substring(21);
     }
 

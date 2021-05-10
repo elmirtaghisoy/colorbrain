@@ -3,7 +3,6 @@ package az.webapp.colorbrain.component.validator;
 import az.webapp.colorbrain.component.annotation.IsImage;
 import com.google.common.io.Files;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;

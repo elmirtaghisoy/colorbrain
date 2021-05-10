@@ -30,8 +30,8 @@ public class BlogService {
     }
 
     public void saveBlog(BlogEntity blogEntity, List<MultipartFile> files, MultipartFile file) throws IOException {
+        blogEntity.setCoverPath(FileService.saveSingle(blogEntity.getCoverImage()));
         blogEntity.setFileEntities(FileService.saveMultiple(files, "blog"));
-        blogEntity.setImageCover(FileService.saveSingle(file));
         blogEntity.setCreatedAt(LocalDateTime.now());
         blogEntity.setStatus(true);
         blogEntity.setActive(true);
