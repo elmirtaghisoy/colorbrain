@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.controller;
 
+import az.webapp.colorbrain.component.annotation.IsImage;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.MediaEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
@@ -49,16 +50,12 @@ public class MediaController {
 
     @PostMapping("/create")
     public String saveMedia(
-            @Valid @ModelAttribute("mediaEntity") MediaEntity mediaEntity,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-
-            BindingResult bindingResult) throws IOException {
+            @Valid @ModelAttribute("mediaEntity") MediaEntity mediaEntity,BindingResult bindingResult,
+            @NotNull @RequestParam("files") List<MultipartFile> files) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createMediaPage";
         }
-        System.out.println(mediaEntity.toString());
-        mediaService.saveMedia(mediaEntity, file, files);
+        mediaService.saveMedia(mediaEntity, files);
         return "redirect:/media/active";
     }
 

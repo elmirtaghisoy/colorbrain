@@ -28,6 +28,7 @@ public class MediaService {
      }
 
      public void saveMedia(MediaEntity mediaEntity,MultipartFile file, List<MultipartFile> files) throws IOException {
+         mediaEntity.setCoverPath(FileService.saveSingle(mediaEntity.getCoverImage()));
          mediaEntity.setFileEntities(FileService.saveMultiple(files,"media"));
          mediaEntity.setImageCover(FileService.saveSingle(file));
          mediaEntity.setCreatedAt(LocalDateTime.now());
@@ -66,5 +67,8 @@ public class MediaService {
 
     public void deleteFileByTrainingId(FileEntity fileEntity) {
           fileRepository.delete(fileEntity);
+    }
+
+    public void saveMedia(MediaEntity mediaEntity, List<MultipartFile> files) {
     }
 }
