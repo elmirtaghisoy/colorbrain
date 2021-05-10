@@ -15,7 +15,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Fayl</th>
                     <th scope="col">Fayl Tipi</th>
-                    <th scope="col">Sil</th>
+                    <th th:if="${isFinished}" scope="col">Sil</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                         <iframe th:case="4" th:src="@{'/file/'+${file.filePath}}" height="200" width="auto"></iframe>
                     </td>
                     <td class="align-middle" th:text="${file.fileType}"></td>
-                    <td class="align-middle">
+                    <td th:if="${isFinished}" class="align-middle">
                         <div class="row d-flex justify-content-center">
                             <form th:action="@{'files/delete'}" method="post">
                                 <input type="hidden" th:value="${file.id}" name="fileId">
@@ -45,7 +45,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
+        <div th:if="${isFinished}" class="row">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
@@ -59,7 +59,8 @@
                         <div class="accordion-body">
                             <form th:action="@{'files/save'}" method="post" enctype="multipart/form-data">
                                 <div class="container-fluid mb-3 mt-2">
-                                    <label for="formFileLg" class="form-label text-uppercase fw-bolder">Fayllarını seçİn</label>
+                                    <label for="formFileLg" class="form-label text-uppercase fw-bolder">Fayllarını
+                                        seçİn</label>
                                     <input name="files" multiple class="form-control form-control-lg" id="formFileLg"
                                            type="file">
                                     <div class="row d-flex justify-content-center mt-4">

@@ -3,13 +3,17 @@
 <head></head>
 <body>
 <div class="container-fluid">
-    <div class="main-container">
-        <div class="main-card-row-container">
-            <div class="row">
-                <div class="d-grid gap-2 col-6 mx-auto" role="group" aria-label="Basic mixed styles example">
-                    <a href="/media/create" class="btn btn-primary text-uppercas">Paylaşım əlave edİn</a>
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="main-container">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a th:href="@{/media/create}" class="btn btn-primary text-uppercase">Yenİ Paylaşım Yarat</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="main-card-row-container">
             <div class="row mt-4">
                 <div th:each="media : ${medias}" class="col-3">
                     <div class="card">

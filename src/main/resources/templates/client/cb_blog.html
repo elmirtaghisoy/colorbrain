@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{client/layout/layout.html :: layout (~{::body},'home')}">
+<html lang="en">
+<head>
+</head>
+
+<body>
+<!-- Begin bread crumbs -->
+<nav class="bread-crumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="bread-crumbs-list">
+                    <li>
+                        <a href="index-2.html">Home</a>
+                        <i class="material-icons md-18">chevron_right</i>
+                    </li>
+                    <li><a href="#!">News</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End bread crumbs -->
+
+<!-- Begin main content -->
+<div style="padding-top: 1.5rem" class="section">
+    <div class="container">
+        <div class="row content-items">
+            <div class="col-lg-9 col-12 content-item">
+                <div class="section-heading heading-center">
+                    <div class="section-subheading">most interesting articles</div>
+                    <h1>News</h1>
+                </div>
+                <div class="news-list items">
+                    <!-- Begin news item -->
+                    <article th:each="blog : ${blogs}" class="news-wide-item item">
+                        <a href="news-post.html" class="news-wide-item-img img-style">
+                            <img class="lazy" th:src="@{'/file/' +${blog.imageCover}}">
+                        </a>
+                        <div class="news-wide-item-info">
+                            <h4 class="news-wide-item-title item-heading">
+                                <a href="news-post.html" th:text="${blog.header}"></a>
+                            </h4>
+                            <div class="news-wide-item-row">
+                                <div class="news-wide-item-date">Jan 23, 2021</div>
+                                <div class="news-wide-item-author">
+                                    by <a href="#!">John Doe</a>
+                                </div>
+                            </div>
+                            <div class="news-wide-item-desc">
+                                <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                    are so beguiled and demoralized by the charms of pleasure of the
+                                    moment...</p>
+                            </div>
+                            <div class="wrapp-btn-link">
+                                <a href="news-post.html" class="btn-link">
+                                    <span>Read more</span>
+                                    <svg class="btn-link-ico btn-link-ico-right" viewBox="0 0 13 9" width="13"
+                                         height="9">
+                                        <use xlink:href="assets/img/sprite.svg#arrow-right"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- End news item -->
+                    <div class="item">
+                        <nav class="pagination">
+                            <ul class="pagination-list">
+                                <li class="active"><a href="#!">1</a></li>
+                                <li><a href="#!">2</a></li>
+                                <li><a href="#!">3</a></li>
+                            </ul><!-- End pagination -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-12 content-item">
+                <!-- Begin sidebar -->
+                <aside class="sidebar items">
+                    <div class="sidebar-item item">
+                        <div class="section-bg item-border-radius sibebar-item-bg">
+                            <p class="sidebar-item-title item-heading">Categories</p>
+                            <ul class="sidebar-cat">
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Startup</a>
+                                    <span class="sidebar-cat-count">25</span>
+                                </li>
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Software Development</a>
+                                    <span class="sidebar-cat-count">14</span>
+                                </li>
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Hybrid Cloud Management</a>
+                                    <span class="sidebar-cat-count">20</span>
+                                </li>
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Software Solutions</a>
+                                    <span class="sidebar-cat-count">3</span>
+                                </li>
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Creating Better Software</a>
+                                    <span class="sidebar-cat-count">18</span>
+                                </li>
+                                <li class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link">Through Design Thinking</a>
+                                    <span class="sidebar-cat-count">9</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <!-- End sidebar -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End main content -->
+</body>
+</html>

@@ -4,7 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,15 +53,12 @@ public class BlogEntity {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "status")
-    private boolean status;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "blog_id")
     private List<FileEntity> fileEntities;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "blog_id")
-//    private CategoryEntity categoryEntity;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private CategoryEntity categoryEntity;
 
 }

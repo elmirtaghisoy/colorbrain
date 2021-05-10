@@ -6,9 +6,7 @@
         <div class="col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/blog/active" type="button" class="btn btn-success text-uppercase">Aktiv Bloglar</a>
-                    <a href="/blog/create" class="btn btn-primary text-uppercase">Yeni Bloglar</a>
-                    <a href="/blog/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Bloglar</a>
+                    <a href="/blog/create" class="btn btn-primary text-uppercase">Yenİ Bloq Yarat</a>
                 </div>
             </div>
         </div>
@@ -23,9 +21,6 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${blog.header}"></h5>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" th:text="${blog.status}"><b>Status:</b></li>
-                    </ul>
                     <div class="card-body text-center">
                         <a th:href="@{{id}(id=${blog.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
                     </div>

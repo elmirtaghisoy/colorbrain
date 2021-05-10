@@ -47,6 +47,7 @@ public class TrainingService {
         trainingEntity.setCoverPath(FileService.saveSingle(trainingEntity.getCoverImage()));
         trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
         trainingEntity.setCreatedAt(LocalDateTime.now());
+        trainingEntity.setActive(true);
         trainingEntity.setStatus(true);
         trainingRepository.save(trainingEntity);
     }

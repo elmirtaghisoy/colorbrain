@@ -22,18 +22,13 @@ public class BlogService {
     private FileRepository fileRepository;
 
     public List<BlogEntity> getAllActiveBlog() {
-        return blogRepository.findAllByStatusTrue();
-    }
-
-    public List<BlogEntity> getAllFinishedBlog() {
-        return blogRepository.findAllByStatusFalse();
+        return blogRepository.findAllByActiveTrue();
     }
 
     public void saveBlog(BlogEntity blogEntity, List<MultipartFile> files, MultipartFile file) throws IOException {
         blogEntity.setFileEntities(FileService.saveMultiple(files, "blog"));
         blogEntity.setImageCover(FileService.saveSingle(file));
         blogEntity.setCreatedAt(LocalDateTime.now());
-        blogEntity.setStatus(true);
         blogEntity.setActive(true);
         blogRepository.save(blogEntity);
     }

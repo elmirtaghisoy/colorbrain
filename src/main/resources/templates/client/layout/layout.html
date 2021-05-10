@@ -1,0 +1,65 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template,menu)">
+<head>
+
+    <meta charset="utf-8">
+
+    <title>PathSoft - IT Solution for You Business</title>
+
+    <meta name="description" content="Description">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+
+    <link rel="icon" th:href="@{/static/client/img/favicon/favicon.ico}" type="image/x-icon">
+
+    <link rel="stylesheet" th:href="@{/static/client/css/libs.css}">
+    <link rel="stylesheet" th:href="@{/static/client/css/style.css}">
+
+    <link rel="stylesheet" th:href="@{/static/client/libs/jquery-minicolors-master/jquery.minicolors.css}">
+    <link rel="stylesheet" th:href="@{/static/client/css/settings.css}">
+    <link rel="stylesheet" th:href="@{/static/client/css/ecommerce.css}">
+
+    <link rel="preload" th:href="@{/static/client/fonts/istok-web-v15-latin/istok-web-v15-latin-regular.woff2}"
+          as="font"
+          type="font/woff2" crossorigin>
+    <link rel="preload" th:href="@{/static/client/fonts/istok-web-v15-latin/istok-web-v15-latin-700.woff2}" as="font"
+          type="font/woff2" crossorigin>
+    <link rel="preload" th:href="@{/static/client/fonts/montserrat-v15-latin/montserrat-v15-latin-700.woff2}" as="font"
+          type="font/woff2" crossorigin>
+    <link rel="preload" th:href="@{/static/client/fonts/montserrat-v15-latin/montserrat-v15-latin-600.woff2}" as="font"
+          type="font/woff2" crossorigin>
+
+    <link rel="preload" th:href="@{/static/client/fonts/material-design-icons/material-design-icons.woff2}" as="font"
+          type="font/woff2" crossorigin>
+    <link rel="preload" th:href="@{/static/client/fonts/material-design-icons/material-design-icons-outlined.woff2}"
+          as="font"
+          type="font/woff2" crossorigin>
+</head>
+<body>
+<main class="main">
+    <div th:replace="client/layout/header.html::header"></div>
+    <th:block th:include="${template}"/>
+    <div th:replace="client/layout/footer.html::footer"></div>
+</main>
+<script th:src="@{/static/client/libs/jquery/jquery.min.js}"></script>
+<script th:src="@{/static/client/libs/lozad/lozad.min.js}"></script>
+<script th:src="@{/static/client/libs/device/device.js}"></script>
+<script th:src="@{/static/client/libs/ScrollToFixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/static/client/libs/spincrement/jquery.spincrement.min.js}"></script>
+<script th:src="@{/static/client/libs/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js}"></script>
+<script th:src="@{/static/client/libs/jquery-validation-1.19.3/jquery.validate.min.js}"></script>
+<script th:src="@{/static/client/libs/autosize-master/autosize.min.js}"></script>
+<script th:src="@{/static/client/libs/flickity/flickity.pkgd.min.js}"></script>
+<script th:src="@{/static/client/libs/flickity/flickity-imagesloaded.js}"></script>
+<script th:src="@{/static/client/libs/flickity/bg-lazyload.js}"></script>
+<script th:src="@{/static/client/libs/flickity/flickity-fade.js}"></script>
+<script th:src="@{/static/client/libs/isotope/isotope.pkgd.min.js}"></script>
+<script th:src="@{/static/client/libs/lightGallery/js/picturefill.min.js}"></script>
+<script th:src="@{/static/client/libs/lightGallery/js/lightgallery-all.min.js}"></script>
+<script th:src="@{/static/client/libs/lightGallery/js/jquery.mousewheel.min.js}"></script>
+<script th:src="@{/static/client/libs/jquery-ui-range/jquery-ui.min.js}"></script>
+<script th:src="@{/static/client/js/custom.js}"></script>
+<script th:src="@{/static/client/libs/jquery-minicolors-master/jquery.minicolors.min.js}"></script>
+<script th:src="@{/static/client/js/settings.js}"></script>
+
+</body>
+</html>
