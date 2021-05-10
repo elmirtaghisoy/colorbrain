@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    private static String uploadPath = "/C:/javaProjects/uploads";
+    private static String uploadPath = "/C:/colorbrain/uploads";
 
     @Override
     public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {

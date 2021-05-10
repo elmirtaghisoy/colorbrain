@@ -56,8 +56,9 @@ public class TeamMembersController {
     @PostMapping("/create")
     public String saveTeamMembers(
             @Valid @ModelAttribute("teamMembersEntity") TeamMembersEntity teamMembersEntity,
-            @NotNull @RequestParam("memberImage") MultipartFile file,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @NotNull @RequestParam("memberImage") MultipartFile file
+
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createTeamMembersPage";

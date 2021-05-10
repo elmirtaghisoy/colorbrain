@@ -59,9 +59,10 @@ public class NewsController {
     @PostMapping("/create")
     public String saveNews(
             @Valid @ModelAttribute("newsEntity") NewsEntity newsEntity,
+            BindingResult bindingResult,
             @NotNull @RequestParam("coverImage") MultipartFile file,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            BindingResult bindingResult
+            @NotNull @RequestParam("files") List<MultipartFile> files
+
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createNewsPage";
@@ -78,12 +79,13 @@ public class NewsController {
         newsService.saveAdditionalNewsFiles(files, newsEntity);
         return "redirect:/news/" + newsEntity.getId() + "/files";
     }
+
     @PostMapping("{id}/files/delete")
     public String deleteFileByNewsId(
             @RequestParam("fileId") FileEntity fileEntity,
             @PathVariable("id") NewsEntity newsEntity
     ) {
-       newsService.deleteFileByNewsId(fileEntity);
+        newsService.deleteFileByNewsId(fileEntity);
         return "redirect:/news/" + newsEntity.getId() + "/files";
     }
 

@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 public class FileService {
 
-    private static final String uploadPath = "/C:/javaProjects/uploads";
+    private static final String uploadPath = "/C:/colorbrain/uploads";
 
     public static String saveSingle(MultipartFile file) throws IOException {
         String resultFilename = "";

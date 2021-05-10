@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="aboutAsEntity" type="az.webapp.colorbrain.model.entity.AboutAsEntity"*/-->
+            <form th:object="${aboutAsEntity}" th:action="@{'/aboutAs/update'}" method="post">
+                <input type="hidden" name="id" th:value="${aboutAsEntity.id}">
+            </form>
+        </div>
+    </div>
+
+<div class="row static-page">
+
+<!--    <div class="row">-->
+<!--        <div class="accordion accordion-flush  mb-8 mt-2 " id="accordionFlushExample">-->
+<!--            <div class="accordion-item">-->
+<!--                <h2 class="accordion-header" id="flush-headingOne">-->
+<!--                    <button class="accordion-button collapsed text-uppercase fw-bolder" type="button" data-bs-toggle="collapse"-->
+<!--                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">-->
+<!--                        şəkil-->
+<!--                    </button>-->
+<!--                </h2>-->
+<!--                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"-->
+<!--                     data-bs-parent="#accordionFlushExample">-->
+<!--                    <div class="container-fluid mb-3 mt-2">-->
+<!--                        <label for="formFileLg" class="form-label text-uppercase fw-bolder">şəkİlİ-->
+<!--                            seçİn</label>-->
+<!--                        <input name="file" class="form-control form-control-lg" id="formFileLg" type="file">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="col-12">
+        <label for="editor"
+               class="form-label text-uppercase container-fluid mb-6 mt-2 fw-bolder">Haqqımızda</label>
+        <p style="display: inline" th:if="${#fields.hasErrors('aboutAs')}" class="text-danger fw-bolder"
+           th:errors="*{aboutAs}"></p>
+        <textarea th:text="${aboutAsEntity.aboutAs}" name="editor"
+                  class="form-control" id="editor"
+                  rows="3"></textarea>
+    </div>
+</div>
+</div>
+<div th:if="${aboutAsEntity}" class="row d-flex justify-content-center mt-3">
+    <input type="submit" class="btn btn-success text-uppercase" value="Dəyİşİklİyİ Yadda Saxla">
+</div>
+</html>
