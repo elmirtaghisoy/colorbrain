@@ -8,8 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BlogRepository extends JpaRepository<BlogEntity, Long> {
-
-    List<BlogEntity> findAllByStatusTrue();
-
-    List<BlogEntity> findAllByStatusFalse();
+    List<BlogEntity> findAllByActiveTrue();
 }

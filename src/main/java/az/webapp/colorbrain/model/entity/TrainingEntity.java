@@ -92,6 +92,6 @@ public class TrainingEntity {
     private List<FileEntity> fileEntities;
 
     @Transient
-    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
+//    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
     private MultipartFile coverImage;
 }

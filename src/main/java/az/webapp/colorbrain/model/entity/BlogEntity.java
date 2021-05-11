@@ -46,15 +46,15 @@ public class BlogEntity {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "status")
-    private boolean status;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "blog_id")
     private List<FileEntity> fileEntities;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private CategoryEntity categoryEntity;
+
     @Transient
     @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG, JPEG, IMG, PNG) ola bilər.")
     private MultipartFile coverImage;
-
 }

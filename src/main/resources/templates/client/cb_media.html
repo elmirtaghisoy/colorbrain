@@ -1,0 +1,115 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{client/layout/layout.html :: layout (~{::body},'home')}">
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+
+    <!-- Begin bread crumbs -->
+    <nav class="bread-crumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-crumbs-list">
+                        <li>
+                            <a href="index-2.html">Home</a>
+                            <i class="material-icons md-18">chevron_right</i>
+                        </li>
+                        <li><a href="#!">News</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End bread crumbs -->
+
+    <!-- Begin main content -->
+    <div style="padding-top: 1.5rem" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading heading-center">
+                        <div class="section-subheading">most interesting articles</div>
+                        <h1>News</h1>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12 item">
+                    <!-- Begin news item -->
+                    <article th:each="media : ${medias}" class="news-item news-item-min item-style">
+                        <div class="news-item-header">
+                            <a href="#!" class="news-item-auth">
+                                <div class="news-item-auth-img">
+                                    <img data-src="assets/img/auth-img-1.jpg" class="lazy"
+                                    th:src="@{'/file/' +${media.imageCover}}">
+                                </div>
+                                <div class="news-item-auth-name">Catherine Williams</div>
+                            </a>
+                            <div class="news-item-date2">Jan 23, 2021</div>
+                        </div>
+                        <a href="news-post.html" class="news-item-img">
+                            <img data-src="assets/img/news-img-1.jpg" class="lazy"
+                                 src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                                 alt="">
+                        </a>
+                        <div class="news-item-info">
+                            <h4 class="news-item-title item-heading">
+                                <a href="news-post.html" title="Benefits Of Async/Await" th:text="${media.header}">Benefits Of Async/Await</a>
+                            </h4>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+
+                <div class="col-12">
+                    <!-- Begin pagination -->
+                    <nav class="pagination pagination-full">
+                        <ul class="pagination-list">
+                            <li class="pagination-item-arrow pagination-item-arrow-first pagination-item-disabled">
+                                <a href="#!"><i class="material-icons md-24">first_page</i></a></li>
+                            <li class="pagination-item-arrow pagination-item-arrow-prev pagination-item-disabled"><a
+                                    href="#!"><i class="material-icons md-24">chevron_left</i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li><a href="#!">2</a></li>
+                            <li><a href="#!">3</a></li>
+                            <li><span>...</span></li>
+                            <li><a href="#!">12</a></li>
+                            <li><a href="#!">13</a></li>
+                            <li><a href="#!">14</a></li>
+                            <li class="pagination-item-arrow pagination-item-arrow-next"><a href="#!"><i
+                                    class="material-icons md-24">chevron_right</i></a></li>
+                            <li class="pagination-item-arrow pagination-item-arrow-last"><a href="#!"><i
+                                    class="material-icons md-24">last_page</i></a></li>
+                        </ul>
+                    </nav><!-- End pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End main content -->
+
+
+<!-- End main -->
+
+<!--<script src="assets/libs/jquery/jquery.min.js"></script>-->
+<!--<script src="assets/libs/lozad/lozad.min.js"></script>-->
+<!--<script src="assets/libs/device/device.js"></script>-->
+<!--<script src="assets/libs/ScrollToFixed/jquery-scrolltofixed-min.js"></script>-->
+<!--<script src="assets/libs/spincrement/jquery.spincrement.min.js"></script>-->
+<!--<script src="assets/libs/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>-->
+<!--<script src="assets/libs/jquery-validation-1.19.3/jquery.validate.min.js"></script>-->
+<!--<script src="assets/libs/autosize-master/autosize.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-imagesloaded.js"></script>-->
+<!--<script src="assets/libs/flickity/bg-lazyload.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-fade.js"></script>-->
+<!--<script src="assets/libs/isotope/isotope.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/picturefill.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/lightgallery-all.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/jquery.mousewheel.min.js"></script>-->
+<!--<script src="assets/libs/jquery-ui-range/jquery-ui.min.js"></script>-->
+<!--<script src="assets/js/custom.js"></script>-->
+<!--<script src="assets/libs/jquery-minicolors-master/jquery.minicolors.min.js"></script>-->
+<!--<script src="assets/js/settings.js"></script>-->
+
+</body>
+</html>

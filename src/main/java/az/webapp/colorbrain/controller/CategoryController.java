@@ -25,15 +25,16 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public String getCategoryById(
-            @PathVariable("id") CategoryEntity categoryEntity
-            , Model model
+            @PathVariable("id") CategoryEntity categoryEntity,
+            Model model
     ) {
         model.addAttribute("category", categoryEntity);
         return "admin/oneCategoryPage";
     }
 
     @GetMapping("/create")
-    public String getCreatePage() {
+    public String getCreatePage(Model model) {
+        model.addAttribute("categoryEntity", new CategoryEntity());
         return "admin/createCategoryPage";
     }
 

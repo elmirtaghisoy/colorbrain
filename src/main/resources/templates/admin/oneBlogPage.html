@@ -10,15 +10,13 @@
                 <input type="hidden" name="id" th:value="${blogEntity.id}">
                 <div th:include="/admin/layout/blog/blogForm::updateForm"></div>
             </form>
-
             <a style="color: white" th:href="@{/blog/{id}/files(id=${blogEntity.id})}"
                class="btn btn-warning text-uppercase mb-3">Fayllarda dəyişiklik et</a>
-
             <form th:object="${blogEntity}" th:action="@{'/blog/delete'}" method="post">
                 <input type="hidden" name="id" th:value="${blogEntity.id}">
                 <div class="row d-flex justify-content-center">
                     <input type="submit" class="btn btn-danger text-uppercase"
-                           th:value="${blogEntity.status}? 'Layihəni ləğv et' : 'Layihəni sil'">
+                           value="Bloqu sİl">
                 </div>
             </form>
         </div>

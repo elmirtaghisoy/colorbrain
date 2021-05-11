@@ -6,9 +6,9 @@
         <div class="col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/project/active" type="button" class="btn btn-success text-uppercase">Aktiv Layihələr</a>
-                    <a href="/project/create" class="btn btn-primary text-uppercase">Yeni Layihələr</a>
-                    <a href="/project/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Layihələr</a>
+                    <a href="/project/active" type="button" class="btn btn-success text-uppercase">Aktİv Layİhələr</a>
+                    <a href="/project/create" class="btn btn-primary text-uppercase">Yenİ Layİhə Yarat</a>
+                    <a href="/project/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Layİhələr</a>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="row">
             <div th:each="project : ${projects}" class="col-3">
                 <div class="card">
-                    <img th:src="@{'/file/' +${project.imageCover}}" class="card-img-top" alt="Cover Image">
+                    <img th:src="@{'/file/' +${project.coverPath}}" class="card-img-top" alt="Cover Image">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${project.header}"></h5>
                     </div>

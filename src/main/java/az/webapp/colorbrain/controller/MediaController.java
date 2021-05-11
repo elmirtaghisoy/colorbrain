@@ -33,6 +33,12 @@ public class MediaController {
         return "admin/allMediaPage";
     }
 
+    @GetMapping("/allf")
+    public String getAllMediaF(Model model) {
+        model.addAttribute("medias", mediaService.getAllMedia());
+        return "client/cb_media";
+    }
+
     @GetMapping("/{id}")
     public String getOneMediaById(
             @PathVariable("id") MediaEntity mediaEntity,

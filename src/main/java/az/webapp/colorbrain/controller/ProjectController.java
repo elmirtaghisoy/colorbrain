@@ -7,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +32,12 @@ public class ProjectController {
         return "admin/allProjectPage";
     }
 
+    @GetMapping("/activef")
+    public String getAllProjectF(Model model) {
+        model.addAttribute("projects", projectService.getAllActiveProject());
+        return "client/cb_project";
+    }
+
     @GetMapping("/finished")
     public String getAllFinishedProject(Model model) {
         model.addAttribute("projects", projectService.getAllFinishedProject());
@@ -35,10 +46,11 @@ public class ProjectController {
 
     @GetMapping("/{id}/files")
     public String getAllFilesByProjectId(
-            @PathVariable("id") Long id,
+            @PathVariable("id") ProjectEntity projectEntity,
             Model model
     ) {
-        model.addAttribute("files", projectService.getAllFilesByProjectId(id));
+        model.addAttribute("files", projectService.getAllFilesByProjectId(projectEntity.getId()));
+        model.addAttribute("isFinished", projectEntity.isStatus());
         return "admin/allFilesPage";
     }
 

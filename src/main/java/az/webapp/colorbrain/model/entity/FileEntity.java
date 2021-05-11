@@ -35,30 +35,15 @@ public class FileEntity {
     @Column(name = "file_category")
     private int fileCategory;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id")
     private TrainingEntity trainingEntity;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "news_id")
     private NewsEntity newsEntity;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH
-    })
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teamMembers_id")
     private TeamMemberEntity teamMemberEntity;
 
@@ -70,11 +55,7 @@ public class FileEntity {
     @JoinColumn(name = "blog_id")
     private BlogEntity blogEntity;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH})
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "media_id")
     private MediaEntity mediaEntity;
 }

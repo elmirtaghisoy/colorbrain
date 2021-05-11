@@ -1,6 +1,5 @@
 package az.webapp.colorbrain.controller;
 
-import az.webapp.colorbrain.component.annotation.IsImage;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.service.TrainingService;
@@ -8,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -37,10 +41,11 @@ public class TrainingController {
 
     @GetMapping("/{id}/files")
     public String getAllFilesByTrainingId(
-            @PathVariable("id") Long id,
+            @PathVariable("id") TrainingEntity trainingEntity,
             Model model
     ) {
-        model.addAttribute("files", trainingService.getAllFilesByTrainingId(id));
+        model.addAttribute("files", trainingService.getAllFilesByTrainingId(trainingEntity.getId()));
+        model.addAttribute("isFinished", trainingEntity.isStatus());
         return "admin/allFilesPage";
     }
 
@@ -109,13 +114,3 @@ public class TrainingController {
     }
 
 }
-
-
-//        if (!file.getOriginalFilename().contains("jpg")) {
-//            try {
-//                throw new IOException("Elave etdiyiniz faylin formati shekil olmalidir");
-//            } catch (IOException ex) {
-//                model.addAttribute("fileEx", file);
-//                System.out.println("ex");
-//                return "admin/createTrainingPage";
-//            }

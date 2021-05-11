@@ -29,4 +29,8 @@ public class CategoryService {
     public void updateCategory(CategoryEntity categoryEntity) {
         categoryRepository.save(categoryEntity);
     }
+
+    public List<CategoryEntity> getAllCategoryWithoutCurrent(Long id) {
+        return categoryRepository.findAllByIdNot(id);
+    }
 }
