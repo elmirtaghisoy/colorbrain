@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
@@ -35,6 +36,12 @@ public class ProjectController {
     @GetMapping("/activef")
     public String getAllProjectF(Model model) {
         model.addAttribute("projects", projectService.getAllActiveProject());
+        return "client/cb_project";
+    }
+
+    @GetMapping("/finishedf")
+    public String getAllFinishedProjectF(Model model) {
+        model.addAttribute("projects", projectService.getAllFinishedProject());
         return "client/cb_project";
     }
 

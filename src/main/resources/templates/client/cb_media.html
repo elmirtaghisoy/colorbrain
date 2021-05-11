@@ -41,15 +41,15 @@
                             <a href="#!" class="news-item-auth">
                                 <div class="news-item-auth-img">
                                     <img data-src="assets/img/auth-img-1.jpg" class="lazy"
-                                    th:src="@{'/file/' +${media.imageCover}}">
+                                  >
                                 </div>
                                 <div class="news-item-auth-name">Catherine Williams</div>
                             </a>
                             <div class="news-item-date2">Jan 23, 2021</div>
                         </div>
                         <a href="news-post.html" class="news-item-img">
-                            <img data-src="assets/img/news-img-1.jpg" class="lazy"
-                                 src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                            <img class="lazy"
+                                 th:src="@{'/file/' +${media.imageCover}}"
                                  alt="">
                         </a>
                         <div class="news-item-info">
