@@ -27,6 +27,12 @@ public class ContactController {
         return "admin/allContactPage";
     }
 
+    @GetMapping("/allf")
+    public String getAllContactF(Model model) {
+        model.addAttribute("contacts", contactService.getAllContact());
+        return "client/cb_contactUs";
+    }
+
     @GetMapping("/{id}")
     public String getOneContactById(
             @PathVariable("id") ContactEntity contactEntity,

@@ -48,8 +48,8 @@ public class NewsEntity {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-    @Column(name = "image_cover")
-    private String imageCover;
+    @Column(name = "cover_path")
+    private String coverPath;
 
     @Column(name = "active")
     private boolean active;
