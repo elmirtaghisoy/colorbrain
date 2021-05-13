@@ -4,9 +4,12 @@ import az.webapp.colorbrain.component.annotation.IsImage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,6 +41,16 @@ public class ProjectEntity {
 
     @Column(name = "cover_path")
     private String coverPath;
+
+    @NotNull(message = "Layihənin başlayacağı tarixi daxil edin.")
+    @Column(name = "start_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+
+    @NotNull(message = "Laihənin bitmə tarixini daxil edin.")
+    @Column(name = "end_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     @Column(name = "status")
     private boolean status;

@@ -28,7 +28,7 @@ public class NewsService {
 
     public void saveNews(NewsEntity newsEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
         newsEntity.setFileEntities(FileService.saveMultiple(files, "news"));
-        newsEntity.setImageCover(FileService.saveSingle(file));
+        newsEntity.setCoverPath(FileService.saveSingle(file));
         newsEntity.setCreatedAt(LocalDateTime.now());
         newsRepository.save(newsEntity);
     }

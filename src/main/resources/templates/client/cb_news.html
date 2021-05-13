@@ -36,7 +36,7 @@
                         <!-- Begin news item -->
                         <article th:each="news : ${newsList}" class="news-wide-item item">
                             <a href="news-post.html" class="news-wide-item-img img-style">
-                                <img class="lazy" th:src="@{'/file/' +${news.imageCover}}">
+                                <img class="lazy" th:src="@{'/file/' +${news.coverPath}}">
                             </a>
                             <div class="news-wide-item-info">
                                 <h4 class="news-wide-item-title item-heading">
