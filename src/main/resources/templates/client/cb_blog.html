@@ -11,10 +11,10 @@
             <div class="col-12">
                 <ul class="bread-crumbs-list">
                     <li>
-                        <a href="index-2.html">Home</a>
+                        <a href="index-2.html">Əsas səhifə</a>
                         <i class="material-icons md-18">chevron_right</i>
                     </li>
-                    <li><a href="#!">News</a></li>
+                    <li><a href="#!">Bloqlar</a></li>
                 </ul>
             </div>
         </div>
@@ -28,8 +28,7 @@
         <div class="row content-items">
             <div class="col-lg-9 col-12 content-item">
                 <div class="section-heading heading-center">
-                    <div class="section-subheading">most interesting articles</div>
-                    <h1>News</h1>
+                    <h1 style="text-transform: uppercase">Bloqlar</h1>
                 </div>
                 <div class="news-list items">
                     <!-- Begin news item -->
@@ -42,19 +41,19 @@
                                 <a href="news-post.html" th:text="${blog.header}"></a>
                             </h4>
                             <div class="news-wide-item-row">
-                                <div class="news-wide-item-date">Jan 23, 2021</div>
                                 <div class="news-wide-item-author">
-                                    by <a href="#!">John Doe</a>
+                                    <a href="" th:text="${blog.categoryEntity.categoryName}"></a>
                                 </div>
                             </div>
+                            <div class="news-wide-item-row">
+                                <div id="createdAtLabel" class="news-wide-item-date" th:text="${blog.createdAt}"></div>
+                            </div>
                             <div class="news-wide-item-desc">
-                                <p>On the other hand, we denounce with righteous indignation and dislike men who
-                                    are so beguiled and demoralized by the charms of pleasure of the
-                                    moment...</p>
+                                <p th:text="${blog.context}"></p>
                             </div>
                             <div class="wrapp-btn-link">
                                 <a href="news-post.html" class="btn-link">
-                                    <span>Read more</span>
+                                    <span style="text-transform: uppercase">Ətraflı</span>
                                     <svg class="btn-link-ico btn-link-ico-right" viewBox="0 0 13 9" width="13"
                                          height="9">
                                         <use xlink:href="assets/img/sprite.svg#arrow-right"></use>
@@ -82,29 +81,8 @@
                         <div class="section-bg item-border-radius sibebar-item-bg">
                             <p class="sidebar-item-title item-heading">Categories</p>
                             <ul class="sidebar-cat">
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Startup</a>
-                                    <span class="sidebar-cat-count">25</span>
-                                </li>
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Software Development</a>
-                                    <span class="sidebar-cat-count">14</span>
-                                </li>
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Hybrid Cloud Management</a>
-                                    <span class="sidebar-cat-count">20</span>
-                                </li>
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Software Solutions</a>
-                                    <span class="sidebar-cat-count">3</span>
-                                </li>
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Creating Better Software</a>
-                                    <span class="sidebar-cat-count">18</span>
-                                </li>
-                                <li class="sidebar-cat-item">
-                                    <a href="#!" class="sidebar-cat-link">Through Design Thinking</a>
-                                    <span class="sidebar-cat-count">9</span>
+                                <li th:each="category : ${categories}" class="sidebar-cat-item">
+                                    <a href="#!" class="sidebar-cat-link" th:text="${category.categoryName}"></a>
                                 </li>
                             </ul>
                         </div>
@@ -116,5 +94,12 @@
     </div>
 </div>
 <!-- End main content -->
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
 </body>
 </html>

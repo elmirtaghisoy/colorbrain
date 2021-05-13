@@ -25,7 +25,7 @@ public class BlogService {
         return blogRepository.findAllByActiveTrue();
     }
 
-    public void saveBlog(BlogEntity blogEntity, List<MultipartFile> files, MultipartFile file) throws IOException {
+    public void saveBlog(BlogEntity blogEntity, List<MultipartFile> files) throws IOException {
         blogEntity.setCoverPath(FileService.saveSingle(blogEntity.getCoverImage()));
         blogEntity.setFileEntities(FileService.saveMultiple(files, "blog"));
         blogEntity.setCreatedAt(LocalDateTime.now());

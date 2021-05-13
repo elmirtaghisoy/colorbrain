@@ -40,6 +40,7 @@ public class BlogController {
     @GetMapping("/allf")
     public String getAllBlogF(Model model) {
         model.addAttribute("blogs", blogService.getAllActiveBlog());
+        model.addAttribute("categories",categoryService.getAllCategory());
         return "client/cb_blog";
     }
 
@@ -72,14 +73,13 @@ public class BlogController {
     @PostMapping("/create")
     public String saveBlog(
             @Valid @ModelAttribute("blogEntity") BlogEntity blogEntity,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createBlogPage";
         }
-        blogService.saveBlog(blogEntity, files, file);
+        blogService.saveBlog(blogEntity, files);
         return "redirect:/blog/all";
     }
 
