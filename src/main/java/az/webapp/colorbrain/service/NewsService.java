@@ -26,10 +26,11 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
-    public void saveNews(NewsEntity newsEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
+    public void saveNews(NewsEntity newsEntity, List<MultipartFile> files) throws IOException {
+        newsEntity.setCoverPath(FileService.saveSingle(newsEntity.getCoverImage()));
         newsEntity.setFileEntities(FileService.saveMultiple(files, "news"));
-        newsEntity.setCoverPath(FileService.saveSingle(file));
         newsEntity.setCreatedAt(LocalDateTime.now());
+        newsEntity.setActive(true);
         newsRepository.save(newsEntity);
     }
 

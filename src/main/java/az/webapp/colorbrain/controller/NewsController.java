@@ -68,14 +68,14 @@ public class NewsController {
     @PostMapping("/create")
     public String saveNews(
             @Valid @ModelAttribute("newsEntity") NewsEntity newsEntity,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createNewsPage";
         }
-        newsService.saveNews(newsEntity, file, files);
+        newsService.saveNews(newsEntity, files);
+
         return "redirect:/news/all";
     }
 

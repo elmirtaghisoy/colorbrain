@@ -66,14 +66,14 @@ public class MediaController {
     @PostMapping("/create")
     public String saveMedia(
             @Valid @ModelAttribute("mediaEntity") MediaEntity mediaEntity,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createMediaPage";
         }
-        mediaService.saveMedia(mediaEntity, file, files);
+        mediaService.saveMedia(mediaEntity, files);
+
         return "redirect:/media/all";
     }
 

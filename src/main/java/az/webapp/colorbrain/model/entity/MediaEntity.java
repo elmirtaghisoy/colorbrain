@@ -1,18 +1,12 @@
 package az.webapp.colorbrain.model.entity;
 
+import az.webapp.colorbrain.component.annotation.IsImage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,4 +42,8 @@ public class MediaEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "media_id")
     private List<FileEntity> fileEntities;
+
+    @Transient
+    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG, JPEG, IMG, PNG) ola bilər.")
+    private MultipartFile coverImage;
 }

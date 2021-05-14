@@ -1,6 +1,7 @@
 package az.webapp.colorbrain.service;
 
 import az.webapp.colorbrain.model.entity.TeamMemberEntity;
+import az.webapp.colorbrain.repository.FileRepository;
 import az.webapp.colorbrain.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,17 @@ public class TeamMemberService {
     @Autowired
     private TeamMemberRepository teamMemberRepository;
 
+    @Autowired
+    private FileRepository fileRepository;
+
     public List<TeamMemberEntity> getAllTeamMembers() {
         return teamMemberRepository.findAll();
     }
 
-    public void saveTeamMembers(TeamMemberEntity teamMemberEntity, MultipartFile file) throws IOException {
-        teamMemberEntity.setMemberImage(FileService.saveSingle(file));
+    public void saveTeamMembers(TeamMemberEntity teamMemberEntity, List<MultipartFile> files) throws IOException {
+        teamMemberEntity.setMemberImage(FileService.saveSingle(teamMemberEntity.getCoverImage()));
+        teamMemberEntity.setFileEntities(FileService.saveMultiple(files, "team"));
+        teamMemberEntity.setActive(true);
         teamMemberRepository.save(teamMemberEntity);
     }
 

@@ -25,9 +25,9 @@ public class MediaService {
         return mediaRepository.findAll();
     }
 
-    public void saveMedia(MediaEntity mediaEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
+    public void saveMedia(MediaEntity mediaEntity, List<MultipartFile> files) throws IOException {
+        mediaEntity.setCoverPath(FileService.saveSingle(mediaEntity.getCoverImage()));
         mediaEntity.setFileEntities(FileService.saveMultiple(files, "media"));
-        mediaEntity.setCoverPath(FileService.saveSingle(file));
         mediaEntity.setCreatedAt(LocalDateTime.now());
         mediaEntity.setActive(true);
         mediaRepository.save(mediaEntity);
