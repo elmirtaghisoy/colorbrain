@@ -29,6 +29,7 @@ public class MediaService {
         mediaEntity.setCoverPath(FileService.saveSingle(mediaEntity.getCoverImage()));
         mediaEntity.setFileEntities(FileService.saveMultiple(files, "media"));
         mediaEntity.setCreatedAt(LocalDateTime.now());
+
         mediaEntity.setActive(true);
         mediaRepository.save(mediaEntity);
     }
