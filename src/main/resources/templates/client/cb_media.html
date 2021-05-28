@@ -24,39 +24,40 @@
 </nav>
 <!-- End bread crumbs -->
 
-<!-- Begin main content -->
-<div style="padding-top: 1.5rem" class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading heading-center">
-                    <h1 style="text-transform: uppercase">MEDİA</h1>
+    <!-- Begin main content -->
+    <div style="padding-top: 1.5rem" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading heading-center">
+                        <h1 style="text-transform: uppercase">Medİa</h1>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 item">
-                <!-- Begin news item -->
-                <article th:each="media : ${medias}" class="news-item news-item-min item-style">
-                    <div class="news-item-header">
-                        <a href="#!" class="news-item-auth">
-                            <div class="news-item-auth-img">
-                                <img data-src="assets/img/auth-img-1.jpg" class="lazy"
-                                >
-                            </div>
-                            <div class="news-item-auth-name" th:text="${media.createdAt}"></div>
+                <div class="col-lg-4 col-md-6 col-12 item">
+                    <!-- Begin news item -->
+                    <article th:each="media : ${medias}" class="news-item news-item-min item-style">
+                        <div class="news-item-header">
+                            <a href="#!" class="news-item-auth">
+                                <div class="news-item-auth-img">
+                                    <img data-src="assets/img/auth-img-1.jpg" class="lazy"
+                                  >
+                                </div>
+                                <div class="news-item-auth-name">Catherine Williams</div>
+                            </a>
+                            <div class="news-item-date2">Jan 23, 2021</div>
+                        </div>
+                        <a href="news-post.html" class="news-item-img">
+                            <img class="lazy"
+                                 th:src="@{'/file/' +${media.coverPath}}"
+                                 alt="">
                         </a>
-                    </div>
-                    <a href="news-post.html" class="news-item-img">
-                        <img class="lazy"
-                             th:src="@{'/file/' +${media.imageCover}}"
-                             alt="">
-                    </a>
-                    <div class="news-item-info">
-                        <h4 class="news-item-title item-heading">
-                            <a href="news-post.html" title="Benefits Of Async/Await" th:text="${media.header}"></a>
-                        </h4>
-                    </div>
-                </article><!-- End news item -->
-            </div>
+                        <div class="news-item-info">
+                            <h4 class="news-item-title item-heading">
+                                <a href="news-post.html" title="Benefits Of Async/Await" th:text="${media.header}">Benefits Of Async/Await</a>
+                            </h4>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
 
             <div class="col-12">
                 <!-- Begin pagination -->

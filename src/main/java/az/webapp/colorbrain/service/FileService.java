@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.service;
 
+import az.webapp.colorbrain.model.CustomFile;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import com.google.common.io.Files;
 import org.springframework.stereotype.Service;
@@ -11,32 +12,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static az.webapp.colorbrain.config.MvcConfig.uploadPath;
+
+
 @Service
 public class FileService {
 
-    private static final String uploadPath = "/C:/TestProjects/colorbrain/uploads";
-
-    public static String saveSingle(MultipartFile file) throws IOException {
+    public static String saveSingle(CustomFile customFile) throws IOException {
         String resultFilename = "";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
+        String currentFilePath = uploadPath + "/" + customFile.getCategory() + "/" + customFile.generateFolder();
+
+        if (customFile.getFile() != null && !customFile.getFile().getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(currentFilePath);
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdirs();
             }
-            String uuidFile = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            String uuid = UUID.randomUUID().toString();
+            resultFilename = uuid + "." + customFile.getFile().getOriginalFilename();
+            customFile.getFile().transferTo(new File(currentFilePath + "/" + resultFilename));
         }
-        return resultFilename;
+        return customFile.getCategory() + "/" + customFile.generateFolder() + "/" + resultFilename;
     }
 
-    public static List<FileEntity> saveMultiple(List<MultipartFile> files, String fileCategory) throws IOException {
+    public static List<FileEntity> saveMultiple(List<MultipartFile> files, String category, String folder) throws IOException {
         List<FileEntity> savedFiles = new ArrayList<>();
         for (MultipartFile file : files) {
             FileEntity fileEntity = new FileEntity();
-            fileEntity.setFilePath(saveSingle(file));
+            fileEntity.setFolderUuid(folder);
+            fileEntity.setFilePath(saveSingle(new CustomFile(category, folder, file)));
             fileEntity.setFileType(extensionDetector(file.getOriginalFilename()));
-            fileEntity.setFileCategory(fileCategoryDetector(fileCategory));
+            fileEntity.setFileCategory(fileCategoryDetector(category));
             savedFiles.add(fileEntity);
         }
         return savedFiles;

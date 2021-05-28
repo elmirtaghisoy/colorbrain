@@ -77,7 +77,8 @@
                                     <a href="product-single.html" th:text="${project.header}"></a>
                                 </h3>
                                 <div class="card-prices">
-                                    <div class="card-price">Start-date & End-date</div>
+                                    <div class="card-price" th:text="${project.startDate}"></div>
+                                    <div class="card-price" th:text="${project.endDate}"></div>
                                 </div>
                             </div>
                             <footer class="card-footer card-footer-abs">

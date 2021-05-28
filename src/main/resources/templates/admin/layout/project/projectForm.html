@@ -1,4 +1,5 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="updateForm">
     <div class="row">
         <div class="mb-3 col-6">
@@ -7,6 +8,22 @@
                th:errors="*{header}"></p>
             <input th:value="${projectEntity.header}" th:disabled="${!projectEntity.status}" name="header" type="text"
                    class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('startDate')}" class="text-danger fw-bolder"
+               th:errors="*{startDate}"></p>
+            <input th:value="${projectEntity.startDate}" th:disabled="${!projectEntity.status}" name="startDate"
+                   type="date" class="form-control"
+                   id="startDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="endDayLabel" class="form-label text-uppercase">Bitmə Tarİxİ</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('endDate')}" class="text-danger fw-bolder"
+               th:errors="*{endDate}"></p>
+            <input th:value="${projectEntity.endDate}" th:disabled="${!projectEntity.status}" name="endDate"
+                   type="date" class="form-control"
+                   id="endDayLabel">
         </div>
         <div class="row">
             <div class="col-12">
@@ -55,6 +72,18 @@
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
             <input th:field="*{header}" name="header" type="text" class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="startDayLabel" class="form-label text-uppercase">Başlama Tarİxİ</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('startDate')}" class="text-danger fw-bolder"
+               th:errors="*{startDate}"></p>
+            <input name="startDate" type="date" class="form-control" id="startDayLabel">
+        </div>
+        <div class="mb-3 col-4">
+            <label for="endDayLabel" class="form-label text-uppercase">Bitmə Tarİxİ</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('endDate')}" class="text-danger fw-bolder"
+               th:errors="*{endDate}"></p>
+            <input name="endDate" type="date" class="form-control" id="endDayLabel">
         </div>
         <div class="row main-card-row-container">
             <div class="col-12">

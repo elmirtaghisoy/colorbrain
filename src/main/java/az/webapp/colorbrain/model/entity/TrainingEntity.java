@@ -87,11 +87,14 @@ public class TrainingEntity {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "folder_uuid")
+    private String folderUuid;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id")
     private List<FileEntity> fileEntities;
 
     @Transient
-//    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
+    @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
     private MultipartFile coverImage;
 }

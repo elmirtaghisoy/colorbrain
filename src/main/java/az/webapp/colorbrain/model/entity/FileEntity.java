@@ -35,6 +35,9 @@ public class FileEntity {
     @Column(name = "file_category")
     private int fileCategory;
 
+    @Column(name = "folder_uuid")
+    private String folderUuid;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id")
     private TrainingEntity trainingEntity;

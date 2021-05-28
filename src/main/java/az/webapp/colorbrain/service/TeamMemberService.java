@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.service;
 
+import az.webapp.colorbrain.model.CustomFile;
 import az.webapp.colorbrain.model.entity.TeamMemberEntity;
 import az.webapp.colorbrain.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class TeamMemberService {
     }
 
     public void saveTeamMembers(TeamMemberEntity teamMemberEntity, MultipartFile file) throws IOException {
-        teamMemberEntity.setMemberImage(FileService.saveSingle(file));
+//        teamMemberEntity.setMemberImage(FileService.saveSingle(file));
         teamMemberRepository.save(teamMemberEntity);
     }
 

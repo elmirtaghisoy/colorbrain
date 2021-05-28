@@ -27,8 +27,8 @@ public class NewsService {
     }
 
     public void saveNews(NewsEntity newsEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
-        newsEntity.setFileEntities(FileService.saveMultiple(files, "news"));
-        newsEntity.setImageCover(FileService.saveSingle(file));
+//        newsEntity.setFileEntities(FileService.saveMultiple(files, "news"));
+//        newsEntity.setCoverPath(FileService.saveSingle(file));
         newsEntity.setCreatedAt(LocalDateTime.now());
         newsRepository.save(newsEntity);
     }
@@ -50,11 +50,11 @@ public class NewsService {
 
     public void saveAdditionalNewsFiles(List<MultipartFile> files, NewsEntity newsEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "news");
-            for (FileEntity file : savedFiles) {
-                file.setNewsEntity(newsEntity);
-                fileRepository.save(file);
-            }
+//            List<FileEntity> savedFiles = FileService.saveMultiple(files, "news");
+//            for (FileEntity file : savedFiles) {
+//                file.setNewsEntity(newsEntity);
+//                fileRepository.save(file);
+//            }
         }
     }
 

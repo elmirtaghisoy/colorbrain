@@ -17,17 +17,17 @@
     <label for="contactNameLabel" class="form-label">Contact Name</label>
     <p style="display:inline" th:if="${#fields.hasErrors('contactName')}" class="text-danger fw-bolder"
        th:errors="*{contactName}">Email error</p>
-    <input th:field="*{contactName}" name="contactName" placeholder="Kontaktin adını daxil edin" type="text"
+    <input th:field="*{contactName}" name="contactName" placeholder="Əlaqənin adını daxil edin" type="text"
            class="form-control" id="contactNameLabel">
     <label for="contactAddressLabel" class="form-label">Contact Address</label>
     <p style="display:inline" th:if="${#fields.hasErrors('contactAddress')}" class="text-danger fw-bolder"
        th:errors="*{contactAddress}">Email error</p>
-    <input th:field="*{contactAddress}" name="contactAddress" placeholder="Kontaktin adresini daxil edin" type="text"
+    <input th:field="*{contactAddress}" name="contactAddress" placeholder="Əlaqənin adresini daxil edin" type="text"
            class="form-control" id="contactAddressLabel">
     <label for="iconLabel" class="form-label">Icon</label>
     <p style="display:inline" th:if="${#fields.hasErrors('icon')}" class="text-danger fw-bolder"
        th:errors="*{icon}">Email error</p>
-    <input th:field="*{icon}" name="icon" placeholder="Iconu daxil edin" type="text"
+    <input th:field="*{icon}" name="icon" placeholder="İconu daxil edin" type="text"
            class="form-control" id="iconLabel">
     <button type="submit" class="btn btn-primary mt-3">Yadda saxla</button>
 </div>

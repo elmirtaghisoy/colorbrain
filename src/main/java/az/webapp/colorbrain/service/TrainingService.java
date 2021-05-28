@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.service;
 
+import az.webapp.colorbrain.model.CustomFile;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.repository.FileRepository;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TrainingService {
@@ -44,9 +46,12 @@ public class TrainingService {
     }
 
     public void saveTraining(TrainingEntity trainingEntity, List<MultipartFile> files) throws IOException {
-        trainingEntity.setCoverPath(FileService.saveSingle(trainingEntity.getCoverImage()));
-        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training"));
+        String uuidFolderName = UUID.randomUUID().toString();
+        CustomFile file = new CustomFile("training", uuidFolderName, trainingEntity.getCoverImage());
+        trainingEntity.setCoverPath(FileService.saveSingle(file));
+        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training", uuidFolderName));
         trainingEntity.setCreatedAt(LocalDateTime.now());
+        trainingEntity.setFolderUuid(uuidFolderName);
         trainingEntity.setActive(true);
         trainingEntity.setStatus(true);
         trainingRepository.save(trainingEntity);
@@ -62,7 +67,8 @@ public class TrainingService {
 
     public void saveAdditionalTrainingFiles(List<MultipartFile> files, TrainingEntity trainingEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "training");
+            FileEntity fileEntity = fileRepository.findFirstByTrainingEntityId(trainingEntity.getId());
+            List<FileEntity> savedFiles = FileService.saveMultiple(files, "training", fileEntity.getFolderUuid());
             for (FileEntity file : savedFiles) {
                 file.setTrainingEntity(trainingEntity);
                 fileRepository.save(file);

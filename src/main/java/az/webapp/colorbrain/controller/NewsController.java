@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -34,6 +33,12 @@ public class NewsController {
     public String getAllNews(Model model) {
         model.addAttribute("newsList", newsService.getAllNews());
         return "admin/allNewsPage";
+    }
+
+    @GetMapping("/allf")
+    public String getAllNewsF(Model model) {
+        model.addAttribute("newsList", newsService.getAllNews());
+        return "client/cb_news";
     }
 
     @GetMapping("/{id}")

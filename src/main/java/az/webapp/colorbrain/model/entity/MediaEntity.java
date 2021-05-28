@@ -42,8 +42,8 @@ public class MediaEntity {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "image_cover")
-    private String imageCover;
+    @Column(name = "cover_path")
+    private String coverPath;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "media_id")

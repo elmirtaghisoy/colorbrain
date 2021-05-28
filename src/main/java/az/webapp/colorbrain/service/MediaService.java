@@ -26,8 +26,8 @@ public class MediaService {
     }
 
     public void saveMedia(MediaEntity mediaEntity, MultipartFile file, List<MultipartFile> files) throws IOException {
-        mediaEntity.setFileEntities(FileService.saveMultiple(files, "media"));
-        mediaEntity.setImageCover(FileService.saveSingle(file));
+//        mediaEntity.setFileEntities(FileService.saveMultiple(files, "media"));
+//        mediaEntity.setCoverPath(FileService.saveSingle(file));
         mediaEntity.setCreatedAt(LocalDateTime.now());
         mediaEntity.setActive(true);
         mediaRepository.save(mediaEntity);
@@ -54,11 +54,11 @@ public class MediaService {
 
     public void saveAdditionalMediaFiles(List<MultipartFile> files, MediaEntity mediaEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "media");
-            for (FileEntity file : savedFiles) {
-                file.setMediaEntity(mediaEntity);
-                fileRepository.save(file);
-            }
+//            List<FileEntity> savedFiles = FileService.saveMultiple(files, "media");
+//            for (FileEntity file : savedFiles) {
+//                file.setMediaEntity(mediaEntity);
+//                fileRepository.save(file);
+//            }
         }
     }
 

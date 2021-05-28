@@ -26,8 +26,8 @@ public class BlogService {
     }
 
     public void saveBlog(BlogEntity blogEntity, List<MultipartFile> files) throws IOException {
-        blogEntity.setCoverPath(FileService.saveSingle(blogEntity.getCoverImage()));
-        blogEntity.setFileEntities(FileService.saveMultiple(files, "blog"));
+//        blogEntity.setCoverPath(FileService.saveSingle(blogEntity.getCoverImage()));
+//        blogEntity.setFileEntities(FileService.saveMultiple(files, "blog"));
         blogEntity.setCreatedAt(LocalDateTime.now());
         blogEntity.setActive(true);
         blogRepository.save(blogEntity);
@@ -35,11 +35,11 @@ public class BlogService {
 
     public void saveAdditionalBlogFiles(List<MultipartFile> files, BlogEntity blogEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "blog");
-            for (FileEntity file : savedFiles) {
-                file.setBlogEntity(blogEntity);
-                fileRepository.save(file);
-            }
+//            List<FileEntity> savedFiles = FileService.saveMultiple(files, "blog");
+//            for (FileEntity file : savedFiles) {
+//                file.setBlogEntity(blogEntity);
+//                fileRepository.save(file);
+//            }
         }
     }
 
