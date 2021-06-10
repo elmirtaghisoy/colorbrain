@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -81,20 +82,22 @@ public class TrainingEntity {
     @Column(name = "registration_is_active")
     private boolean registrationIsActive;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "int default 1")
     private boolean status;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "int default 1")
     private boolean active;
 
-    @Column(name = "folder_uuid")
-    private String folderUuid;
-
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "training_id")
     private List<FileEntity> fileEntities;
 
     @Transient
     @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG,JPEG,IMG,PNG) ola bilər.")
     private MultipartFile coverImage;
+
+    @PrePersist
+    private void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

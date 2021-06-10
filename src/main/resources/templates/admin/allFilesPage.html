@@ -15,7 +15,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">Fayl</th>
                     <th scope="col">Fayl Tipi</th>
-                    <th th:if="${isFinished}" scope="col">Sil</th>
+                    <!--                    <th th:if="${isFinished}" scope="col">Sil</th>-->
+                    <th scope="col">Sil</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +34,8 @@
                         <iframe th:case="4" th:src="@{'/file/'+${file.filePath}}" height="200" width="auto"></iframe>
                     </td>
                     <td class="align-middle" th:text="${file.fileType}"></td>
-                    <td th:if="${isFinished}" class="align-middle">
+                    <!--                    <td th:if="${isFinished}" class="align-middle">-->
+                    <td class="align-middle">
                         <div class="row d-flex justify-content-center">
                             <form th:action="@{'files/delete'}" method="post">
                                 <input type="hidden" th:value="${file.id}" name="fileId">
@@ -45,7 +47,8 @@
                 </tbody>
             </table>
         </div>
-        <div th:if="${isFinished}" class="row">
+        <!--        <div th:if="${isFinished}" class="row">-->
+        <div class="row">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">

@@ -1,6 +1,5 @@
 package az.webapp.colorbrain.controller;
 
-import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.MediaEntity;
 import az.webapp.colorbrain.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +40,10 @@ public class MediaController {
 
     @GetMapping("/{id}")
     public String getOneMediaById(
-            @PathVariable("id") MediaEntity mediaEntity,
+            @PathVariable("id") Long mediaId,
             Model model
     ) {
-        model.addAttribute("mediaEntity", mediaService.getOneMediaById(mediaEntity.getId()));
+        model.addAttribute("mediaEntity", mediaService.getOneMediaById(mediaId));
         return "admin/oneMediaPage";
     }
 
@@ -66,14 +65,14 @@ public class MediaController {
     @PostMapping("/create")
     public String saveMedia(
             @Valid @ModelAttribute("mediaEntity") MediaEntity mediaEntity,
-            @NotNull @RequestParam("files") List<MultipartFile> files,
-            @NotNull @RequestParam("coverImage") MultipartFile file,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createMediaPage";
         }
-        mediaService.saveMedia(mediaEntity, file, files);
+        mediaService.saveMedia(mediaEntity, files);
+
         return "redirect:/media/all";
     }
 
@@ -81,7 +80,7 @@ public class MediaController {
     public String updateMedia(
             @Valid @ModelAttribute("mediaEntity") MediaEntity mediaEntity,
             BindingResult bindingResult
-    ) {
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/oneMediaPage";
         }
@@ -90,27 +89,28 @@ public class MediaController {
     }
 
     @PostMapping("/delete")
-    public String deleteMedia(MediaEntity mediaEntity) {
-        mediaService.deleteMedia(mediaEntity);
+    public String deleteMedia(
+            @RequestParam("mediaId") Long mediaId) {
+        mediaService.deleteMedia(mediaId);
         return "redirect:/media/all";
     }
 
     @PostMapping("/{id}/files/save")
     public String saveFilesByMediaId(
-            @PathVariable("id") MediaEntity mediaEntity,
+            @PathVariable("id") Long id,
             @NotNull @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
-        mediaService.saveAdditionalMediaFiles(files, mediaEntity);
-        return "redirect:/media/" + mediaEntity.getId() + "/files";
+        mediaService.saveAdditionalMediaFiles(files, id);
+        return "redirect:/media/" + id + "/files";
     }
 
     @PostMapping("{id}/files/delete")
     public String deleteFileByTrainingId(
-            @RequestParam("fileId") FileEntity fileEntity,
-            @PathVariable("id") MediaEntity mediaEntity
+            @RequestParam("fileId") Long fileId,
+            @PathVariable("id") Long mediaId
     ) {
-        mediaService.deleteFileByTrainingId(fileEntity);
-        return "redirect:/media/" + mediaEntity.getId() + "/files";
+        mediaService.deleteFileMediaFile(fileId);
+        return "redirect:/media/" + mediaId + "/files";
     }
 
 }

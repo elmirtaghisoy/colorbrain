@@ -6,14 +6,14 @@
     <div class="main-container">
         <div class="row">
             <!--/*@thymesVar id="mediaEntity" type="az.webapp.colorbrain.model.entity.MediaEntity"*/-->
-            <form th:object="${mediaEntity}" th:action="@{'/media/update'}" method="post">
+            <form th:object="${mediaEntity}" th:action="@{'/media/update'}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" th:value="${mediaEntity.id}">
                 <div th:include="/admin/layout/media/mediaForm::updateForm"></div>
             </form>
             <a style="color: white" th:href="@{/media/{id}/files(id=${mediaEntity.id})}"
                class="btn btn-warning text-uppercase mb-3">Fayllarda dəyİşİklİk et</a>
             <form th:object="${mediaEntity}" th:action="@{'/media/delete'}" method="post">
-                <input type="hidden" name="id" th:value="${mediaEntity.id}">
+                <input type="hidden" name="mediaId" th:value="${mediaEntity.id}">
                 <div class="row d-flex justify-content-center">
                     <input type="submit" class="btn btn-danger text-uppercase" value="Paylaşımı Sİl">
                 </div>

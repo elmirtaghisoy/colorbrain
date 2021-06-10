@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static az.webapp.colorbrain.config.MvcConfig.uploadPath;
+
 @Service
 public class ProjectService {
 
@@ -33,9 +35,9 @@ public class ProjectService {
 
     public void saveProject(ProjectEntity projectEntity, List<MultipartFile> files) throws IOException {
         String uuidFolderName = UUID.randomUUID().toString();
-        CustomFile file = new CustomFile("project", uuidFolderName, projectEntity.getCoverImage());
-        projectEntity.setCoverPath(FileService.saveSingle(file));
-        projectEntity.setFileEntities(FileService.saveMultiple(files, "project", uuidFolderName));
+//        CustomFile file = new CustomFile("project", uuidFolderName, projectEntity.getCoverImage());
+//        projectEntity.setCoverPath(FileService.saveSingle(file));
+//        projectEntity.setFileEntities(FileService.saveMultiple(files, "project", uuidFolderName));
         projectEntity.setCreatedAt(LocalDateTime.now());
         projectEntity.setStatus(true);
         projectEntity.setActive(true);
@@ -44,12 +46,12 @@ public class ProjectService {
 
     public void saveAdditionalProjectFiles(List<MultipartFile> files, ProjectEntity projectEntity) throws IOException {
         if (files.get(0).getSize() != 0) {
-            FileEntity fileEntityFromDb = fileRepository.findFirstByProjectEntityId(projectEntity.getId());
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "project", fileEntityFromDb.getFolderUuid());
-            for (FileEntity file : savedFiles) {
-                file.setProjectEntity(projectEntity);
-                fileRepository.save(file);
-            }
+//            FileEntity fileEntityFromDb = fileRepository.findFirstByProjectEntityId(projectEntity.getId());
+//            List<FileEntity> savedFiles = FileService.saveMultiple(files, "project", fileEntityFromDb.getFolderUuid());
+//            for (FileEntity file : savedFiles) {
+//                file.setProjectEntity(projectEntity);
+//                fileRepository.save(file);
+//            }
         }
     }
 
@@ -69,11 +71,14 @@ public class ProjectService {
     }
 
     public List<FileEntity> getAllFilesByProjectId(Long id) {
-        return fileRepository.findAllByProjectEntity_IdOrderByFileTypeAsc(id);
+//        return fileRepository.findAllByProjectEntity_IdOrderByFileTypeAsc(id);
+        return null;
+
     }
 
     public void deleteFileByProjectId(FileEntity fileEntity) {
         fileRepository.delete(fileEntity);
+        FileService.deleteFile(uploadPath + "/" + fileEntity.getFilePath());
     }
 }
 

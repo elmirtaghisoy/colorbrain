@@ -1,6 +1,5 @@
 package az.webapp.colorbrain.controller;
 
-import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +40,11 @@ public class TrainingController {
 
     @GetMapping("/{id}/files")
     public String getAllFilesByTrainingId(
-            @PathVariable("id") TrainingEntity trainingEntity,
+            @PathVariable("id") Long id,
             Model model
     ) {
-        model.addAttribute("files", trainingService.getAllFilesByTrainingId(trainingEntity.getId()));
-        model.addAttribute("isFinished", trainingEntity.isStatus());
+        model.addAttribute("files", trainingService.getAllFilesByTrainingId(id));
+        model.addAttribute("isFinished", trainingService.getTrainingStatus(id));
         return "admin/allFilesPage";
     }
 
@@ -79,25 +78,27 @@ public class TrainingController {
 
     @PostMapping("{id}/files/save")
     public String saveFilesByTrainingId(
-            @PathVariable("id") TrainingEntity trainingEntity,
+            @PathVariable("id") Long id,
             @NotBlank @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
-        trainingService.saveAdditionalTrainingFiles(files, trainingEntity);
-        return "redirect:/training/" + trainingEntity.getId() + "/files";
+        trainingService.saveAdditionalTrainingFiles(files, id);
+        return "redirect:/training/" + id + "/files";
     }
 
     @PostMapping("{id}/files/delete")
     public String deleteFileByTrainingId(
-            @RequestParam("fileId") FileEntity fileEntity,
-            @PathVariable("id") TrainingEntity trainingEntity
+            @RequestParam("fileId") Long fileId,
+            @PathVariable("id") Long trainingId
     ) {
-        trainingService.deleteFileByTrainingId(fileEntity);
-        return "redirect:/training/" + trainingEntity.getId() + "/files";
+        trainingService.deleteFileByTrainingId(fileId);
+        return "redirect:/training/" + trainingId + "/files";
     }
 
     @PostMapping("/delete")
-    public String deleteTraining(TrainingEntity trainingEntity) {
-        trainingService.deleteTraining(trainingEntity);
+    public String deleteTraining(
+            @RequestParam("trainingId") Long trainingId
+    ) {
+        trainingService.deleteTraining(trainingId);
         return "redirect:/training/active";
     }
 
@@ -105,7 +106,7 @@ public class TrainingController {
     public String updateTraining(
             @Valid @ModelAttribute("trainingEntity") TrainingEntity trainingEntity,
             BindingResult bindingResult
-    ) {
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/oneTrainingPage";
         }

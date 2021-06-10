@@ -20,31 +20,48 @@ public class FileService {
 
     public static String saveSingle(CustomFile customFile) throws IOException {
         String resultFilename = "";
-        String currentFilePath = uploadPath + "/" + customFile.getCategory() + "/" + customFile.generateFolder();
+        String currentFilePath = uploadPath + "/" + customFile.getCategory() + "/" + customFile.getFolder();
 
         if (customFile.getFile() != null && !customFile.getFile().getOriginalFilename().isEmpty()) {
             File uploadDir = new File(currentFilePath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
-            String uuid = UUID.randomUUID().toString();
-            resultFilename = uuid + "." + customFile.getFile().getOriginalFilename();
-            customFile.getFile().transferTo(new File(currentFilePath + "/" + resultFilename));
+            resultFilename = createFile(customFile, currentFilePath);
         }
-        return customFile.getCategory() + "/" + customFile.generateFolder() + "/" + resultFilename;
+        return customFile.getCategory() + "/" + customFile.getFolder() + "/" + resultFilename;
     }
 
-    public static List<FileEntity> saveMultiple(List<MultipartFile> files, String category, String folder) throws IOException {
+    private static String createFile(CustomFile customFile, String currentFilePath) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String resultFilename = uuid + "." + customFile.getFile().getOriginalFilename();
+        customFile.getFile().transferTo(new File(currentFilePath + "/" + resultFilename));
+        return resultFilename;
+    }
+
+    public static List<FileEntity> saveMultiple(String category, String folder, List<MultipartFile> files) throws IOException {
         List<FileEntity> savedFiles = new ArrayList<>();
         for (MultipartFile file : files) {
             FileEntity fileEntity = new FileEntity();
             fileEntity.setFolderUuid(folder);
-            fileEntity.setFilePath(saveSingle(new CustomFile(category, folder, file)));
+            fileEntity.setFilePath(saveSingle(
+                    CustomFile.builder()
+                            .category(category)
+                            .folder(folder)
+                            .file(file)
+                            .build()
+                    )
+            );
             fileEntity.setFileType(extensionDetector(file.getOriginalFilename()));
             fileEntity.setFileCategory(fileCategoryDetector(category));
             savedFiles.add(fileEntity);
         }
         return savedFiles;
+    }
+
+    public static boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+        return file.delete();
     }
 
     public static int fileCategoryDetector(String fileCategory) {

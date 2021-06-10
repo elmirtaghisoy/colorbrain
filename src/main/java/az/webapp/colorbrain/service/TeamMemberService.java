@@ -5,7 +5,6 @@ import az.webapp.colorbrain.model.entity.TeamMemberEntity;
 import az.webapp.colorbrain.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,12 +19,14 @@ public class TeamMemberService {
         return teamMemberRepository.findAll();
     }
 
-    public void saveTeamMembers(TeamMemberEntity teamMemberEntity, MultipartFile file) throws IOException {
+    public void saveTeamMember(TeamMemberEntity teamMemberEntity) throws IOException {
+//        CustomFile file = new CustomFile("teamMembers", "member", teamMemberEntity.getCoverImage());
 //        teamMemberEntity.setMemberImage(FileService.saveSingle(file));
+        teamMemberEntity.setActive(true);
         teamMemberRepository.save(teamMemberEntity);
     }
 
-    public void updateTeamMembers(TeamMemberEntity teamMemberEntity) {
+    public void updateTeamMember(TeamMemberEntity teamMemberEntity) {
         teamMemberRepository.save(teamMemberEntity);
     }
 
@@ -33,7 +34,7 @@ public class TeamMemberService {
         return teamMemberRepository.getOne(id);
     }
 
-    public void deleteTeamMembers(TeamMemberEntity teamMemberEntity) {
+    public void deleteTeamMember(TeamMemberEntity teamMemberEntity) {
         teamMemberRepository.delete(teamMemberEntity);
     }
 

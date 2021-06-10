@@ -5,14 +5,18 @@ import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.model.entity.TrainingEntity;
 import az.webapp.colorbrain.repository.FileRepository;
 import az.webapp.colorbrain.repository.TrainingRepository;
+import az.webapp.colorbrain.repository.view.DeleteFileView;
+import az.webapp.colorbrain.repository.view.GetView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+
+import static az.webapp.colorbrain.config.ApplicationConstants.TRAINING;
+import static az.webapp.colorbrain.config.MvcConfig.uploadPath;
+import static az.webapp.colorbrain.util.CommonUtils.getRandomFolderName;
 
 @Service
 public class TrainingService {
@@ -35,49 +39,61 @@ public class TrainingService {
         return trainingRepository.getOne(id);
     }
 
-    public void updateTraining(TrainingEntity trainingEntity) {
-        TrainingEntity trainingEntityFromDb = getOneTrainingById(trainingEntity.getId());
-        if (!trainingEntity.isStatus()) {
-            trainingEntity.setRegistrationIsActive(false);
+    public void updateTraining(TrainingEntity trainingEntity) throws IOException {
+        TrainingEntity trainingEntityFromDB = getOneTrainingById(trainingEntity.getId());
+        trainingEntity.setCreatedAt(trainingEntityFromDB.getCreatedAt());
+        trainingEntity.setUpdatedAt(trainingEntityFromDB.getUpdatedAt());
+
+        if (trainingEntity.getCoverImage().isEmpty()) {
+            trainingEntity.setCoverPath(trainingEntityFromDB.getCoverPath());
+        } else {
+            String folderUUID = fileRepository.getFolderUUIDForTraining(trainingEntity.getId());
+            CustomFile file = CustomFile.builder()
+                    .category(TRAINING)
+                    .folder(folderUUID)
+                    .file(trainingEntity.getCoverImage())
+                    .build();
+            trainingEntity.setCoverPath(FileService.saveSingle(file));
         }
-        trainingEntity.setCreatedAt(trainingEntityFromDb.getCreatedAt());
-        trainingEntity.setUpdatedAt(LocalDateTime.now());
-        trainingRepository.save(trainingEntity);
+        trainingRepository.update(trainingEntity);
     }
 
     public void saveTraining(TrainingEntity trainingEntity, List<MultipartFile> files) throws IOException {
-        String uuidFolderName = UUID.randomUUID().toString();
-        CustomFile file = new CustomFile("training", uuidFolderName, trainingEntity.getCoverImage());
+        String uuidFolderName = getRandomFolderName();
+        CustomFile file = CustomFile.builder()
+                .category(TRAINING)
+                .folder(uuidFolderName)
+                .file(trainingEntity.getCoverImage())
+                .build();
         trainingEntity.setCoverPath(FileService.saveSingle(file));
-        trainingEntity.setFileEntities(FileService.saveMultiple(files, "training", uuidFolderName));
-        trainingEntity.setCreatedAt(LocalDateTime.now());
-        trainingEntity.setFolderUuid(uuidFolderName);
-        trainingEntity.setActive(true);
-        trainingEntity.setStatus(true);
+        trainingEntity.setFileEntities(FileService.saveMultiple(TRAINING, uuidFolderName, files));
         trainingRepository.save(trainingEntity);
     }
 
-    public void deleteTraining(TrainingEntity trainingEntity) {
-        trainingRepository.delete(trainingEntity);
+    public void deleteTraining(Long trainingId) {
+        trainingRepository.deleteById(trainingId);
     }
 
-    public List<FileEntity> getAllFilesByTrainingId(Long id) {
-        return fileRepository.findAllByTrainingEntity_IdOrderByFileTypeAsc(id);
+    public List<GetView.File.Training> getAllFilesByTrainingId(Long id) {
+        return fileRepository.findAllByTrainingId(id);
     }
 
-    public void saveAdditionalTrainingFiles(List<MultipartFile> files, TrainingEntity trainingEntity) throws IOException {
+    public boolean getTrainingStatus(Long id) {
+        return Boolean.parseBoolean(trainingRepository.getTrainingStatusById(id));
+    }
+
+    public void saveAdditionalTrainingFiles(List<MultipartFile> files, Long trainingId) throws IOException {
         if (files.get(0).getSize() != 0) {
-            FileEntity fileEntity = fileRepository.findFirstByTrainingEntityId(trainingEntity.getId());
-            List<FileEntity> savedFiles = FileService.saveMultiple(files, "training", fileEntity.getFolderUuid());
-            for (FileEntity file : savedFiles) {
-                file.setTrainingEntity(trainingEntity);
-                fileRepository.save(file);
-            }
+            List<FileEntity> fileList = FileService.saveMultiple(TRAINING, fileRepository.getFolderUUIDForTraining(trainingId), files);
+            fileList.forEach(file -> file.setTrainingId(trainingId));
+            fileRepository.saveAll(fileList);
         }
     }
 
-    public void deleteFileByTrainingId(FileEntity fileEntity) {
-        fileRepository.delete(fileEntity);
+    public void deleteFileByTrainingId(Long fileId) {
+        DeleteFileView file = fileRepository.getFileById(fileId);
+        fileRepository.deleteFile(file.getId());
+        FileService.deleteFile(uploadPath + "/" + file.getFilePath());
     }
 
 }
