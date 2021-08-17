@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="newsEntity" type="az.webapp.colorbrain.model.entity.entity.newsEntity"*/-->
+            <form th:object="${newsEntity}" th:action="@{'/news/create'}" method="post"
+                  enctype="multipart/form-data">
+                <div th:include="/admin/layout/news/newsForm::createFrom"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{client/layout/layout.html :: layout (~{::body},'home')}">
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+
+    <!-- Begin bread crumbs -->
+    <nav class="bread-crumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-crumbs-list">
+                        <li>
+                            <a href="index-2.html">Home</a>
+                            <i class="material-icons md-18">chevron_right</i>
+                        </li>
+                        <li><a href="#!">News</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End bread crumbs -->
+
+    <!-- Begin main content -->
+    <div class="section">
+        <div class="container">
+            <div class="row items">
+                <div class="col-12">
+                    <div class="section-heading heading-center">
+                        <div class="section-subheading">Who we are</div>
+                        <h1>Meet The Team</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12 item">
+                    <!-- Begin team item -->
+                    <div th:each="team : ${teamMembers}" class="team-item item-style">
+                        <div class="team-item-img">
+                            <img class="lazy" th:src="@{${team.memberImage}}">
+                        </div>
+                        <div class="team-item-info">
+                            <h4 class="team-item-title item-heading">Mary Lee</h4>
+                            <div class="team-item-position">Software Developer</div>
+                            <ul class="team-item-social-links">
+                                <li>
+                                    <a href="#!" title="Facebook">
+                                        <svg viewBox="0 0 320 512">
+                                            <use xlink:href="assets/img/sprite.svg#facebook-ico"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#!" title="Instagram">
+                                        <svg viewBox="0 0 448 512">
+                                            <use xlink:href="assets/img/sprite.svg#instagram-ico"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#!" title="LinkedIn">
+                                        <svg viewBox="0 0 448 512">
+                                            <use xlink:href="assets/img/sprite.svg#linkedin-in-ico"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#!" title="Twitter">
+                                        <svg viewBox="0 0 512 512">
+                                            <use xlink:href="assets/img/sprite.svg#twitter-ico"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- End team item -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End main content -->
+
+
+
+<!--<script src="assets/libs/jquery/jquery.min.js"></script>-->
+<!--<script src="assets/libs/lozad/lozad.min.js"></script>-->
+<!--<script src="assets/libs/device/device.js"></script>-->
+<!--<script src="assets/libs/ScrollToFixed/jquery-scrolltofixed-min.js"></script>-->
+<!--<script src="assets/libs/spincrement/jquery.spincrement.min.js"></script>-->
+<!--<script src="assets/libs/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>-->
+<!--<script src="assets/libs/jquery-validation-1.19.3/jquery.validate.min.js"></script>-->
+<!--<script src="assets/libs/autosize-master/autosize.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-imagesloaded.js"></script>-->
+<!--<script src="assets/libs/flickity/bg-lazyload.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-fade.js"></script>-->
+<!--<script src="assets/libs/isotope/isotope.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/picturefill.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/lightgallery-all.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/jquery.mousewheel.min.js"></script>-->
+<!--<script src="assets/libs/jquery-ui-range/jquery-ui.min.js"></script>-->
+<!--<script src="assets/js/custom.js"></script>-->
+<!--<script src="assets/libs/jquery-minicolors-master/jquery.minicolors.min.js"></script>-->
+<!--<script src="assets/js/settings.js"></script>-->
+
+</body>
+</html>

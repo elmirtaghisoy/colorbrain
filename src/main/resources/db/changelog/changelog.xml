@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <include file="/db/changelog/changes/create-blog-table.xml"/>
+    <include file="/db/changelog/changes/create-c_user-table.xml"/>
+    <include file="/db/changelog/changes/create-category-table.xml"/>
+    <include file="/db/changelog/changes/create-contact-table.xml"/>
+    <include file="/db/changelog/changes/create-file-table.xml"/>
+    <include file="/db/changelog/changes/create-media-table.xml"/>
+    <include file="/db/changelog/changes/create-news-table.xml"/>
+    <include file="/db/changelog/changes/create-participant-table.xml"/>
+    <include file="/db/changelog/changes/create-project-table.xml"/>
+    <include file="/db/changelog/changes/create-member-table.xml"/>
+    <include file="/db/changelog/changes/create-training-table.xml"/>
+    <include file="/db/changelog/changes/add-constraints.xml"/>
+    <include file="/db/changelog/changes/insert-static-values.xml"/>
+</databaseChangeLog>

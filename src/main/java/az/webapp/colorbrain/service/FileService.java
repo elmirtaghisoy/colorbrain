@@ -1,5 +1,6 @@
 package az.webapp.colorbrain.service;
 
+import az.webapp.colorbrain.component.CustomFile;
 import az.webapp.colorbrain.model.entity.FileEntity;
 import com.google.common.io.Files;
 import org.springframework.stereotype.Service;
@@ -11,65 +12,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static az.webapp.colorbrain.config.MvcConfig.uploadPath;
+
 @Service
 public class FileService {
 
-    private static final String uploadPath = "/C:/TestProjects/colorbrain/uploads";
-
-    public static String saveSingle(MultipartFile file) throws IOException {
+    public static String saveSingle(CustomFile customFile) throws IOException {
         String resultFilename = "";
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
+        String currentFilePath = uploadPath + "/" + customFile.getCategory() + "/" + customFile.getFolder();
+
+        if (customFile.getFile() != null && !customFile.getFile().getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(currentFilePath);
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdirs();
             }
-            String uuidFile = UUID.randomUUID().toString();
-            resultFilename = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            resultFilename = createFile(customFile, currentFilePath);
         }
+        return "/file/" + customFile.getCategory() + "/" + customFile.getFolder() + "/" + resultFilename;
+    }
+
+    private static String createFile(CustomFile customFile, String currentFilePath) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String resultFilename = uuid + "." + customFile.getFile().getOriginalFilename();
+        customFile.getFile().transferTo(new File(currentFilePath + "/" + resultFilename));
         return resultFilename;
     }
 
-    public static List<FileEntity> saveMultiple(List<MultipartFile> files, String fileCategory) throws IOException {
+    public static List<FileEntity> saveMultiple(String category, String folder, List<MultipartFile> files) throws IOException {
         List<FileEntity> savedFiles = new ArrayList<>();
         for (MultipartFile file : files) {
             FileEntity fileEntity = new FileEntity();
-            fileEntity.setFilePath(saveSingle(file));
+            fileEntity.setFilePath(saveSingle(
+                    CustomFile.builder()
+                            .category(category)
+                            .folder(folder)
+                            .file(file)
+                            .build()
+                    )
+            );
             fileEntity.setFileType(extensionDetector(file.getOriginalFilename()));
-            fileEntity.setFileCategory(fileCategoryDetector(fileCategory));
+            fileEntity.setFileCategory(category);
             savedFiles.add(fileEntity);
         }
         return savedFiles;
     }
 
-    public static int fileCategoryDetector(String fileCategory) {
-        int fileCategoryInt = 0;
-        switch (fileCategory) {
-            case "training":
-                fileCategoryInt = 1;
-                break;
-            case "news":
-                fileCategoryInt = 2;
-                break;
-            case "media":
-                fileCategoryInt = 3;
-                break;
-            case "blog":
-                fileCategoryInt = 4;
-                break;
-            case "project":
-                fileCategoryInt = 5;
-                break;
-        }
-        return fileCategoryInt;
+    public static boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+        return file.delete();
     }
 
-    public static int extensionDetector(String fileName) {
+    private static int extensionDetector(String fileName) {
         switch (Files.getFileExtension(fileName)) {
             case "jpg":
             case "png":
             case "jpeg":
             case "img":
+            case "jfif":
                 return 1;
             case "mp4":
             case "webm":

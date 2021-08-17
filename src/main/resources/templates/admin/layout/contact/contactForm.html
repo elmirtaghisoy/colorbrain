@@ -1,0 +1,34 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="updateForm">
+    <label class="form-label" for="contactNameLabel">KONTAKT ADI</label>
+    <!--/*@thymesVar id="contact" type="az.webapp.colorbrain.model.entity.ContactEntity"*/-->
+    <input type="text" class="form-control" id="contactNameLabel"
+           th:value="${contact.getContactName()}" name="contactName">
+    <label class="form-label" for="contactNameLabel">KONTAKT ÜNVANI</label>
+    <input type="text" class="form-control" id="contactAddressLabel"
+           th:value="${contact.getContactAddress()}" name="contactAddress">
+    <label class="form-label" for="iconLabel">İKON</label>
+    <input type="text" class="form-control" id="iconLabel"
+           th:value="${contact.getIcon()}" name="icon">
+    <button class="btn btn-primary mt-3" type="submit">DƏYİŞİKLİYİ YADDA SAXLA</button>
+</div>
+
+<div th:fragment="createForm">
+    <label class="form-label" for="contactNameLabel">KONTAKT ADI</label>
+    <p style="display:inline" th:if="${#fields.hasErrors('contactName')}" class="text-danger fw-bolder"
+       th:errors="*{contactName}">Email error</p>
+    <input th:field="*{contactName}" name="contactName" placeholder="Əlaqənin adını daxil edin" type="text"
+           class="form-control" id="contactNameLabel">
+    <label class="form-label" for="contactAddressLabel">KONTAKT ÜNVANI</label>
+    <p style="display:inline" th:if="${#fields.hasErrors('contactAddress')}" class="text-danger fw-bolder"
+       th:errors="*{contactAddress}">Email error</p>
+    <input th:field="*{contactAddress}" name="contactAddress" placeholder="Əlaqənin adresini daxil edin" type="text"
+           class="form-control" id="contactAddressLabel">
+    <label class="form-label" for="iconLabel">İKON</label>
+    <p style="display:inline" th:if="${#fields.hasErrors('icon')}" class="text-danger fw-bolder"
+       th:errors="*{icon}">Email error</p>
+    <input th:field="*{icon}" name="icon" placeholder="İconu daxil edin" type="text"
+           class="form-control" id="iconLabel">
+    <button class="btn btn-primary mt-3" type="submit">YADDA SAXLA</button>
+</div>
+</html>

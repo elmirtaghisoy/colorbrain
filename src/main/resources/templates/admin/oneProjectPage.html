@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head>
+</head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="projectEntity" type="az.webapp.colorbrain.model.entity.ProjectEntity"*/-->
+            <form enctype="multipart/form-data" method="post" th:action="@{'/project/update'}"
+                  th:object="${projectEntity}">
+                <input type="hidden" name="id" th:value="${projectEntity.id}">
+                <div th:include="/admin/layout/project/projectForm::updateForm"></div>
+            </form>
+
+            <a style="color: white" th:href="@{/project/{id}/files(id=${projectEntity.id})}"
+               class="btn btn-warning text-uppercase mb-3">Fayllarda dəyişiklik et</a>
+
+            <form th:object="${projectEntity}" th:action="@{'/project/delete'}" method="post">
+                <input type="hidden" name="id" th:value="${projectEntity.id}">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" class="btn btn-danger text-uppercase"
+                           th:value="${projectEntity.status}? 'Layihəni ləğv et' : 'Layihəni sil'">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>

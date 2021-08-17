@@ -1,8 +1,6 @@
 package az.webapp.colorbrain.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "participant")
-@Getter
-@Setter
-@ToString
+@Data
 public class ParticipantEntity {
 
     @Id

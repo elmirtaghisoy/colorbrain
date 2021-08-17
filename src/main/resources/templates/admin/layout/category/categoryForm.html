@@ -1,0 +1,18 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="updateForm">
+    <label class="form-label" for="categoryNameLabel">KATEQORIYA</label>
+    <!--/*@thymesVar id="category" type="az.webapp.colorbrain.model.entity.ContactEntity"*/-->
+    <input type="text" class="form-control" id="categoryNameLabel"
+           th:value="${category.getCategoryName()}" name="categoryName">
+    <button class="btn btn-primary mt-3" type="submit">DƏYİŞİKLİYİ YADDA SAXLA</button>
+</div>
+
+<div th:fragment="createForm">
+    <label class="form-label" for="categoryNameLabel">KATEQORİYA</label>
+    <p style="display:inline" th:if="${#fields.hasErrors('categoryName')}" class="text-danger fw-bolder"
+       th:errors="*{categoryName}">Email error</p>
+    <input th:field="*{categoryName}" name="categoryName" placeholder="Kateqoriyanın adını daxil edin" type="text"
+           class="form-control" id="categoryNameLabel">
+    <button class="btn btn-primary mt-3" type="submit">YADDA SAXLA</button>
+</div>
+</html>

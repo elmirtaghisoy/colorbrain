@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{client/layout/layout.html :: layout (~{::body},'home')}">
+<html lang="en">
+
+<head>
+</head>
+<body>
+
+<div class="section">
+    <div class="container">
+        <div class="row content-items">
+            <div class="col-12">
+                <div class="section-heading heading-center">
+                    <div class="section-subheading">We are always in touch</div>
+                    <h1>Contact Us</h1>
+                </div>
+            </div>
+            <div th:each="contact : ${contacts}" class="col-md-4 col-12 content-item">
+                <div class="contacts-info-item item-style">
+                    <div class="contacts-info-item-ico">
+                        <i class="material-icons md-60" th:text="${contact.icon}"></i>
+                    </div>
+                    <div class="contacts-info-item-content">
+                        <a th:href="${contact.contactAddress}" th:text="${contact.contactName}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End main -->
+</body>
+</html>

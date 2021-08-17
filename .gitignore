@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 uploads
+
+## Spring Boot Custom ignor ##
+src/main/resources/application.properties

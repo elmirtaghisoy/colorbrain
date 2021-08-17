@@ -1,0 +1,165 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="updateForm">
+    <div class="row mb-3">
+        <div class="accordion " id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed"
+                            data-bs-target="#collapseOne" data-bs-toggle="collapse" type="button">
+                        Başlıq Şəkili
+                        <p class="text-danger fw-bolder" style="display: inline"
+                           th:errors="*{cover}"
+                           th:if="${#fields.hasErrors('cover')}"></p>
+                    </button>
+                </h2>
+                <div aria-labelledby="headingOne" class="accordion-collapse collapse text-center" data-bs-parent="#accordionExample"
+                     id="collapseOne">
+                    <img class="img-thumbnail" style="height:200; width:auto;"
+                         th:src="${blogEntity.coverPath}">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label class="form-label text-uppercase" for="formFileLg">Mövcud başlıq şəkili dəyİşmək</label>
+                        <input class="form-control form-control-lg" id="formFileLg" name="cover"
+                               th:field="*{cover}" type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
+               th:errors="*{header}"></p>
+            <input th:value="${blogEntity.header}" name="header" type="text"
+                   class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Kateqorİya</label>
+            <select name="categoryEntity" class="form-select">
+
+                <option th:value="${blogEntity.categoryEntity.id}"
+                        th:text="${blogEntity.categoryEntity.categoryName}">
+                    selected
+                </option>
+
+                <span th:each="category : ${categories}">
+                    <option th:value="${category.id}"
+                            th:text="${category.categoryName}">
+                    </option>
+                </span>
+
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="editor" class="form-label text-uppercase">Məlumat</label>
+                <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
+                   th:errors="*{context}"></p>
+                <textarea th:text="${blogEntity.context}" name="context"
+                          class="form-control" id="editor"
+                          rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="mb-3 col-4 text-center">
+                <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
+                    At</label>
+                <input th:value="${blogEntity.createdAt}" name="createdAt" type="text" disabled class="form-control"
+                       id="createdAtLabel">
+            </div>
+            <div class="mb-3 col-4 text-center">
+                <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
+                    At</label>
+                <input th:value="${blogEntity.updatedAt}" name="updatedAt" type="text" disabled class="form-control"
+                       id="updatedAtLabel">
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success text-uppercase" value="Dəyİşİklİyİ Yadda Saxla">
+    </div>
+</div>
+
+<div th:fragment="createForm">
+    <div class="row">
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
+            <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
+               th:errors="*{header}"></p>
+            <input th:field="*{header}" name="header" type="text" class="form-control" id="headerLabel">
+        </div>
+        <div class="mb-3 col-6">
+            <label for="headerLabel" class="form-label text-uppercase">Kateqorİya</label>
+            <select name="categoryEntity" class="form-select">
+                <span th:each="category : ${categories}">
+                    <option th:value="${category.id}" th:text="${category.categoryName}"></option>
+                </span>
+            </select>
+        </div>
+        <div class="row main-card-row-container">
+            <div class="col-12">
+                <label for="editor" class="form-label text-uppercase">Məlumat</label>
+                <p style="display: inline" th:if="${#fields.hasErrors('context')}" class="text-danger fw-bolder"
+                   th:errors="*{context}"></p>
+                <textarea th:field="*{context}" name="context" class="form-control" id="editor"
+                          rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed text-uppercase" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                            Başlıq şəkili
+                            <p style="display: inline" th:errors="*{cover}"
+                               class="text-danger fw-bolder"
+                               th:if="${#fields.hasErrors('cover')}"></p>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="main-container">
+                            <label for="formFileLg" class="form-label text-uppercase">Blogun başlıq şəkilini
+                                seçin</label>
+                            <input class="form-control form-control-lg" name="cover" th:field="*{cover}" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed text-uppercase" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                            Əlavə fayllar
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="main-container">
+                            <label for="formFileLg" class="form-label text-uppercase">Blogun digər fayllarını
+                                seçin</label>
+                            <input name="files" multiple class="form-control form-control-lg" id="formFileLg"
+                                   type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="mb-3 col-3 text-center">
+                    <label style="margin: 0" for="createdAtLabel" class="form-label text-uppercase">Created
+                        At</label>
+                    <input name="createdAt" type="text" disabled class="form-control"
+                           id="createdAtLabel">
+                </div>
+                <div class="mb-3 col-3 text-center">
+                    <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
+                        At</label>
+                    <input name="updatedAt" type="text" disabled class="form-control"
+                           id="updatedAtLabel">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success text-uppercase" value="Yadda Saxla">
+        </div>
+    </div>
+</div>
+</html>

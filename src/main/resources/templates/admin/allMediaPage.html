@@ -1,0 +1,129 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="custom-bread-crumb col-12 text-center">
+            <div class="main-container">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a th:href="@{/media/create}" class="btn btn-primary text-uppercase">Yenİ Paylaşım Yarat</a>
+                </div>
+                <a aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary" data-toggle="collapse"
+                   href="#collapseExample" role="button">
+                    AXTARIŞ
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form method="get" th:action="@{'/media/all'}">
+                    <div class="row d-flex justify-content-center">
+                        <div class="mb-3 col-6">
+                            <label class="form-label text-uppercase" for="headerLabel">Başlıq</label>
+                            <input class="form-control" id="headerLabel" name="header" type="search">
+                        </div>
+                        <!--                        <div class="mb-3 col-6">-->
+                        <!--                            <label for="trainerLabel" class="form-label text-uppercase">Təlİmçİ</label>-->
+                        <!--                            <input name="trainer" type="search" class="form-control" id="trainerLabel">-->
+                        <!--                        </div>-->
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="lastRegDayLabel">Tarİxİndən</label>
+                            <input class="form-control" id="lastRegDayLabel" name="from"
+                                   type="date">
+                        </div>
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="startDayLabel">TarİxİnƏdək</label>
+                            <input class="form-control" id="startDayLabel" name="to" type="date">
+                        </div>
+                        <!--                        <div class="mb-3 col-3">-->
+                        <!--                            <label for="headerLabel" class="form-label text-uppercase">Qeydİyyat</label>-->
+                        <!--                            <select name="reg" class="form-select">-->
+                        <!--                                <option value="-1">SEÇ</option>-->
+                        <!--                                <option value="1">AÇIQ</option>-->
+                        <!--                                <option value="0">BAĞLI</option>-->
+                        <!--                            </select>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="mb-3 col-3">-->
+                        <!--                            <label for="headerLabel" class="form-label text-uppercase">STATUS</label>-->
+                        <!--                            <select name="status" class="form-select">-->
+                        <!--                                <option value="-1">SEÇ</option>-->
+                        <!--                                <option value="1">AKTİV</option>-->
+                        <!--                                <option value="0">BİTMİŞ</option>-->
+                        <!--                            </select>-->
+                        <!--                        </div>-->
+                        <div class="row d-flex justify-content-center">
+                            <input class="btn btn-success text-uppercase" type="submit" value="AXTAR">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="main-card-row-container">
+            <div class="row mt-4">
+                <div class="col-3" th:each="media,i : ${objectList.page}">
+                    <div class="card">
+                        <img alt="Cover Image" class="card-img-top" th:src="${media.coverPath}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${media.header}"></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${media.createdAt}"><b>Tarix: </b></li>
+                        </ul>
+                        <div class="card-body text-center">
+                            <a class="card-link text-uppercase" th:href="@{/media/{id}(id=${media.id})}">Ətraflı
+                                Məlumat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--paging-->
+            <div class="row mt-4">
+                <nav aria-label="Page navigation" class="paging">
+                    <ul class="pagination justify-content-center" th:if="${objectList.page.totalPages > 1}">
+                        <li class="page-item" th:classappend="${!objectList.paging.isPrevEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               tabindex="-1"
+                               th:href="@{'/media/all?page=' + ${objectList.paging.pageNumber - 1}+ ${srcUrl}}">Previous</a>
+                        </li>
+                        <th:block th:each="item : ${objectList.paging.getItems()}">
+                            <li class="page-item"
+                                th:classappend="${item.index == objectList.paging.pageNumber? 'active' : ''}"
+                                th:if="${item.pageItemType.name() == 'PAGE'}">
+                                <a class="page-link" th:href="@{'/media/all?page=' + ${item.index}+ ${srcUrl}}"
+                                   th:text="${item.index}"></a>
+                            </li>
+                            <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+                        <li class="page-item" th:classappend="${!objectList.paging.isNextEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{'/media/all?page=' + ${objectList.paging.pageNumber + 1}+ ${srcUrl}}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--paging-->
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function dateConverter() {
+        var createdAtLabel = document.getElementById("createdAtLabel")
+        var updatedAtLabel = document.getElementById("updatedAtLabel")
+        var deletedAtLabel = document.getElementById("deletedAtLabel")
+
+        createdAtLabel.setAttribute("value", createdAtLabel.value.replace("T", " ").substring(0, 16))
+        updatedAtLabel.setAttribute("value", updatedAtLabel.value.replace("T", " ").substring(0, 16))
+        deletedAtLabel.setAttribute("value", deletedAtLabel.value.replace("T", " ").substring(0, 16))
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
+<head></head>
+<body>
+<div class="container">
+    <div class="main-container">
+        <div class="row">
+            <!--/*@thymesVar id="contactEntity" type="az.webapp.colorbrain.model.entity.ContactEntity" */-->
+            <form action="#" th:object="${contactEntity}" th:action="@{'/contact/create'}" method="post">
+                <div th:include="/admin/layout/contact/contactForm::createForm"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

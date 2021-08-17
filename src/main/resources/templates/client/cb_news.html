@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org" th:include="~{client/layout/layout.html :: layout (~{::body},'home')}">
+<html lang="en">
+
+<head>
+</head>
+<body>
+
+    <!-- Begin bread crumbs -->
+    <nav class="bread-crumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-crumbs-list">
+                        <li>
+                            <a href="index-2.html">Home</a>
+                            <i class="material-icons md-18">chevron_right</i>
+                        </li>
+                        <li><a href="#!">News</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End bread crumbs -->
+
+    <!-- Begin main content -->
+    <div style="padding-top: 1.5rem" class="section">
+        <div class="container">
+            <div class="row content-items">
+                <div class="col-lg-12 col-12 content-item">
+                    <div class="section-heading heading-center">
+                        <div class="section-subheading">most interesting articles</div>
+                        <h1>News</h1>
+                    </div>
+                    <div class="news-list items">
+                        <!-- Begin news item -->
+                        <article th:each="news : ${newsList}" class="news-wide-item item">
+                            <a href="news-post.html" class="news-wide-item-img img-style">
+                                <img class="lazy" th:src="${news.coverPath}">
+                            </a>
+                            <div class="news-wide-item-info">
+                                <h4 class="news-wide-item-title item-heading">
+                                    <a href="news-post.html" th:text="${news.header}">Benefits of Async/Await in Programming</a>
+                                </h4>
+                                <div class="news-wide-item-row">
+                                    <div class="news-wide-item-date">Jan 23, 2021</div>
+                                    <div class="news-wide-item-author">
+                                        by <a href="#!">John Doe</a>
+                                    </div>
+                                </div>
+                                <div class="news-wide-item-desc">
+                                    <p>On the other hand, we denounce with righteous indignation and dislike men who
+                                        are so beguiled and demoralized by the charms of pleasure of the
+                                        moment...</p>
+                                </div>
+                                <div class="wrapp-btn-link">
+                                    <a href="news-post.html" class="btn-link">
+                                        <span>Read more</span>
+                                        <svg class="btn-link-ico btn-link-ico-right" viewBox="0 0 13 9" width="13"
+                                             height="9" width="13px" height="9px">
+                                            <use xlink:href="assets/img/sprite.svg#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- End news item -->
+                        <div class="item">
+                            <nav class="pagination">
+                                <ul class="pagination-list">
+                                    <li class="active"><a href="#!">1</a></li>
+                                    <li><a href="#!">2</a></li>
+                                    <li><a href="#!">3</a></li>
+                                </ul><!-- End pagination -->
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End main content -->
+
+<!--<script src="assets/libs/jquery/jquery.min.js"></script>-->
+<!--<script src="assets/libs/lozad/lozad.min.js"></script>-->
+<!--<script src="assets/libs/device/device.js"></script>-->
+<!--<script src="assets/libs/ScrollToFixed/jquery-scrolltofixed-min.js"></script>-->
+<!--<script src="assets/libs/spincrement/jquery.spincrement.min.js"></script>-->
+<!--<script src="assets/libs/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>-->
+<!--<script src="assets/libs/jquery-validation-1.19.3/jquery.validate.min.js"></script>-->
+<!--<script src="assets/libs/autosize-master/autosize.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-imagesloaded.js"></script>-->
+<!--<script src="assets/libs/flickity/bg-lazyload.js"></script>-->
+<!--<script src="assets/libs/flickity/flickity-fade.js"></script>-->
+<!--<script src="assets/libs/isotope/isotope.pkgd.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/picturefill.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/lightgallery-all.min.js"></script>-->
+<!--<script src="assets/libs/lightGallery/js/jquery.mousewheel.min.js"></script>-->
+<!--<script src="assets/libs/jquery-ui-range/jquery-ui.min.js"></script>-->
+<!--<script src="assets/js/custom.js"></script>-->
+<!--<script src="assets/libs/jquery-minicolors-master/jquery.minicolors.min.js"></script>-->
+<!--<script src="assets/js/settings.js"></script>-->
+
+</body>
+</html>
