@@ -4,21 +4,21 @@
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" type="button"
                             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Başlıq Şəkili
-                        <p style="display: inline" th:if="${#fields.hasErrors('coverImage')}"
+                        <p style="display: inline" th:errors="*{cover}"
                            class="text-danger fw-bolder"
-                           th:errors="*{coverImage}"></p>
+                           th:if="${#fields.hasErrors('cover')}"></p>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse text-center" aria-labelledby="headingOne"
                      data-bs-parent="#accordionExample">
-                    <img style="height:200; width:auto;" th:src="@{'/file/'+${mediaEntity.coverPath}}"
+                    <img style="height:200; width:auto;" th:src="${mediaEntity.coverPath}"
                          class="img-thumbnail">
                     <div class="container-fluid mb-3 mt-2">
                         <label for="formFileLg2" class="form-label">Mövcud başlıq şəkili dəyİşmək</label>
-                        <input th:field="*{coverImage}" name="coverImage"  class="form-control form-control-lg"
+                        <input class="form-control form-control-lg" name="cover" th:field="*{cover}"
                                id="formFileLg2"
                                type="file">
                     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
         <!--/*@thymesVar id="modelEntity" type="az.webapp.colorbrain.model.entity.MediaEntity"*/-->
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-12">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
@@ -61,7 +61,7 @@
 <div th:fragment="createForm">
     <div class="row">
         <!--/*@thymesVar id="modelEntity" type="az.webapp.colorbrain.model.entity.MediaEntity"*/-->
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-12">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
@@ -72,19 +72,19 @@
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" type="button"
                             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Başlıq Şəkili
-                        <p style="display: inline" th:if="${#fields.hasErrors('coverImage')}"
+                        <p style="display: inline" th:errors="*{cover}"
                            class="text-danger fw-bolder"
-                           th:errors="*{coverImage}"></p>
+                           th:if="${#fields.hasErrors('cover')}"></p>
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                <div aria-labelledby="headingOne" class="accordion-collapse collapse" id="collapseOne"
                      data-bs-parent="#accordionExample">
                     <div class="container-fluid mb-3 mt-2">
                         <label for="formFileLg" class="form-label">Paylaşımın başlıq şəklini seçin</label>
-                        <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
+                        <input class="form-control form-control-lg" id="formFileLg" name="cover" type="file">
                     </div>
                 </div>
             </div>

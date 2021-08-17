@@ -2,30 +2,33 @@
 <div th:fragment="updateFrom">
     <div class="row ">
         <div class="row col-6">
-            <img th:src="@{'/file/'+${teamMemberEntity.memberImage}}" style="height:200; width:auto;"
-                 class="card-img-top"
+            <img class="auto-lr-margin img-thumbnail"
+                 style="height:200; width:auto;"
+                 th:src="@{{memberEntity.memberImage}}"
                  alt="Member Image">
         </div>
         <div class="row col-6 right ">
             <div class="row col-12 mb-3 col-4">
-                <div class="accordion accordion-flush col-12" style="height: 0;" id="accordionFlushExample">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed text-uppercase fw-bolder" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                            <button aria-expanded="false" class="accordion-button collapsed text-uppercase"
+                                    data-bs-target="#flush-collapseOne" data-bs-toggle="collapse" type="button"
                                     aria-controls="flush-collapseOne">
-                                Üzvün şəkİlİNİ SEÇİN
+                                Üzvün şəkilİnİ yenİlə
+                                <p class="text-danger fw-bolder" style="display: inline"
+                                   th:errors="*{cover}"
+                                   th:if="${#fields.hasErrors('cover')}"></p>
                             </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse"
                              aria-labelledby="flush-headingOne"
                              data-bs-parent="#accordionFlushExample">
-                            <div class="container-fluid mb-3 mt-2">
-                                <label for="formFileLg" class="form-label text-uppercase fw-bolder">Üzvün şəkİlİnİ
+                            <div class="main-container">
+                                <label class="form-label text-uppercase" for="formFileLg">Üzvün yenİ şəkİlİnİ
                                     seçİn</label>
-                                <input name="file" class="form-control form-control-lg" id="formFileLg"
-                                       type="file">
+                                <input class="form-control form-control-lg" id="formFileLg" name="cover"
+                                       th:field="*{cover}" type="file">
                             </div>
                         </div>
                     </div>
@@ -38,21 +41,21 @@
             <label for="memberNameLabel" class="form-label text-uppercase fw-bolder">Ad</label>
             <p style="display: inline" th:if="${#fields.hasErrors('memberName')}" class="text-danger fw-bolder"
                th:errors="*{memberName}"></p>
-            <input th:value="${teamMemberEntity.memberName}"
+            <input th:value="${memberEntity.memberName}"
                    name="memberName" type="text" class="form-control" id="memberNameLabel">
         </div>
         <div class="mb-3 col-6">
             <label for="surnameLabel" class="form-label text-uppercase fw-bolder">Soyad</label>
             <p style="display: inline" th:if="${#fields.hasErrors('surname')}" class="text-danger fw-bolder"
                th:errors="*{surname}"></p>
-            <input th:value="${teamMemberEntity.surname}"
+            <input th:value="${memberEntity.surname}"
                    name="surname" type="text" class="form-control" id="surnameLabel">
         </div>
         <div class="d-grid gap-2 col-7 mx-auto">
             <label for="positionLabel" class="form-label text-uppercase fw-bolder">Vəzİfə</label>
             <p style="display: inline" th:if="${#fields.hasErrors('position')}" class="text-danger fw-bolder"
                th:errors="*{position}"></p>
-            <input th:value="${teamMemberEntity.position}"
+            <input th:value="${memberEntity.position}"
                    name="position" type="text" class="form-control" id="positionLabel">
         </div>
 
@@ -63,67 +66,73 @@
                    class="form-label text-uppercase container-fluid mb-6 mt-2 fw-bolder">Haqqında</label>
             <p style="display: inline" th:if="${#fields.hasErrors('about')}" class="text-danger fw-bolder"
                th:errors="*{about}"></p>
-            <textarea th:text="${teamMemberEntity.about}" name="about"
+            <textarea name="about" th:text="${memberEntity.about}"
                       class="form-control" id="about"
                       rows="3"></textarea>
         </div>
     </div>
-    <div th:if="${teamMemberEntity}" class="row d-flex justify-content-center mt-3">
+    <div class="row d-flex justify-content-center mt-3" th:if="${memberEntity}">
         <input type="submit" class="btn btn-success text-uppercase" value="Dəyİşİklİyİ Yadda Saxla">
     </div>
 </div>
 
 <div th:fragment="createFrom">
     <div class="row">
-        <div class="accordion accordion-flush  mb-8 mt-2 " id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed text-uppercase fw-bolder" type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Üzvün şəkİlİNİ SEÇİN
-                    </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                     data-bs-parent="#accordionFlushExample">
-                    <div class="container-fluid mb-3 mt-2">
-                        <label for="formFileLg" class="form-label text-uppercase fw-bolder">Üzvün şəkİlİnİ
-                            seçİn</label>
-                        <input name="file" class="form-control form-control-lg" id="formFileLg" type="file">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="mb-3 col-6">
-            <label for="memberNameLabel" class="form-label text-uppercase fw-bolder">Ad</label>
+            <label class="form-label text-uppercase " for="memberNameLabel">Ad</label>
             <p style="display: inline" th:if="${#fields.hasErrors('memberName')}" class="text-danger fw-bolder"
                th:errors="*{memberName}"></p>
             <input th:field="*{memberName}" name="memberName" type="text" class="form-control" id="memberNameLabel">
         </div>
         <div class="mb-3 col-6">
-            <label for="surnameLabel" class="form-label text-uppercase fw-bolder">Soyad</label>
+            <label class="form-label text-uppercase " for="surnameLabel">Soyad</label>
             <p style="display: inline" th:if="${#fields.hasErrors('surname')}" class="text-danger fw-bolder"
                th:errors="*{surname}"></p>
             <input th:field="*{surname}" name="surname" type="text" class="form-control" id="surnameLabel">
         </div>
+    </div>
+    <div class="row">
         <div class="mb-3 col-12">
-            <label for="positionLabel" class="form-label text-uppercase fw-bolder">Vəzİfə</label>
+            <label class="form-label text-uppercase " for="positionLabel">Vəzİfə</label>
             <p style="display: inline" th:if="${#fields.hasErrors('position')}" class="text-danger fw-bolder"
                th:errors="*{position}"></p>
             <input th:field="*{position}" name="position" type="text" class="form-control" id="positionLabel">
         </div>
-
     </div>
     <div class="row main-card-row-container">
         <div class="col-12">
-            <label for="about" class="form-label text-uppercase fw-bolder">Haqqında</label>
+            <label class="form-label text-uppercase " for="about">Haqqında</label>
             <p style="display: inline" th:if="${#fields.hasErrors('about')}" class="text-danger fw-bolder"
                th:errors="*{about}"></p>
             <textarea th:field="*{about}" name="about" class="form-control" id="about"
                       rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button aria-controls="flush-collapseOne" aria-expanded="false"
+                                class="accordion-button collapsed text-uppercase" data-bs-target="#flush-collapseOne" data-bs-toggle="collapse"
+                                type="button">
+                            ÜZVÜN ŞƏKİLİNİ SEÇİN
+                            <p class="text-danger fw-bolder" style="display: inline"
+                               th:errors="*{cover}"
+                               th:if="${#fields.hasErrors('cover')}"></p>
+                        </button>
+                    </h2>
+                    <div aria-labelledby="flush-headingOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"
+                         id="flush-collapseOne">
+                        <div class="main-container">
+                            <label class="form-label text-uppercase" for="formFileLg">ÜZVÜN başlıq şəkİlİnİ
+                                seçin</label>
+                            <input class="form-control form-control-lg" id="formFileLg" name="cover"
+                                   th:field="*{cover}" type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row d-flex justify-content-center">

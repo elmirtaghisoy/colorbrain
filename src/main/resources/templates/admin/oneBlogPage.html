@@ -6,7 +6,7 @@
     <div class="main-container">
         <div class="row">
             <!--/*@thymesVar id="blogEntity" type="az.webapp.colorbrain.model.entity.BlogEntity"*/-->
-            <form th:object="${blogEntity}" th:action="@{'/blog/update'}" method="post">
+            <form enctype="multipart/form-data" method="post" th:action="@{'/blog/update'}" th:object="${blogEntity}">
                 <input type="hidden" name="id" th:value="${blogEntity.id}">
                 <div th:include="/admin/layout/blog/blogForm::updateForm"></div>
             </form>

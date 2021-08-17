@@ -1,6 +1,8 @@
 package az.webapp.colorbrain.config;
 
+import az.webapp.colorbrain.util.CommonUtils;
 import com.sun.istack.NotNull;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

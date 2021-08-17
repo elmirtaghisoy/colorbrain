@@ -2,24 +2,28 @@ package az.webapp.colorbrain.service;
 
 
 import az.webapp.colorbrain.model.entity.CategoryEntity;
+import az.webapp.colorbrain.repository.BlogRepository;
 import az.webapp.colorbrain.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final BlogRepository blogRepository;
 
     public List<CategoryEntity> getAllCategory() {
         return categoryRepository.findAll();
     }
 
-    public void deleteCategory(CategoryEntity categoryEntity) {
-        categoryRepository.delete(categoryEntity);
+    public void deleteCategory(Long id) {
+        blogRepository.deleteCategoryFromBlogs(id);
+        categoryRepository.deleteById(id);
     }
 
     public void saveCategory(CategoryEntity categoryEntity) {

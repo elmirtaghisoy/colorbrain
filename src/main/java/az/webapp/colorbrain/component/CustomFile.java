@@ -1,4 +1,4 @@
-package az.webapp.colorbrain.model;
+package az.webapp.colorbrain.component;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -3,32 +3,100 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="custom-bread-crumb col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/blog/create" class="btn btn-primary text-uppercase">Yenİ Bloq Yarat</a>
+                    <a class="btn btn-primary text-uppercase" th:href="@{/blog/create}">Yenİ Bloq Yarat</a>
+                    <a aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary" data-toggle="collapse"
+                       href="#collapseExample" role="button">
+                        AXTARIŞ
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="main-container">
-    <div class="main-card-row-container">
-        <div class="row">
-            <div th:each="blog : ${blogs}" class="col-3">
-                <div class="card">
-                    <img th:src="@{'/file/' +${blog.coverPath}}" class="card-img-top" alt="Cover Image">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${blog.header}"></h5>
+    <div class="row">
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form method="get" th:action="@{'/blog/all'}">
+                    <div class="row d-flex justify-content-center">
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="headerLabel">Başlıq</label>
+                            <input class="form-control" id="headerLabel" name="header" type="search">
+                        </div>
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="headerLabel">Kateqorİya</label>
+                            <select class="form-select" name="category">
+                                <option value="-1">SEÇ</option>
+                                <span th:each="category : ${categoryList}">
+                                    <option th:text="${category.categoryName}" th:value="${category.id}"></option>
+                                </span>
+                            </select>
+                        </div>
                     </div>
-                    <div class="card-body text-center">
-                        <a th:href="@{{id}(id=${blog.id})}" class="card-link text-uppercase">Ətraflı Məlumat</a>
+                    <div class="row d-flex justify-content-center">
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="lastRegDayLabel">Tarİxİndən</label>
+                            <input class="form-control" id="lastRegDayLabel" name="from"
+                                   type="date">
+                        </div>
+                        <div class="mb-3 col-4">
+                            <label class="form-label text-uppercase" for="startDayLabel">TarİxİnƏdək</label>
+                            <input class="form-control" id="startDayLabel" name="to" type="date">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <input class="btn btn-success text-uppercase" type="submit" value="AXTAR">
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+    <div class="main-container">
+        <div class="main-card-row-container">
+            <div class="row mt-4">
+                <div class="col-3" th:each="blog : ${objectList.page}">
+                    <div class="card">
+                        <img alt="Cover Image" class="card-img-top" th:src="${blog.coverPath}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${blog.header}"></h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <a class="card-link text-uppercase" th:href="@{{id}(id=${blog.id})}">Ətraflı Məlumat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--paging-->
+            <div class="row mt-4">
+                <nav aria-label="Page navigation" class="paging">
+                    <ul class="pagination justify-content-center" th:if="${objectList.page.totalPages > 1}">
+                        <li class="page-item" th:classappend="${!objectList.paging.isPrevEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               tabindex="-1"
+                               th:href="@{'/blog/all/?page=' + ${objectList.paging.pageNumber - 1}+ ${srcUrl}}">Previous</a>
+                        </li>
+                        <th:block th:each="item : ${objectList.paging.getItems()}">
+                            <li class="page-item"
+                                th:classappend="${item.index == objectList.paging.pageNumber? 'active' : ''}"
+                                th:if="${item.pageItemType.name() == 'PAGE'}">
+                                <a class="page-link" th:href="@{'/blog/all/?page=' + ${item.index}+ ${srcUrl}}"
+                                   th:text="${item.index}"></a>
+                            </li>
+                            <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+                        <li class="page-item" th:classappend="${!objectList.paging.isNextEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{'/blog/all/?page=' + ${objectList.paging.pageNumber + 1}+ ${srcUrl}}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--paging-->
+        </div>
+    </div>
 </div>
 </body>
 </html>

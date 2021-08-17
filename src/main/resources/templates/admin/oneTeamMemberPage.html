@@ -4,13 +4,14 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
-            <!--/*@thymesVar id="teamMemberEntity" type="az.webapp.colorbrain.model.entity.TeamMemberEntity"*/-->
-            <form th:object="${teamMemberEntity}" th:action="@{'/team-member/update'}" method="post">
-                <input type="hidden" name="id" th:value="${teamMemberEntity.id}">
+            <!--/*@thymesVar id="memberEntity" type="az.webapp.colorbrain.model.entity.MemberEntity"*/-->
+            <form enctype="multipart/form-data" method="post" th:action="@{'/team-member/update'}"
+                  th:object="${memberEntity}">
+                <input name="id" th:value="${memberEntity.id}" type="hidden">
                 <div th:include="/admin/layout/teamMember/teamMemberForm::updateFrom"></div>
             </form>
-            <form th:object="${teamMemberEntity}" th:action="@{'/team-member/delete'}" method="post">
-                <input type="hidden" name="id" th:value="${teamMemberEntity.id}">
+            <form method="post" th:action="@{'/team-member/delete'}" th:object="${memberEntity}">
+                <input name="id" th:value="${memberEntity.id}" type="hidden">
                 <div class="row d-flex justify-content-center">
                     <input type="submit" class="btn btn-danger text-uppercase" value="Üzvü Sİl">
                 </div>

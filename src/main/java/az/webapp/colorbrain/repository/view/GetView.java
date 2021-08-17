@@ -12,27 +12,7 @@ public interface GetView {
 
         int getFileCategory();
 
-        String getFolderUuid();
-
-        interface Media extends File {
-            Long getMediaId();
-        }
-
-        interface News extends File {
-            Long getNewsId();
-        }
-
-        interface Blog extends File {
-            Long getBlogId();
-        }
-
-        interface Project extends File {
-            Long getProjectId();
-        }
-
-        interface Training extends File {
-            Long getTrainingId();
-        }
+        Long getRefObjectId();
     }
 
 }

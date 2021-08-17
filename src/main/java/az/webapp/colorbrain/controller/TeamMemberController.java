@@ -1,8 +1,8 @@
 package az.webapp.colorbrain.controller;
 
-import az.webapp.colorbrain.model.entity.TeamMemberEntity;
+import az.webapp.colorbrain.model.entity.MemberEntity;
 import az.webapp.colorbrain.service.TeamMemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/team-member")
+@AllArgsConstructor
 public class TeamMemberController {
 
-    @Autowired
-    private TeamMemberService teamMemberService;
+    private final TeamMemberService teamMemberService;
 
     @GetMapping("/all")
     public String getAllTeamMembers(Model model) {
@@ -39,44 +40,46 @@ public class TeamMemberController {
             @PathVariable("id") Long id,
             Model model
     ) {
-        model.addAttribute("teamMemberEntity", teamMemberService.getOneTeamMembersById(id));
+        model.addAttribute("teamMemberEntity", teamMemberService.getOneTeamMemberById(id));
         return "admin/oneTeamMemberPage";
     }
 
     @GetMapping("/create")
     public String getCreatePage(Model model) {
-        model.addAttribute("teamMemberEntity", new TeamMemberEntity());
+        model.addAttribute("teamMemberEntity", new MemberEntity());
         return "admin/createTeamMemberPage";
     }
 
     @PostMapping("/create")
     public String saveTeamMember(
-            @Valid @ModelAttribute("teamMemberEntity") TeamMemberEntity teamMemberEntity,
+            @Valid @ModelAttribute("teamMemberEntity") MemberEntity memberEntity,
             BindingResult bindingResult
     ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/createTeamMemberPage";
         }
-        teamMemberService.saveTeamMember(teamMemberEntity);
+        teamMemberService.saveTeamMember(memberEntity);
 
         return "redirect:/team-member/all";
     }
 
     @PostMapping("/update")
     public String updateTeamMember(
-            @Valid @ModelAttribute("teamMembersEntity") TeamMemberEntity teamMemberEntity,
+            @Valid @ModelAttribute("teamMembersEntity") MemberEntity memberEntity,
             BindingResult bindingResult
-    ) {
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/oneTeamMemberPage";
         }
-        teamMemberService.updateTeamMember(teamMemberEntity);
+        teamMemberService.updateTeamMember(memberEntity);
         return "redirect:/team-member/all";
     }
 
     @PostMapping("/delete")
-    public String deleteTeamMembers(TeamMemberEntity teamMemberEntity) {
-        teamMemberService.deleteTeamMember(teamMemberEntity);
+    public String deleteTeamMembers(
+            @RequestParam("id") Long id
+    ) {
+        teamMemberService.deleteTeamMember(id);
         return "redirect:/team-member/all";
     }
 

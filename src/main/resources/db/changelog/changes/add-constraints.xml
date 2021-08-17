@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="TagiyevEZ (generated)" id="1628181183799-12">
+        <createIndex indexName="FKopwwoxfgi50gql1vvi9xeat1a" tableName="participant">
+            <column name="training_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="TagiyevEZ (generated)" id="1628181183799-13">
+        <createIndex indexName="FKqyvjif1i2geaeuvkh3n1jrnn4" tableName="blog">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="TagiyevEZ (generated)" id="1628181183799-14">
+        <createIndex indexName="news_file_fk" tableName="file">
+            <column name="ref_object_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="TagiyevEZ (generated)" id="1628181183799-15">
+        <addForeignKeyConstraint baseColumnNames="training_id" baseTableName="participant" constraintName="FKopwwoxfgi50gql1vvi9xeat1a" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="training"/>
+    </changeSet>
+    <changeSet author="TagiyevEZ (generated)" id="1628181183799-16">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="blog" constraintName="FKqyvjif1i2geaeuvkh3n1jrnn4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+</databaseChangeLog>

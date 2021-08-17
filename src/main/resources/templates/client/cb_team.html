@@ -38,7 +38,7 @@
                     <!-- Begin team item -->
                     <div th:each="team : ${teamMembers}" class="team-item item-style">
                         <div class="team-item-img">
-                            <img th:src="@{'/file/' +${team.memberImage}}" class="lazy">
+                            <img class="lazy" th:src="@{${team.memberImage}}">
                         </div>
                         <div class="team-item-info">
                             <h4 class="team-item-title item-heading">Mary Lee</h4>

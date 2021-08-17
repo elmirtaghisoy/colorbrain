@@ -1,11 +1,11 @@
 package az.webapp.colorbrain.controller;
 
+import az.webapp.colorbrain.component.criteria.BlogSearchCriteria;
+import az.webapp.colorbrain.component.paging.Paged;
 import az.webapp.colorbrain.model.entity.BlogEntity;
-import az.webapp.colorbrain.model.entity.FileEntity;
 import az.webapp.colorbrain.service.BlogService;
 import az.webapp.colorbrain.service.CategoryService;
-import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,31 +16,55 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 import java.util.List;
 
+import static az.webapp.colorbrain.util.SearchUtil.mediaSearchPathBuilder;
+
 @Controller
 @RequestMapping(value = "/blog")
+@AllArgsConstructor
 public class BlogController {
 
-    @Autowired
-    private BlogService blogService;
+    private final BlogService blogService;
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping("/all")
-    public String getAllBlog(Model model) {
-        model.addAttribute("blogs", blogService.getAllActiveBlog());
+    public String getAllBlog(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "8") int size,
+            @RequestParam(value = "from", required = false, defaultValue = "2000-01-01") String fromDate,
+            @RequestParam(value = "to", required = false, defaultValue = "2100-01-01") String toDate,
+            @RequestParam(value = "header", required = false) String header,
+            @RequestParam(value = "category", required = false) Long categoryId,
+            HttpServletRequest request,
+            Model model
+    ) {
+        var criteria = new BlogSearchCriteria();
+        criteria.setFromDate(fromDate);
+        criteria.setToDate(toDate);
+        criteria.setHeader(header);
+        criteria.setCategoryId(categoryId);
+        Paged<BlogEntity> list = blogService.searchAllBlog(
+                page,
+                size,
+                criteria
+        );
+        model.addAttribute("objectList", list);
+        model.addAttribute("categoryList", categoryService.getAllCategory());
+        model.addAttribute("srcUrl", mediaSearchPathBuilder(request));
         return "admin/allBlogPage";
     }
 
     @GetMapping("/allf")
     public String getAllBlogF(Model model) {
-        model.addAttribute("blogs", blogService.getAllActiveBlog());
-        model.addAttribute("categories",categoryService.getAllCategory());
+        model.addAttribute("blogs", blogService.getAllBlog(1, 8));
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "client/cb_blog";
     }
 
@@ -85,25 +109,27 @@ public class BlogController {
 
     @PostMapping("{id}/files/save")
     public String saveFilesByBlogId(
-            @PathVariable("id") BlogEntity blogEntity,
+            @PathVariable("id") Long id,
             @NotBlank @RequestParam("files") List<MultipartFile> files
     ) throws IOException {
-        blogService.saveAdditionalBlogFiles(files, blogEntity);
-        return "redirect:/blog/" + blogEntity.getId() + "/files";
+        blogService.saveAdditionalBlogFiles(files, id);
+        return "redirect:/blog/" + id + "/files";
     }
 
     @PostMapping("{id}/files/delete")
     public String deleteFileByProjectId(
-            @RequestParam("fileId") FileEntity fileEntity,
-            @PathVariable("id") BlogEntity blogEntity
+            @RequestParam("fileId") Long fileId,
+            @PathVariable("id") Long id
     ) {
-        blogService.deleteFileByBlogId(fileEntity);
-        return "redirect:/blog/" + blogEntity.getId() + "/files";
+        blogService.deleteBlogFileById(fileId);
+        return "redirect:/blog/" + id + "/files";
     }
 
     @PostMapping("/delete")
-    public String deleteProject(BlogEntity blogEntity) {
-        blogService.deleteBlog(blogEntity);
+    public String deleteProject(
+            @RequestParam("id") Long id
+    ) {
+        blogService.deleteBlog(id);
         return "redirect:/blog/all";
     }
 
@@ -111,7 +137,7 @@ public class BlogController {
     public String updateBlog(
             @Valid @ModelAttribute("blogEntity") BlogEntity blogEntity,
             BindingResult bindingResult
-    ) {
+    ) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/oneBlogPage";
         }

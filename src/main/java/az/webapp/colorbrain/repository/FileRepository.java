@@ -13,44 +13,16 @@ import java.util.List;
 
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
-    List<GetView.File.Training> findAllByTrainingId(Long id);
 
-//    List<FileEntity> findAllByNewsEntity_IdOrderByFileTypeAsc(Long id);
-
-    List<GetView.File.Media> findAllByMediaId(Long id);
-
-    DeleteFileView getFileById(Long id);
-
-//    List<FileEntity> findAllByProjectEntity_IdOrderByFileTypeAsc(Long id);
-
-//    List<FileEntity> findAllByBlogEntity_IdOrderByFileTypeAsc(Long id);
-
-//    FileEntity findFirstByTrainingEntityId(Long id);
-
-//    FileEntity findFirstByNewsEntityId(Long id);
-
-    @Query(
-            nativeQuery = true,
-            value = "select f.folder_uuid from file f where f.media_id =:id limit 1"
-    )
-    String getFolderUUIDForMedia(Long id);
-
-    @Query(
-            nativeQuery = true,
-            value = "select f.folder_uuid from file f where f.training_id =:id limit 1"
-    )
-    String getFolderUUIDForTraining(Long id);
+    List<GetView.File> findAllByFileCategoryAndRefObjectId(String category, Long id);
 
     @Transactional
     @Modifying
     @Query(
-            value = "delete from FileEntity f where f.id=:id"
+            value = "delete from FileEntity f where f.id=:id and f.fileCategory=:category"
     )
-    void deleteFile(Long id);
+    void deleteByFileCategoryAndRefObjectId(String category, Long id);
 
-
-//    FileEntity findFirstByProjectEntityId(Long id);
-
-//    FileEntity findFirstByBlogEntityId(Long id);
+    DeleteFileView getFileById(Long fileId);
 
 }

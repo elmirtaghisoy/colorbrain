@@ -1,8 +1,6 @@
 package az.webapp.colorbrain.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "file")
-@Getter
-@Setter
-@ToString
+@Data
 public class FileEntity {
 
     @Id
@@ -30,32 +26,9 @@ public class FileEntity {
     private String filePath;
 
     @Column(name = "file_category")
-    private int fileCategory;
+    private String fileCategory;
 
-    @Column(name = "folder_uuid")
-    private String folderUuid;
+    @Column(name = "ref_object_id")
+    private Long refObjectId;
 
-    //    @ManyToOne(cascade = CascadeType.PERSIST)
-    @Column(name = "training_id")
-    private Long trainingId;
-
-    //    @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "news_id")
-    private Long newsId;
-
-    //    @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "teamMembers_id")
-    private Long teamMemberId;
-
-    //    @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "project_id")
-    private Long projectId;
-
-    //    @ManyToOne(cascade = CascadeType.ALL)
-    @Column(name = "blog_id")
-//    private BlogEntity blogEntity;
-    private Long blogId;
-
-    @Column(name = "media_id")
-    private Long mediaId;
 }

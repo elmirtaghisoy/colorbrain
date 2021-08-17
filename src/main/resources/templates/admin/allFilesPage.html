@@ -4,7 +4,7 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
-            <div class="col-4">
+            <div class="custom-bread-crumb col-4">
                 <a th:href="@{/previous-page}" class="btn btn-danger text-white text-uppercase mb-4">Gerİ</a>
             </div>
         </div>
@@ -23,15 +23,15 @@
                 <tr th:each="file : ${files}" class="col-3">
                     <th class="align-middle" scope="row" th:text="${file.id}"></th>
                     <td th:switch="${file.fileType}">
-                        <img th:case="1" style="height:200; width:auto;" th:src="@{'/file/'+${file.filePath}}"
+                        <img style="height:200; width:auto;" th:case="1" th:src="@{${file.filePath}}"
                              class="img-thumbnail">
                         <video th:case="2" width="auto" height="200" controls>
-                            <source th:src="@{'/file/'+${file.filePath}}" type="video/mp4">
+                            <source th:src="@{${file.filePath}}" type="video/mp4">
                         </video>
                         <audio th:case="3" controls>
-                            <source th:src="@{'/file/'+${file.filePath}}" type="audio/mpeg">
+                            <source th:src="@{${file.filePath}}" type="audio/mpeg">
                         </audio>
-                        <iframe th:case="4" th:src="@{'/file/'+${file.filePath}}" height="200" width="auto"></iframe>
+                        <iframe height="200" th:case="4" th:src="@{${file.filePath}}" width="auto"></iframe>
                     </td>
                     <td class="align-middle" th:text="${file.fileType}"></td>
                     <!--                    <td th:if="${isFinished}" class="align-middle">-->
@@ -52,7 +52,8 @@
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button collapsed text-uppercase" data-bs-toggle="collapse"
+                                type="button"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Yenİ fayl əlavə et
                         </button>

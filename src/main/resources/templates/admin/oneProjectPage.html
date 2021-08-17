@@ -6,7 +6,8 @@
     <div class="main-container">
         <div class="row">
             <!--/*@thymesVar id="projectEntity" type="az.webapp.colorbrain.model.entity.ProjectEntity"*/-->
-            <form th:object="${projectEntity}" th:action="@{'/project/update'}" method="post">
+            <form enctype="multipart/form-data" method="post" th:action="@{'/project/update'}"
+                  th:object="${projectEntity}">
                 <input type="hidden" name="id" th:value="${projectEntity.id}">
                 <div th:include="/admin/layout/project/projectForm::updateForm"></div>
             </form>

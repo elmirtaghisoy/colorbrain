@@ -1,10 +1,8 @@
 package az.webapp.colorbrain.model.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,9 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "category")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryEntity {

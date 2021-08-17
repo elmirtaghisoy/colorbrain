@@ -1,9 +1,7 @@
 package az.webapp.colorbrain.model.entity;
 
 import az.webapp.colorbrain.component.annotation.IsImage;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.CascadeType;
@@ -23,9 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "media")
-@Getter
-@Setter
-@ToString
+@Data
 public class MediaEntity {
 
     @Id
@@ -50,15 +46,19 @@ public class MediaEntity {
     private String coverPath;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "media_id")
+    @JoinColumn(name = "ref_object_id")
     private List<FileEntity> fileEntities;
+
+    @Column(name = "folder_uuid")
+    private String folderUuid;
 
     @Transient
     @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG, JPEG, IMG, PNG) ola bilər.")
-    private MultipartFile coverImage;
+    private MultipartFile cover;
 
     @PrePersist
     private void onCreate() {
+        active = true;
         createdAt = LocalDateTime.now();
     }
 

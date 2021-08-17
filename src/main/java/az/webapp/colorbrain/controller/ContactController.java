@@ -2,7 +2,7 @@ package az.webapp.colorbrain.controller;
 
 import az.webapp.colorbrain.model.entity.ContactEntity;
 import az.webapp.colorbrain.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/contact")
+@AllArgsConstructor
 public class ContactController {
 
-    @Autowired
-    private ContactService contactService;
+    private final ContactService contactService;
 
     @GetMapping("/all")
     public String getAllContact(Model model) {
@@ -67,8 +68,10 @@ public class ContactController {
     }
 
     @PostMapping("/delete")
-    public String deleteContact(ContactEntity contactEntity) {
-        contactService.deleteContact(contactEntity);
+    public String deleteContact(
+            @RequestParam("id") Long id
+    ) {
+        contactService.deleteContact(id);
         return "redirect:/contact/all";
     }
 }

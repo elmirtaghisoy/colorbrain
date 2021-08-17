@@ -1,6 +1,6 @@
 //package az.webapp.colorbrain.service;
 //
-//import az.webapp.colorbrain.model.entity.CUser;
+//import az.webapp.colorbrain.model.CUser;
 //import az.webapp.colorbrain.repository.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.User;

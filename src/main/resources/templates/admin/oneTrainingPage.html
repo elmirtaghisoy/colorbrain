@@ -4,17 +4,17 @@
 <div class="container">
     <div class="main-container">
         <div class="row">
-            <!--/*@thymesVar id="trainingEntity" type="az.webapp.colorbrain.model.entity.TrainingEntity"*/-->
-            <form th:object="${trainingEntity}" th:action="@{'/training/update'}" method="post"
+            <!--/*@thymesVar id="training" type="az.webapp.colorbrain.model.dto.request"*/-->
+            <form th:object="${training}" th:action="@{'/training/update'}" method="post"
                   enctype="multipart/form-data">
-                <input type="hidden" name="id" th:value="${trainingEntity.id}">
+                <input type="hidden" name="id" th:value="${training.id}">
                 <div th:include="/admin/layout/training/trainingForm::updateFrom"></div>
             </form>
-            <a style="color: white" th:href="@{/training/{id}/files(id=${trainingEntity.id})}"
+            <a style="color: white" th:href="@{/training/{id}/files(id=${training.id})}"
                class="btn btn-warning text-uppercase mb-3">Fayllarda
                 dəyİşİklİk et</a>
-            <form th:object="${trainingEntity}" th:action="@{'/training/delete'}" method="post">
-                <input type="hidden" name="trainingId" th:value="${trainingEntity.id}">
+            <form th:object="${training}" th:action="@{'/training/delete'}" method="post">
+                <input type="hidden" name="trainingId" th:value="${training.id}">
                 <div class="row d-flex justify-content-center">
                     <input type="submit" class="btn btn-danger text-uppercase" value="Təlİmİ sİl">
                 </div>

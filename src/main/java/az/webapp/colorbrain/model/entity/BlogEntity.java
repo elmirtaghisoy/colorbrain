@@ -1,9 +1,7 @@
 package az.webapp.colorbrain.model.entity;
 
 import az.webapp.colorbrain.component.annotation.IsImage;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.CascadeType;
@@ -15,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -23,9 +22,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "blog")
-@Getter
-@Setter
-@ToString
+@Data
 public class BlogEntity {
 
     @Id
@@ -53,18 +50,27 @@ public class BlogEntity {
     @Column(name = "cover_path")
     private String coverPath;
 
-    @Column(name = "active")
+    @Column(name = "active", columnDefinition = "int default 1")
     private boolean active;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "blog_id")
+    @JoinColumn(name = "ref_object_id")
     private List<FileEntity> fileEntities;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private CategoryEntity categoryEntity;
 
+    @Column(name = "folder_uuid")
+    private String folderUuid;
+
     @Transient
     @IsImage(message = "Əlavə etdiyiniz faylın formatı ancaq (JPG, JPEG, IMG, PNG) ola bilər.")
-    private MultipartFile coverImage;
+    private MultipartFile cover;
+
+    @PrePersist
+    private void onCreate() {
+        active = true;
+        createdAt = LocalDateTime.now();
+    }
 }

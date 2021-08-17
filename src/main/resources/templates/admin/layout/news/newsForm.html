@@ -1,7 +1,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="updateFrom">
+    <div class="row mb-3">
+        <div class="accordion " id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header " id="headingOne">
+                    <button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed"
+                            data-bs-target="#collapseOne" data-bs-toggle="collapse" type="button">
+                        Başlıq Şəkili
+                        <p class="text-danger fw-bolder" style="display: inline"
+                           th:errors="*{cover}"
+                           th:if="${#fields.hasErrors('cover')}"></p>
+                    </button>
+                </h2>
+                <div aria-labelledby="headingOne" class="accordion-collapse collapse text-center" data-bs-parent="#accordionExample"
+                     id="collapseOne">
+                    <img class="img-thumbnail" style="height:200; width:auto;"
+                         th:src="${newsEntity.coverPath}">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label class="form-label text-uppercase" for="formFileLg">Mövcud başlıq şəkili dəyİşmək</label>
+                        <input class="form-control form-control-lg" id="formFileLg" name="cover"
+                               th:field="*{cover}" type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="mb-3 col-6">
+        <div class="mb-3 col-12">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
             <p style="display: inline" th:if="${#fields.hasErrors('header')}" class="text-danger fw-bolder"
                th:errors="*{header}"></p>
@@ -29,7 +54,7 @@
         <div class="mb-3 col-4 text-center">
             <label style="margin: 0" for="updatedAtLabel" class="form-label text-uppercase">Updated
                 At</label>
-            <input th:value="${newsEntity.updateAt}" name="updatedAt" type="text" disabled class="form-control"
+            <input class="form-control" disabled name="updatedAt" th:value="${newsEntity.updatedAt}" type="text"
                    id="updatedAtLabel">
         </div>
     </div>
@@ -63,6 +88,9 @@
                     <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
                             data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                         Başlıq Şəkİlİ
+                        <p class="text-danger fw-bolder" style="display: inline"
+                           th:errors="*{cover}"
+                           th:if="${#fields.hasErrors('cover')}"></p>
                     </button>
                 </h2>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -70,7 +98,7 @@
                     <div class="container-fluid mb-3 mt-2">
                         <label for="formFileLg" class="form-label text-uppercase fw-bolder">Xəbərin başlıq şəkİlİnİ
                             seçİn</label>
-                        <input name="coverImage" class="form-control form-control-lg" id="formFileLg" type="file">
+                        <input class="form-control form-control-lg" id="formFileLg" name="cover" type="file">
                     </div>
                 </div>
             </div>

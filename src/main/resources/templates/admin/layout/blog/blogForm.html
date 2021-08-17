@@ -1,5 +1,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="updateForm">
+    <div class="row mb-3">
+        <div class="accordion " id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed"
+                            data-bs-target="#collapseOne" data-bs-toggle="collapse" type="button">
+                        Başlıq Şəkili
+                        <p class="text-danger fw-bolder" style="display: inline"
+                           th:errors="*{cover}"
+                           th:if="${#fields.hasErrors('cover')}"></p>
+                    </button>
+                </h2>
+                <div aria-labelledby="headingOne" class="accordion-collapse collapse text-center" data-bs-parent="#accordionExample"
+                     id="collapseOne">
+                    <img class="img-thumbnail" style="height:200; width:auto;"
+                         th:src="${blogEntity.coverPath}">
+                    <div class="container-fluid mb-3 mt-2">
+                        <label class="form-label text-uppercase" for="formFileLg">Mövcud başlıq şəkili dəyİşmək</label>
+                        <input class="form-control form-control-lg" id="formFileLg" name="cover"
+                               th:field="*{cover}" type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="mb-3 col-6">
             <label for="headerLabel" class="form-label text-uppercase">Başlıq</label>
@@ -86,9 +111,9 @@
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                             Başlıq şəkili
-                            <p style="display: inline" th:if="${#fields.hasErrors('coverImage')}"
+                            <p style="display: inline" th:errors="*{cover}"
                                class="text-danger fw-bolder"
-                               th:errors="*{coverImage}"></p>
+                               th:if="${#fields.hasErrors('cover')}"></p>
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -96,7 +121,7 @@
                         <div class="main-container">
                             <label for="formFileLg" class="form-label text-uppercase">Blogun başlıq şəkilini
                                 seçin</label>
-                            <input th:field="*{coverImage}" name="coverImage" class="form-control form-control-lg" type="file">
+                            <input class="form-control form-control-lg" name="cover" th:field="*{cover}" type="file">
                         </div>
                     </div>
                 </div>

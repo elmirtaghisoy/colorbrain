@@ -1,10 +1,8 @@
 package az.webapp.colorbrain.model.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +14,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "contact")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactEntity {

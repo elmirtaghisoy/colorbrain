@@ -2,20 +2,21 @@ package az.webapp.colorbrain.controller;
 
 import az.webapp.colorbrain.model.entity.CategoryEntity;
 import az.webapp.colorbrain.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/category")
+@AllArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping("/all")
     public String getAllCategory(Model model) {
@@ -51,8 +52,10 @@ public class CategoryController {
     }
 
     @PostMapping("/delete")
-    public String deleteCategory(CategoryEntity categoryEntity) {
-        categoryService.deleteCategory(categoryEntity);
+    public String deleteCategory(
+            @RequestParam("id") Long id
+    ) {
+        categoryService.deleteCategory(id);
         return "redirect:/category/all";
     }
 

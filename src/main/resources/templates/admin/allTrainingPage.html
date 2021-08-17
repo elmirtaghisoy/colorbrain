@@ -1,24 +1,77 @@
 <html xmlns:th="http://www.thymeleaf.org" th:include="~{admin/layout/layout.html :: layout (~{::body},'home')}">
 <head></head>
 <body>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="custom-bread-crumb col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <a href="/training/active" type="button" class="btn btn-success text-uppercase">Aktİv Təlİmlər</a>
-                    <a href="/training/create" class="btn btn-primary text-uppercase">Yeni Təlİm Yarat</a>
-                    <a href="/training/finished" type="button" class="btn btn-danger text-uppercase">Bİtmİş Təlİmlər</a>
+                    <a class="btn btn-primary text-uppercase" href="/training/create">Yeni Təlİm YARAT</a>
+                    <a aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary" data-toggle="collapse"
+                       href="#collapseExample" role="button">
+                        AXTARIŞ
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body container search-panel">
+                <form method="get" th:action="@{'/training/all'}">
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label text-uppercase" for="headerLabel">Başlıq</label>
+                            <input class="form-control" id="headerLabel" name="header" type="search">
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label text-uppercase" for="trainerLabel">Təlİmçİ</label>
+                            <input class="form-control" id="trainerLabel" name="trainer" type="search">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-3">
+                            <label class="form-label text-uppercase" for="lastRegDayLabel">Yaradılma tarİxİ</label>
+                            <input class="form-control" id="lastRegDayLabel" name="from"
+                                   type="date">
+                        </div>
+                        <div class="mb-3 col-3">
+                            <label class="form-label text-uppercase" for="startDayLabel">Bitmə Tarixi</label>
+
+                            <input class="form-control" id="startDayLabel" name="to" type="date">
+                        </div>
+                        <div class="mb-3 col-3">
+                            <label class="form-label text-uppercase" for="headerLabel">Qeydİyyat</label>
+                            <select class="form-select" name="reg">
+                                <option value="-1">SEÇ</option>
+                                <option value="1">AÇIQ</option>
+                                <option value="0">BAĞLI</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-3">
+                            <label class="form-label text-uppercase" for="headerLabel">STATUS</label>
+                            <select class="form-select" name="status">
+                                <option value="-1">SEÇ</option>
+                                <option value="1">AKTİV</option>
+                                <option value="0">BİTMİŞ</option>
+                            </select>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <input class="btn btn-success text-uppercase" type="submit" value="AXTAR">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="main-container">
         <div class="main-card-row-container">
             <div class="row">
-                <div th:each="training : ${trainings}" class="col-3">
+                <div class="col-3" th:each="training : ${objectList.page}">
                     <div class="card">
-                        <img th:src="@{'/file/'+${training.coverPath}}" class="card-img-top" alt="Cover Image">
+                        <img alt="Cover Image" class="card-img-top" th:src="${training.coverPath}">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${training.header}"></h5>
                         </div>
@@ -38,6 +91,34 @@
                     </div>
                 </div>
             </div>
+            <!--paging-->
+            <div class="row mt-4">
+                <nav aria-label="Page navigation" class="paging">
+                    <ul class="pagination justify-content-center" th:if="${objectList.page.totalPages > 1}">
+                        <li class="page-item" th:classappend="${!objectList.paging.isPrevEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               tabindex="-1"
+                               th:href="@{'/training/all?page=' + ${objectList.paging.pageNumber - 1}+ ${srcUrl}}">Previous</a>
+                        </li>
+                        <th:block th:each="item : ${objectList.paging.getItems()}">
+                            <li class="page-item"
+                                th:classappend="${item.index == objectList.paging.pageNumber? 'active' : ''}"
+                                th:if="${item.pageItemType.name() == 'PAGE'}">
+                                <a class="page-link" th:href="@{'/training/all?page=' + ${item.index}+ ${srcUrl}}"
+                                   th:text="${item.index}"></a>
+                            </li>
+                            <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+                        <li class="page-item" th:classappend="${!objectList.paging.isNextEnabled()? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{'/training/all?page=' + ${objectList.paging.pageNumber + 1} + ${srcUrl}}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--paging-->
         </div>
     </div>
 </div>

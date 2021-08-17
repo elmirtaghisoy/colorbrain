@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Data
 @Entity
 @Table(name = "c_user")
+@Data
 public class CUser {
 
     @Id

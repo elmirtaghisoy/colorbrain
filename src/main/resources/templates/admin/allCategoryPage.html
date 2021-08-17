@@ -4,7 +4,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="custom-bread-crumb col-12 text-center">
             <div class="main-container">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a th:href="@{/category/create}" class="btn btn-primary text-uppercase">Yenİ Kateqorİya Yarat</a>
@@ -18,9 +18,9 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Kateqoriya</th>
-                    <th scope="col">Dəyişiklik et</th>
-                    <th scope="col">Sil</th>
+                    <th scope="col">KATEQORİYA</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,14 +29,14 @@
                     <td th:text="${category.categoryName}"></td>
                     <td>
                         <a href="/category/id" th:href="@{{id} (id=${category.id})}" class="card-link btn btn-success">
-                            Update
+                            DƏYİŞİKLİK ET
                         </a>
                     </td>
                     <td>
                         <form th:object="${categoryEntity}" th:action="@{'/category/delete'}" method="post">
                             <input type="hidden" name="id" th:value="${category.id}">
                             <div class="text-left">
-                                <input type="submit" class="btn btn-danger" value="Kateqoriyanı sil">
+                                <input class="btn btn-danger" type="submit" value="SİL">
                             </div>
                         </form>
                     </td>

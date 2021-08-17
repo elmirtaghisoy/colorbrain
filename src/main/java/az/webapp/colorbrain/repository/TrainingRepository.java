@@ -1,19 +1,18 @@
 package az.webapp.colorbrain.repository;
 
 import az.webapp.colorbrain.model.entity.TrainingEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Repository
-public interface TrainingRepository extends JpaRepository<TrainingEntity, Long> {
-    List<TrainingEntity> findAllByStatusTrue();
-
-    List<TrainingEntity> findAllByStatusFalse();
+public interface TrainingRepository extends JpaRepository<TrainingEntity, Long>, JpaSpecificationExecutor<TrainingEntity> {
 
     @Transactional
     @Modifying
@@ -26,10 +25,14 @@ public interface TrainingRepository extends JpaRepository<TrainingEntity, Long> 
                     "t.registrationIsActive = :#{#training.registrationIsActive}," +
                     "t.startDate = :#{#training.startDate}," +
                     "t.startTime = :#{#training.startTime}," +
-                    "t.status = :#{#training.staus}," +
+                    "t.status = :#{#training.status}," +
                     "t.trainerName = :#{#training.trainerName}," +
                     "t.trainingPrice = :#{#training.trainingPrice}," +
-                    "t.updatedAt = :#{#training.updatedAt} " +
+                    "t.updatedAt = :#{#training.updatedAt}," +
+                    "t.startRegistrationDay =:#{#training.startRegistrationDay}," +
+                    "t.active = :#{#training.active}," +
+                    "t.registrationIsActive = :#{#training.registrationIsActive}," +
+                    "t.status = :#{#training.status} " +
                     "where t.id = :#{#training.id}"
     )
     void update(TrainingEntity training);
@@ -40,4 +43,11 @@ public interface TrainingRepository extends JpaRepository<TrainingEntity, Long> 
     )
     String getTrainingStatusById(Long id);
 
+    @Query(
+            nativeQuery = true,
+            value = "select p.folder_uuid project p where p.id =:id limit 1"
+    )
+    String getFolderUUID(Long id);
+
+    Page<TrainingEntity> findAll(Specification<TrainingEntity> specification, Pageable pageable);
 }
